@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('lists' , 'ListsController@index')->name('contacts.show');
+Route::get('lists/create', 'ListsController@create')->name('lists.create');
+Route::post('lists/store', 'ListsController@store')->name('lists.store');
+
+
+Route::get('lists/{id}', 'ContactController@index')->name('contacts.show');
+Route::get('lists/{id}/contacts/create', 'ContactController@create')->name('contacts.create');
+Route::post('lists/{id}/contacts', 'ContactController@store')->name('contacts.store');
