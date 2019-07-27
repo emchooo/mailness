@@ -33,6 +33,7 @@ class ListTest extends TestCase
         $response->assertSeeText($list->name);
     }
 
+
     /** @test */
     public function createNewList()
     {
@@ -42,6 +43,55 @@ class ListTest extends TestCase
         $list = Lists::first();
 
         $this->assertEquals($list->name, $name);
+
+    }
+
+    /** @test */
+    public function openEditListPage()
+    {
+        $list = factory(Lists::class)->create();
+
+        $response = $this->get(route('lists.edit', $list->id));
+
+        $response->assertStatus(200)->assertSeeText('Edit list');
+    }
+
+    /** @test */
+    public function updateListing()
+    {
+        $list_name = 'My best list';
+        $list = factory(Lists::class)->create();
+        
+        $response = $this->put(route('lists.update', $list->id), [ 'name' => $list_name ]);
+
+        $edited_list = Lists::find($list->id);
+
+        $this->assertEquals($list_name, $edited_list->name);
+
+    }
+
+    /** @test */
+    public function updateListingNameCannotBeEmpty()
+    {
+        $list = factory(Lists::class)->create();
+
+        $response = $this->put(route('lists.update', $list->id), [ 'name' => '' ]);
+    
+        $response->assertSessionHasErrors();
+
+    }
+
+    /** @test */
+    public function deleteList()
+    {
+        $list = factory(Lists::class)->create();
+        $list2 = factory(Lists::class)->create();
+        
+        $response = $this->delete(route('lists.delete', $list->id));
+
+        $response->assertSuccessful();
+
+        $this->assertEquals(1, $list->count());
 
     }
 }

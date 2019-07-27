@@ -15,10 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('lists' , 'ListsController@index')->name('contacts.show');
+Route::get('lists' , 'ListsController@index')->name('lists.show');
 Route::get('lists/create', 'ListsController@create')->name('lists.create');
+Route::get('lists/{lists}/edit', 'ListsController@edit')->name('lists.edit');
+Route::put('lists/{lists}/update', 'ListsController@update')->name('lists.update');
 Route::post('lists/store', 'ListsController@store')->name('lists.store');
-
+Route::delete('/lists/{lists}/delete', 'ListsController@destroy')->name('lists.delete');
 
 Route::get('lists/{id}', 'ContactController@index')->name('contacts.show');
 Route::get('lists/{id}/contacts/create', 'ContactController@create')->name('contacts.create');

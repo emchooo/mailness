@@ -11,7 +11,7 @@
 
 		<ul>
 			@foreach($lists as $list)
-            	<li>{{ $list->name }}</li>
+            	<li>{{ $list->name }} <a href="{{ route('lists.edit', $list->id ) }}">Edit</a> </li>
            	@endforeach
 		</ul>
                     
