@@ -11,6 +11,6 @@ class Lists extends Model
 
     public function contacts()
     {
-    	return $this->belongsToMany(Contact::class);
+    	return $this->hasMany(Contact::class, 'list_id');
     }
 }

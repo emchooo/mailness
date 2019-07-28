@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Lists;
+use App\Contact;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -86,12 +87,26 @@ class ListTest extends TestCase
     {
         $list = factory(Lists::class)->create();
         $list2 = factory(Lists::class)->create();
+        $list3 = factory(Lists::class)->create();
         
         $response = $this->delete(route('lists.delete', $list->id));
 
-        $response->assertSuccessful();
+        $this->assertEquals(2, $list->count());
 
-        $this->assertEquals(1, $list->count());
+    }
 
+    /** @test */
+    public function whenDeleteListRemoveAllContacts()
+    {
+        $list = factory(Lists::class)->create();
+        $list1 = factory(Lists::class)->create();
+
+        $contact1 = $this->post('/lists/'.$list->id.'/contacts', [ 'email' => 'tom@sawyer.com' ]);
+        $contact2 = $this->post('/lists/'.$list->id.'/contacts', [ 'email' => 'tom@sawyer.net' ]);
+        $contac3 =  $this->post('/lists/'.$list1->id.'/contacts', [ 'email' => 'tom@sawyer.org' ]);
+
+        $response = $this->delete(route('lists.delete', $list->id)); 
+        
+        $this->assertEquals(1, Contact::count());
     }
 }

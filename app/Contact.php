@@ -9,8 +9,8 @@ class Contact extends Model
 {
     protected $guarded = [];
 
-    public function lists()
+    public function list()
     {
-        return $this->belongsToMany(Lists::class);
+        return $this->belongsTo(Lists::class);
     }
 }

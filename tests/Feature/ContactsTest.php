@@ -20,18 +20,17 @@ class ContactsTest extends TestCase
 
         $response = $this->get('/lists/'.$list->id);
 
-        $response->assertViewHas('contacts');
+        $response->assertViewHas('list');
     }
 
     /** @test */
     public function createNewContactAndAttachToList()
     {
         $list = factory(Lists::class)->create();
-        $contact = factory(Contact::class)->create();
 
-        $list->contacts()->attach($contact);
+        $response = $this->post(route('contacts.store', $list->id), [ 'email' => 'billy@kid.com' ]);
 
-        $this->assertEquals($list->contacts[0]->id, $contact->id);
+        $response->assertSuccessful();
     }
 
     /** @test */
@@ -53,7 +52,7 @@ class ContactsTest extends TestCase
         $response = $this->post('/lists/'.$list->id.'/contacts', [ 'email' => 'tom@sawyer.com' ]);
         $response = $this->post('/lists/'.$list->id.'/contacts', [ 'email' => 'tomy@sawyer.com' ]);
 
-        $this->assertEquals(2, $list->contacts->count());
+        $this->assertEquals(2, Contact::count());
     }
 
     /** @test */

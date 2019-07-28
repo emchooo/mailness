@@ -90,6 +90,7 @@ class ListsController extends Controller
      */
     public function destroy(Lists $lists)
     {
-        $lists->delete();
+       $lists->contacts()->delete(); 
+       $lists->delete();
     }
 }

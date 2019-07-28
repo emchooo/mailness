@@ -16,8 +16,7 @@ class ContactController extends Controller
     public function index($id)
     {
         $list = Lists::find($id);
-        $contacts = $list->contacts;
-        return view('contacts.index', compact('contacts'));
+        return view('contacts.index', compact('list'));
     }
 
     /**
@@ -39,15 +38,14 @@ class ContactController extends Controller
      */
     public function store($list_id, Request $request)
     {
-        $contact = Contact::where('email', $request->email)->first();
+        $contact = Contact::where('email', $request->email)->where('list_id', $list_id)->first();
         $list = Lists::find($list_id);
-        if(! isset($contact) or ! $contact->lists->contains($list_id) ) {
+        if(! isset($contact) ) {
             $contact = new Contact();
             $contact->email = $request->email;
+            $contact->list_id = $list->id;
             $contact->save();
         }
-        $list->contacts()->syncWithoutDetaching($contact->id);
-        
         
     }
 
