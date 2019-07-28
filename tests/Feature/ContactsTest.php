@@ -68,6 +68,26 @@ class ContactsTest extends TestCase
 
         $this->assertEquals(2, $contacts->count());
     }
-    
+
+    /** @test */
+    public function thereIsEditContactPage()
+    {
+        $list = factory(Lists::class)->create();
+        $contact = factory(Contact::class)->create([ 'list_id' => $list->id ]);
+
+        $response = $this->get(route('contacts.edit', [ $list->id, $contact->id ]));
+
+        $response->assertSuccessful()->assertSeeText('Edit contact');
+    }
+   
+    /** @test */
+    public function updateContact()
+    {
+        $list = factory(Lists::class)->create();
+        $contact = factory(Contact::class)->create([ 'list_id' => $list->id ]);
+        $response = $this->put(route('contacts.update', [ $list->id, $contact->id ]),[ 'email' => 'chuck@norris.com' ]);
+
+        $this->assertDatabaseHas('contacts', [ 'email' => 'chuck@norris.com' ]);
+    }
     
 }

@@ -25,3 +25,5 @@ Route::delete('/lists/{lists}/delete', 'ListsController@destroy')->name('lists.d
 Route::get('lists/{id}/contacts', 'ContactController@index')->name('contacts.index');
 Route::get('lists/{id}/contacts/create', 'ContactController@create')->name('contacts.create');
 Route::post('lists/{id}/contacts', 'ContactController@store')->name('contacts.store');
+Route::get('lists/{lists}/contacts/{contact}/edit', 'ContactController@edit')->name('contacts.edit');
+Route::put('lists/{lists}/contacts/{contact}/update', 'ContactController@update')->name('contacts.update');

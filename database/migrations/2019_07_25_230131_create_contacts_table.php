@@ -17,6 +17,7 @@ class CreateContactsTable extends Migration
             $table->bigIncrements('id');
             $table->string('email');
             $table->integer('list_id');
+            $table->boolean('subscribed')->default(1);
             $table->timestamps();
         });
     }

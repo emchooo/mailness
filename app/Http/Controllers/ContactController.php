@@ -66,9 +66,9 @@ class ContactController extends Controller
      * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contact $contact)
+    public function edit(Lists $lists, Contact $contact)
     {
-        //
+        return view('contacts.edit', [ 'list' => $lists, 'contact' => $contact ]);
     }
 
     /**
@@ -78,9 +78,10 @@ class ContactController extends Controller
      * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request, Lists $lists, Contact $contact)
     {
-        //
+        $contact->email = $request->email;
+        $contact->save();
     }
 
     /**

@@ -1,16 +1,16 @@
 
 # Contacts
--- Status - Subscribed / Unsubscribed ( bounced, complain, spam )
--- Edit contact
--- Delete Contact
--- Show contact
--- Custom fields , bounded to list
+- Added subscribed field, but figure out how to handle bounced, complained ... mails 
+- Validation
+- Delete Contact
+- Show contact
+- Custom fields , bounded to list
 
 # Lists
--- Imports
--- Exports ( Export subscried contacts, Export unsubscribed contacts )
--- Fields
--- Forms
+- Imports
+- Exports ( Export subscried contacts, Export unsubscribed contacts )
+- Fields
+- Forms
 
 # Campaigns
 
@@ -23,4 +23,4 @@
 # Connect to SES and SNS
 
 # Global
--- check validations for all resources
+- check validations for all resources
