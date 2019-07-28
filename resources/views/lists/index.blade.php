@@ -11,7 +11,7 @@
 
 		<ul>
 			@foreach($lists as $list)
-            	<li>  <a href="{{ route('contacts.show', $list->id) }}">{{ $list->name }}</a> <a href="{{ route('lists.edit', $list->id ) }}">Edit</a> </li>
+            	<li>  <a href="{{ route('contacts.index', $list->id) }}">{{ $list->name }}</a> <a href="{{ route('lists.edit', $list->id ) }}">Edit</a> </li>
            	@endforeach
 		</ul>
                     

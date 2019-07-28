@@ -29,7 +29,7 @@ class ListTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->get('/lists');
+        $response = $this->get(route('lists.index'));
 
         $response->assertSeeText($list->name);
     }
@@ -39,7 +39,7 @@ class ListTest extends TestCase
     public function createNewList()
     {
         $name = 'My best list';
-        $response = $this->post('/lists/store', [ 'name' => $name ]);
+        $response = $this->post(route('lists.store'), [ 'name' => $name ]);
 
         $list = Lists::first();
 
@@ -101,9 +101,9 @@ class ListTest extends TestCase
         $list = factory(Lists::class)->create();
         $list1 = factory(Lists::class)->create();
 
-        $contact1 = $this->post('/lists/'.$list->id.'/contacts', [ 'email' => 'tom@sawyer.com' ]);
-        $contact2 = $this->post('/lists/'.$list->id.'/contacts', [ 'email' => 'tom@sawyer.net' ]);
-        $contac3 =  $this->post('/lists/'.$list1->id.'/contacts', [ 'email' => 'tom@sawyer.org' ]);
+        $contact1 = $this->post(route('contacts.store', $list->id), [ 'email' => 'tom@sawyer.com' ]);
+        $contact2 = $this->post(route('contacts.store', $list->id), [ 'email' => 'tom@sawyer.net' ]);
+        $contac3 =  $this->post(route('contacts.store', $list1->id), [ 'email' => 'tom@sawyer.org' ]);
 
         $response = $this->delete(route('lists.delete', $list->id)); 
         

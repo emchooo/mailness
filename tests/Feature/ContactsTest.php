@@ -18,7 +18,7 @@ class ContactsTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->get('/lists/'.$list->id);
+        $response = $this->get(route('contacts.index', $list->id));
 
         $response->assertViewHas('list');
     }
@@ -48,9 +48,9 @@ class ContactsTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->post('/lists/'.$list->id.'/contacts', [ 'email' => 'tom@sawyer.com' ]);
-        $response = $this->post('/lists/'.$list->id.'/contacts', [ 'email' => 'tom@sawyer.com' ]);
-        $response = $this->post('/lists/'.$list->id.'/contacts', [ 'email' => 'tomy@sawyer.com' ]);
+        $response = $this->post(route('contacts.store', $list->id), [ 'email' => 'tom@sawyer.com' ]);
+        $response = $this->post(route('contacts.store', $list->id), [ 'email' => 'tom@sawyer.com' ]);
+        $response = $this->post(route('contacts.store', $list->id), [ 'email' => 'tomy@sawyer.com' ]);
 
         $this->assertEquals(2, Contact::count());
     }
@@ -61,8 +61,8 @@ class ContactsTest extends TestCase
         $list = factory(Lists::class)->create();
         $list2 = factory(Lists::class)->create();
 
-        $response = $this->post('/lists/'.$list->id.'/contacts', [ 'email' => 'tom@sawyer.com']);
-        $response = $this->post('/lists/'.$list2->id.'/contacts', [ 'email' => 'tom@sawyer.com']);
+        $response = $this->post(route('contacts.store',$list->id), [ 'email' => 'tom@sawyer.com']);
+        $response = $this->post(route('contacts.store',$list2->id), [ 'email' => 'tom@sawyer.com']);
 
         $contacts = Contact::all();
 
