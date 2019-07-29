@@ -109,5 +109,19 @@ class ContactsTest extends TestCase
 
         $this->assertDatabaseHas('contacts', [ 'email' => 'chuck@norris.com' ]);
     }
+   
+    /** @test */
+    public function deleteContact()
+    {
+        $list = factory(Lists::class)->create();
+
+        $contact1 = factory(Contact::class)->create([ 'list_id' => $list->id ]);
+        $contact2 = factory(Contact::class)->create([ 'list_id' => $list->id ]);
+        $contact3 = factory(Contact::class)->create([ 'list_id' => $list->id ]);
+
+        $response = $this->delete(route('contacts.delete', $contact3->id));
+
+        $this->assertEquals(2, Contact::count());
+    }
     
 }

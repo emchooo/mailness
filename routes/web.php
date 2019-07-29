@@ -21,7 +21,7 @@ Route::get('lists/create', 'ListsController@create')->name('lists.create');
 Route::post('lists/store', 'ListsController@store')->name('lists.store');
 Route::get('lists/{lists}/edit', 'ListsController@edit')->name('lists.edit');
 Route::put('lists/{lists}/update', 'ListsController@update')->name('lists.update');
-Route::delete('/lists/{lists}/delete', 'ListsController@destroy')->name('lists.delete');
+Route::delete('lists/{lists}/delete', 'ListsController@destroy')->name('lists.delete');
 
 
 Route::get('lists/{lists}/contacts', 'ContactController@index')->name('contacts.index');
@@ -29,3 +29,4 @@ Route::get('lists/{lists}/contacts/create', 'ContactController@create')->name('c
 Route::post('lists/{lists}/contacts', 'ContactController@store')->name('contacts.store');
 Route::get('lists/{lists}/contacts/{contact}/edit', 'ContactController@edit')->name('contacts.edit');
 Route::put('lists/{lists}/contacts/{contact}/update', 'ContactController@update')->name('contacts.update');
+Route::delete('contact/{contact}/delete', 'ContactController@destroy')->name('contacts.delete');
