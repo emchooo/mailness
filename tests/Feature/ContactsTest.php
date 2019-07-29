@@ -70,6 +70,26 @@ class ContactsTest extends TestCase
     }
 
     /** @test */
+    public function cannotCreateContactWithoutEmail()
+    {
+        $list = factory(Lists::class)->create();
+
+        $response = $this->post(route('contacts.store', $list->id));
+
+        $response->assertSessionHasErrors();
+    }
+
+    /** @test */
+    public function emailFieldMustBeValidEmailAddress()
+    {
+        $list = factory(Lists::class)->create();
+        
+        $response = $this->post(route('contacts.store', $list->id), [ 'email' => 'emirgmail.com' ]);
+
+        $response->assertSessionHasErrors();
+    }
+
+    /** @test */
     public function thereIsEditContactPage()
     {
         $list = factory(Lists::class)->create();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Lists;
 use App\Contact;
 use Illuminate\Http\Request;
+use App\Http\Requests\ContactStoreRequest;
 
 class ContactController extends Controller
 {
@@ -13,10 +14,9 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index(Lists $lists)
     {
-        $list = Lists::find($id);
-        return view('contacts.index', compact('list'));
+        return view('contacts.index', [ 'list' => $lists ]);
     }
 
     /**
@@ -24,10 +24,9 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($list_id)
+    public function create(Lists $lists)
     {
-        $list = Lists::find($list_id);
-        return view('contacts.create', compact('list'));
+        return view('contacts.create', [ 'list' => $lists ]);
     }
 
     /**
@@ -36,14 +35,13 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($list_id, Request $request)
+    public function store(Lists $lists, ContactStoreRequest $request)
     {
-        $contact = Contact::where('email', $request->email)->where('list_id', $list_id)->first();
-        $list = Lists::find($list_id);
+        $contact = Contact::where('email', $request->email)->where('list_id', $lists->id)->first();
         if(! isset($contact) ) {
             $contact = new Contact();
             $contact->email = $request->email;
-            $contact->list_id = $list->id;
+            $contact->list_id = $lists->id;
             $contact->save();
         }
         

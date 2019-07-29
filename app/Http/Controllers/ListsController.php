@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Lists;
 use Illuminate\Http\Request;
 use App\Http\Requests\ListUpdateRequest;
+use App\Http\Requests\ListStoreRequest;
 
 class ListsController extends Controller
 {
@@ -35,7 +36,7 @@ class ListsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ListStoreRequest $request)
     {
         $list = new Lists();
         $list->name = $request->name;
@@ -52,7 +53,7 @@ class ListsController extends Controller
      */
     public function show(Lists $lists)
     {
-        //
+        return view('lists.show', [ 'list' => $lists ]);
     }
 
     /**
@@ -75,11 +76,10 @@ class ListsController extends Controller
      */
     public function update(ListUpdateRequest $request, Lists $lists)
     {
-        // @todo validation
         $lists->name = $request->name;
         $lists->save();
     
-        // return redirect(route('lists.show'));
+        return redirect(route('lists.show'));
     }
 
     /**
@@ -90,6 +90,7 @@ class ListsController extends Controller
      */
     public function destroy(Lists $lists)
     {
+        // @todo who can delete list ?
        $lists->contacts()->delete(); 
        $lists->delete();
     }

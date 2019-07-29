@@ -48,6 +48,32 @@ class ListTest extends TestCase
     }
 
     /** @test */
+    public function createNewListCannotBeAddedWithoutName()
+    {
+        $response = $this->post(route('lists.store'));
+
+        $response->assertSessionHasErrors();
+    }
+
+    /** @test */
+    public function openSingleListPage()
+    {
+        $list = factory(Lists::class)->create();
+
+        $response = $this->get(route('lists.show', $list->id));
+
+        $response->assertSuccessful()->assertSeeText($list->name);
+    }
+
+    /** @test */
+    public function ifListIdIsNotValidReturn404()
+    {
+        $response = $this->get(route('lists.show', 1));
+
+        $response->assertStatus(404);
+    }
+
+    /** @test */
     public function openEditListPage()
     {
         $list = factory(Lists::class)->create();
