@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('lists' , 'ListsController@index')->name('lists.index');
 Route::get('lists/{lists}', 'ListsController@show')->name('lists.show');
 Route::get('lists/create', 'ListsController@create')->name('lists.create');
@@ -25,7 +26,8 @@ Route::delete('lists/{lists}/delete', 'ListsController@destroy')->name('lists.de
 
 
 Route::get('lists/{lists}/contacts', 'ContactController@index')->name('contacts.index');
-Route::get('lists/{lists}/contacts/create', 'ContactController@create')->name('contacts.create');
+Route::get('lists/{lists}/contacts/create', 'ContactController@create' )->name('contacts.create');
+Route::get('lists/{lists}/contacts/{contact}', 'ContactController@show')->name('contacts.show');
 Route::post('lists/{lists}/contacts', 'ContactController@store')->name('contacts.store');
 Route::get('lists/{lists}/contacts/{contact}/edit', 'ContactController@edit')->name('contacts.edit');
 Route::put('lists/{lists}/contacts/{contact}/update', 'ContactController@update')->name('contacts.update');

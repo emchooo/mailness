@@ -38,7 +38,7 @@ class ContactsTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->get(route('contacts.create', $list->id));
+        $response = $this->get(route('contacts.create', $list->id ));
 
         $response->assertSeeText('Create new contact');
     }

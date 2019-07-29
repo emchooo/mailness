@@ -53,9 +53,9 @@ class ContactController extends Controller
      * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show(Contact $contact)
+    public function show(Lists $lists, Contact $contact)
     {
-        //
+        return view('contacts.show', [ 'contact' => $contact ]);
     }
 
     /**
