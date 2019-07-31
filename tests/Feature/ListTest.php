@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Lists;
 use App\Contact;
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -12,6 +13,12 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class ListTest extends TestCase
 {
     use DatabaseMigrations;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->user = factory(User::class)->create();
+    }
 
     /** @test */
     public function itIsPossibleToCreateNewList()
@@ -29,7 +36,7 @@ class ListTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->get(route('lists.index'));
+        $response = $this->actingAs($this->user)->get(route('lists.index'));
 
         $response->assertSeeText($list->name);
     }
@@ -39,7 +46,7 @@ class ListTest extends TestCase
     public function createNewList()
     {
         $name = 'My best list';
-        $response = $this->post(route('lists.store'), [ 'name' => $name ]);
+        $response = $this->actingAs($this->user)->post(route('lists.store'), [ 'name' => $name ]);
 
         $list = Lists::first();
 
@@ -50,7 +57,7 @@ class ListTest extends TestCase
     /** @test */
     public function createNewListCannotBeAddedWithoutName()
     {
-        $response = $this->post(route('lists.store'));
+        $response = $this->actingAs($this->user)->post(route('lists.store'));
 
         $response->assertSessionHasErrors();
     }
@@ -60,7 +67,7 @@ class ListTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->get(route('lists.show', $list->id));
+        $response = $this->actingAs($this->user)->get(route('lists.show', $list->id));
 
         $response->assertSuccessful()->assertSeeText($list->name);
     }
@@ -68,7 +75,7 @@ class ListTest extends TestCase
     /** @test */
     public function openCreateListPage()
     {
-        $response = $this->get(route('lists.create'));
+        $response = $this->actingAs($this->user)->get(route('lists.create'));
 
         $response->assertSuccessful()->assertSeeText('Create new list');
     }
@@ -76,7 +83,7 @@ class ListTest extends TestCase
     /** @test */
     public function ifListIdIsNotValidReturn404()
     {
-        $response = $this->get(route('lists.show', 1));
+        $response = $this->actingAs($this->user)->get(route('lists.show', 1));
 
         $response->assertStatus(404);
     }
@@ -86,7 +93,7 @@ class ListTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->get(route('lists.edit', $list->id));
+        $response = $this->actingAs($this->user)->get(route('lists.edit', $list->id));
 
         $response->assertStatus(200)->assertSeeText('Edit list');
     }
@@ -97,7 +104,7 @@ class ListTest extends TestCase
         $list_name = 'My best list';
         $list = factory(Lists::class)->create();
         
-        $response = $this->put(route('lists.update', $list->id), [ 'name' => $list_name ]);
+        $response = $this->actingAs($this->user)->put(route('lists.update', $list->id), [ 'name' => $list_name ]);
 
         $response->assertRedirect();
 
@@ -112,7 +119,7 @@ class ListTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->put(route('lists.update', $list->id), [ 'name' => '' ]);
+        $response = $this->actingAs($this->user)->put(route('lists.update', $list->id), [ 'name' => '' ]);
     
         $response->assertSessionHasErrors();
 
@@ -125,7 +132,7 @@ class ListTest extends TestCase
         $list2 = factory(Lists::class)->create();
         $list3 = factory(Lists::class)->create();
         
-        $response = $this->delete(route('lists.delete', $list->id));
+        $response = $this->actingAs($this->user)->delete(route('lists.delete', $list->id));
 
         $this->assertEquals(2, $list->count());
 
@@ -137,9 +144,9 @@ class ListTest extends TestCase
         $list = factory(Lists::class)->create();
         $list1 = factory(Lists::class)->create();
 
-        $contact1 = $this->post(route('contacts.store', $list->id), [ 'email' => 'tom@sawyer.com' ]);
-        $contact2 = $this->post(route('contacts.store', $list->id), [ 'email' => 'tom@sawyer.net' ]);
-        $contac3 =  $this->post(route('contacts.store', $list1->id), [ 'email' => 'tom@sawyer.org' ]);
+        $contact1 = $this->actingAs($this->user)->post(route('contacts.store', $list->id), [ 'email' => 'tom@sawyer.com' ]);
+        $contact2 = $this->actingAs($this->user)->post(route('contacts.store', $list->id), [ 'email' => 'tom@sawyer.net' ]);
+        $contac3 =  $this->actingAs($this->user)->post(route('contacts.store', $list1->id), [ 'email' => 'tom@sawyer.org' ]);
 
         $response = $this->delete(route('lists.delete', $list->id)); 
         
