@@ -17,9 +17,9 @@ Route::get('/', function () {
 
 
 Route::get('lists' , 'ListsController@index')->name('lists.index');
-Route::get('lists/{lists}', 'ListsController@show')->name('lists.show');
 Route::get('lists/create', 'ListsController@create')->name('lists.create');
 Route::post('lists/store', 'ListsController@store')->name('lists.store');
+Route::get('lists/{lists}', 'ListsController@show')->name('lists.show');
 Route::get('lists/{lists}/edit', 'ListsController@edit')->name('lists.edit');
 Route::put('lists/{lists}/update', 'ListsController@update')->name('lists.update');
 Route::delete('lists/{lists}/delete', 'ListsController@destroy')->name('lists.delete');

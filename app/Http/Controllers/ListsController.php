@@ -79,7 +79,7 @@ class ListsController extends Controller
         $lists->name = $request->name;
         $lists->save();
     
-        return redirect(route('lists.show'));
+        return redirect(route('lists.show', $lists->id));
     }
 
     /**
@@ -93,5 +93,7 @@ class ListsController extends Controller
         // @todo who can delete list ?
        $lists->contacts()->delete(); 
        $lists->delete();
+
+       return redirect()->route('lists.index');
     }
 }

@@ -1,7 +1,6 @@
 
 # Contacts
 - Added subscribed field, but figure out how to handle bounced, complained ... mails 
-- Show contact
 - Custom fields , bounded to list
 
 # Lists

@@ -66,6 +66,14 @@ class ListTest extends TestCase
     }
 
     /** @test */
+    public function openCreateListPage()
+    {
+        $response = $this->get(route('lists.create'));
+
+        $response->assertSuccessful()->assertSeeText('Create new list');
+    }
+
+    /** @test */
     public function ifListIdIsNotValidReturn404()
     {
         $response = $this->get(route('lists.show', 1));
@@ -90,6 +98,8 @@ class ListTest extends TestCase
         $list = factory(Lists::class)->create();
         
         $response = $this->put(route('lists.update', $list->id), [ 'name' => $list_name ]);
+
+        $response->assertRedirect();
 
         $edited_list = Lists::find($list->id);
 
