@@ -15,12 +15,6 @@
 
 # Reports
 
-# Auth
-- login
-- registration
-- activation
-- middleware
-
 # Connect to SES and SNS
 
 # Global
