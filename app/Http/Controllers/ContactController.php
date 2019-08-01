@@ -55,6 +55,20 @@ class ContactController extends Controller
      */
     public function show(Lists $lists, Contact $contact)
     {
+        $conditions = [
+            [ 'key' => 3, 'value' => 'Travnik', 'condition' => '=' ],
+            [ 'key' => 2, 'value' => 'Emir', 'condition' => '=' ]
+        ];
+
+        $contacts = Contact::where('list_id', $lists->id);
+
+        foreach($conditions as $condition) {
+            $contacts->whereHas('fields', function($query) use ($condition) {
+                $query->where('field_id',$condition['key']);
+                $query->where('value', $condition['condition'] , $condition['value']);
+            });
+        }
+
         return view('contacts.show', [ 'contact' => $contact ]);
     }
 
