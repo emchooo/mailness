@@ -15,7 +15,7 @@
 <br>
 
 @foreach($contact->fields as $f)
-	{{ $f->field->name }} : {{ $f->value }}
+	{{ $f->name }} : {{ $f->pivot->value }}
 @endforeach
 
 </body>

@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\User;
 use App\Lists;
+use App\Field;
 use App\Contact;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -129,6 +130,22 @@ class ContactsTest extends TestCase
         $response = $this->actingAs($this->user)->delete(route('contacts.delete', $contact3->id));
 
         $this->assertEquals(2, Contact::count());
+    }
+
+    /** @test */
+    public function showContactPage()
+    {
+        $list = factory(Lists::class)->create();
+
+        $contact = factory(Contact::class)->create([ 'list_id' => $list->id ]);
+
+        $field = factory(Field::class)->create([ 'list_id' => $list->id, 'name' => 'City' ]);
+
+        $contact->fields()->attach($field, [ 'value' => 'Travnik' ]);
+
+        $response = $this->actingAs($this->user)->get(route('contacts.show', [ $list->id, $contact->id ] ));
+
+        $response->assertSuccessful();
     }
     
 }

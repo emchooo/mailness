@@ -13,7 +13,7 @@ class CreateContactFieldsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contact_fields', function (Blueprint $table) {
+        Schema::create('contact_field', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('field_id');
             $table->integer('contact_id');

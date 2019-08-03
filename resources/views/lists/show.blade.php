@@ -7,6 +7,8 @@
 	<div>
 		<h1 class="title" >List - {{ $list->name }}</h1>
 
+<a href="{{ route('fields.index', $list->id) }}">Fields</a>
+
 		<ul>
 			@foreach($list->contacts as $contact)
 				<li>{{ $contact->email }} 

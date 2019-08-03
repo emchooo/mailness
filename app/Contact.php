@@ -17,6 +17,6 @@ class Contact extends Model
 
     public function fields()
     {
-        return $this->hasMany(ContactField::class);
+        return $this->belongsToMany(Field::class)->withPivot('value');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Field;
 use App\Lists;
 use App\Contact;
 use Illuminate\Http\Request;
@@ -92,6 +93,16 @@ class ContactController extends Controller
      */
     public function update(Request $request, Lists $lists, Contact $contact)
     {
+        // @todo validation
+        $contact->fields()->detach();
+        if($request->fields) {
+            foreach($request->fields as $key => $value) {
+                if($value) {
+                    $field = Field::find($key);
+                    $contact->fields()->attach($field, [ 'value' => $value ]);
+                }
+            }
+        }
         $contact->email = $request->email;
         $contact->save();
     }
