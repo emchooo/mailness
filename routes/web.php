@@ -25,6 +25,13 @@ Route::middleware('auth')->group(function () {
     Route::put('lists/{lists}/update', 'ListsController@update')->name('lists.update');
     Route::delete('lists/{lists}/delete', 'ListsController@destroy')->name('lists.delete');
 
+    Route::get('lists/{lists}/fields', 'FieldController@index')->name('fields.index');
+    Route::get('lists/{lists}/fields/create', 'FieldController@create')->name('fields.create');
+    Route::post('lists/{lists}/fields/store', 'FieldController@store')->name('fields.store');
+    Route::get('lists/{lists}/fields/{field}/edit', 'FieldController@edit')->name('fields.edit');
+    Route::put('lists/{lists}/fields/{field}/update', 'FieldController@update')->name('fields.update');
+    Route::delete('lists/{lists}/fields/{field}/delete', 'FieldController@destroy')->name('fields.delete');
+
 
     Route::get('lists/{lists}/contacts', 'ContactController@index')->name('contacts.index');
     Route::get('lists/{lists}/contacts/create', 'ContactController@create' )->name('contacts.create');
