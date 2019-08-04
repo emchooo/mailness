@@ -19,4 +19,11 @@ class Contact extends Model
     {
         return $this->belongsToMany(Field::class)->withPivot('value');
     }
+
+    public function getFieldValue($field_id)
+    {
+        if($this->fields()->where('field_id', $field_id)->first()) {
+            return $this->fields()->where('field_id', $field_id)->first()->pivot->value;
+        }
+    }
 }

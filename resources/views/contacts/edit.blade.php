@@ -14,7 +14,7 @@
     @foreach($list->fields as $field)
         <p>
         {{ $field->name }}
-        <input type="text" name="fields[{{$field->id}}]" value="@if($contact->fields()->where('field_id', $field->id)->first()) {{ $contact->fields()->where('field_id', $field->id)->first()->pivot->value }} @endif" >
+        <input type="text" name="fields[{{$field->id}}]" value="{{ $contact->getFieldValue($field->id) }}" >
         </p>
     @endforeach
 
