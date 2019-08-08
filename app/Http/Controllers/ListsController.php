@@ -16,7 +16,7 @@ class ListsController extends Controller
      */
     public function index()
     {
-        $lists = Lists::all();
+        $lists = Lists::orderBy('id', 'desc')->get();
         return view('lists.index', compact('lists'));
     }
 
