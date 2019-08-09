@@ -43,6 +43,8 @@ class FieldController extends Controller
         $field->name = $request->name;
         $field->list_id = $list_id;
         $field->save();
+
+        return redirect()->route('fields.index', $list_id); 
     }
 
     /**

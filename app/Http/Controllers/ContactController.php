@@ -45,7 +45,7 @@ class ContactController extends Controller
             $contact->list_id = $lists->id;
             $contact->save();
         }
-        
+        return redirect()->route('lists.show', $lists->id); 
     }
 
     /**
