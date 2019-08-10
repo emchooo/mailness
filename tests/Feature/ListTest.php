@@ -51,7 +51,7 @@ class ListTest extends TestCase
         $list = Lists::first();
 
         $this->assertEquals($list->name, $name);
-
+        $response->assertRedirect(route('lists.show', $list->id));
     }
 
     /** @test */
@@ -70,6 +70,16 @@ class ListTest extends TestCase
         $response = $this->actingAs($this->user)->get(route('lists.show', $list->id));
 
         $response->assertSuccessful()->assertSeeText($list->name);
+    }
+
+    /** @test */
+    public function inListWithoutContatDisplayMessage()
+    {
+        $list = factory(Lists::class)->create();
+
+        $response = $this->actingAs($this->user)->get(route('lists.show', $list->id));
+
+        $response->assertSuccessful()->assertSeeText('no contacts yet');
     }
 
     /** @test */

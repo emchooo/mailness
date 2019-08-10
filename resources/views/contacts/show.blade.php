@@ -8,11 +8,7 @@
 </div>
 
 
-<div class="border border-l-0 border-t-0 border-r-0 mb-5 pb-1" >
-	<a href="#" class="pr-6" >Contacts</a>
-	<a href="{{ route('fields.index', $contact->list->id) }}" class="pr-6" >Fields</a>
-	<a href="#">Settings</a>
-</div>
+
 
 <h1>Contact {{ $contact->email }}</h1>
 

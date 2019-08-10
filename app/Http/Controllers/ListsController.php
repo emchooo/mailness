@@ -42,7 +42,7 @@ class ListsController extends Controller
         $list->name = $request->name;
         $list->save();
 
-        return redirect('/lists');
+        return redirect()->route('lists.show', $list->id);
     }
 
     /**

@@ -1,11 +1,6 @@
 #To-Do list
-- When creating new list redirect to that list instead redirecting to lists page
-- On single list page if there is no contact display message "No contacts"
 - Create contact to list page style
-- On create contact page there is no link to return to list page
 - Show contact page style
-- Submenu on list page (Contact, Fields, Settings) extract and add link them
-- On create new field page add message "No fields yet"
 - Create new field page style when showing list of fields
 - Fields store add validation
 - Edit list page style
@@ -13,6 +8,11 @@
 - Show contact page style
 - Remove unused blades
 - Refactor
+- Auth login style
+- Style "no contacts yet" on lists show page
+- Edit field page style and link on fields list to edit page
+- on show contact page link to go back to list
+- list_submenu highlight current link
 
 
 # Contacts

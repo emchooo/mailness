@@ -2,7 +2,9 @@
 
   @section('content')
 
-  <h1 class="text-gray-700 text-2xl py-4" >Add new contact to {{ $list->name }}</h1>
+  <a href="{{ route('lists.show', $list->id) }}"><- {{ $list->name }}</a>
+
+  <h1 class="text-gray-700 text-2xl py-4" >Add new contact</h1>
 
     <form action="{{ route('contacts.store', $list->id) }}" method="POST">
     @csrf

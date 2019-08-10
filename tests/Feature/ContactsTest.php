@@ -38,7 +38,7 @@ class ContactsTest extends TestCase
 
         $response = $this->actingAs($this->user)->post(route('contacts.store', $list->id), [ 'email' => 'billy@kid.com' ]);
 
-        $response->assertSuccessful();
+        $response->assertRedirect(route('lists.show', $list->id));
     }
 
     /** @test */
@@ -48,7 +48,7 @@ class ContactsTest extends TestCase
 
         $response = $this->actingAs($this->user)->get(route('contacts.create', $list->id ));
 
-        $response->assertSeeText('Create new contact');
+        $response->assertSuccessful();
     }
 
     /** @test */
