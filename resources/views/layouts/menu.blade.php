@@ -12,7 +12,7 @@
         <a href="#">Campaigns</a>
       </li>
       <li class="pr-5" >
-        <a href="#">Templates</a>
+        <a href="{{ route('templates.index') }}">Templates</a>
       </li>
       <li>
         <a href="#">Reports</a>

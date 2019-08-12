@@ -13,10 +13,15 @@
 - Edit field page style and link on fields list to edit page
 - on show contact page link to go back to list
 - list_submenu highlight current link
+- On show contact add link to edit contact
+- Style edit contact page
+- On show contact page add link to return to list
+- On update contact redirct to show contact
 
 
 # Contacts
 - Custom fields , bounded to list
+- Need source for contact ( form, api, added ... )
 
 # Lists
 - Imports

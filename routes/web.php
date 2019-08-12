@@ -40,6 +40,15 @@ Route::middleware('auth')->group(function () {
     Route::get('lists/{lists}/contacts/{contact}/edit', 'ContactController@edit')->name('contacts.edit');
     Route::put('lists/{lists}/contacts/{contact}/update', 'ContactController@update')->name('contacts.update');
     Route::delete('contact/{contact}/delete', 'ContactController@destroy')->name('contacts.delete');
+
+    Route::get('templates', 'TemplateController@index')->name('templates.index');
+    Route::get('templates/create', 'TemplateController@create')->name('templates.create');
+    Route::post('templates/store', 'TemplateController@store')->name('templates.store');
+    Route::get('templates/{template}/edit', 'TemplateController@edit')->name('templates.edit');
+    Route::get('templates/{template}', 'TemplateController@show')->name('templates.show');
+    Route::put('templates/{template}/store', 'TemplateController@update')->name('templates.update');
+    Route::delete('templates/{template}/delete', 'TemplateController@destroy')->name('templates.delete');
+
 });
 
 
