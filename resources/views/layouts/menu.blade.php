@@ -9,7 +9,7 @@
         <a href="{{ route('lists.index') }}" class="hover:text-gray-500 hover:underline" >Lists</a>
       </li>
       <li class="pr-5" >
-        <a href="#">Campaigns</a>
+        <a href="{{ route('campaigns.index') }}">Campaigns</a>
       </li>
       <li class="pr-5" >
         <a href="{{ route('templates.index') }}">Templates</a>

@@ -17,7 +17,7 @@
 - Style edit contact page
 - On show contact page add link to return to list
 - On update contact redirct to show contact
-
+- Fix bug in test when Faker generates name with '
 
 # Contacts
 - Custom fields , bounded to list

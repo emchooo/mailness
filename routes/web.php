@@ -49,6 +49,13 @@ Route::middleware('auth')->group(function () {
     Route::put('templates/{template}/store', 'TemplateController@update')->name('templates.update');
     Route::delete('templates/{template}/delete', 'TemplateController@destroy')->name('templates.delete');
 
+    Route::get('campaigns', 'CampaignController@index')->name('campaigns.index');
+    Route::get('campaigns/create', 'CampaignController@create')->name('campaigns.create');
+    Route::post('campaigns/store', 'CampaignController@store')->name('campaigns.store');
+    Route::get('campaigns/{campaign}/edit', 'CampaignController@edit')->name('campaigns.edit');
+    Route::put('campaigns/{campaign}/update', 'CampaignController@update')->name('campaigns.update');
+    Route::delete('campaigns/{campaign}/delete', 'CampaignController@destroy')->name('campaigns.delete');
+
 });
 
 
