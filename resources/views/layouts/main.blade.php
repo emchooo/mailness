@@ -14,7 +14,7 @@
 
     @include('layouts.menu')
 
-    <div class="container mx-auto pt-5">
+    <div class="container mx-auto pt-5 px-3">
       @yield('content')
     </div>
     

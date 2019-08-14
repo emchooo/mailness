@@ -1,7 +1,7 @@
-<nav class="bg-gray-200 shadow-lg " >
+<nav class="bg-gray-200 shadow-lg" >
   <div class="container mx-auto py-3">
 
-  <div class="flex">
+  <div class="flex px-3">
     <a href="" class="mr-10 text-2xl font-bold" >Mailness</a>
 
     <ul class="flex pt-2" >
