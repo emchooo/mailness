@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Campaign;
+use App\Mail\CampaignMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CampaignController extends Controller
 {
@@ -101,5 +103,13 @@ class CampaignController extends Controller
         $campaign->delete();
 
         return redirect()->route('campaigns.index');
+    }
+
+    public function sendTest(Request $request, Campaign $campaign)
+    {
+        // @todo validation
+        Mail::to($request->email)->queue(new CampaignMail($campaign));
+
+        return back();
     }
 }

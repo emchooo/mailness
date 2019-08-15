@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::get('campaigns/create', 'CampaignController@create')->name('campaigns.create');
     Route::post('campaigns/store', 'CampaignController@store')->name('campaigns.store');
     Route::get('campaigns/{campaign}', 'CampaignController@show')->name('campaigns.show');
+    Route::post('campaigns/{campaign}/send/test', 'CampaignController@sendTest')->name('campaigns.send.test');
     Route::get('campaigns/{campaign}/edit', 'CampaignController@edit')->name('campaigns.edit');
     Route::put('campaigns/{campaign}/update', 'CampaignController@update')->name('campaigns.update');
     Route::delete('campaigns/{campaign}/delete', 'CampaignController@destroy')->name('campaigns.delete');
