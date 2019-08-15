@@ -45,6 +45,8 @@ class CampaignController extends Controller
         $campaign->sending_email = $request->sending_email;
         $campaign->content = $request->content;
         $campaign->save();
+
+        return redirect()->route('campaigns.index');
     }
 
     /**
@@ -55,7 +57,7 @@ class CampaignController extends Controller
      */
     public function show(Campaign $campaign)
     {
-        //
+        return view('campaigns.show', compact('campaign'));
     }
 
     /**

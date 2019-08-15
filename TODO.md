@@ -31,7 +31,6 @@
 - On lists page add pagination
 
 # Campaigns
-- on campaign create redirect to campaigns
 - implement duplicate option
 
 # Templates
