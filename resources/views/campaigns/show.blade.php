@@ -15,5 +15,22 @@
   </form>
 </div>
 
+<div class="mt-10">
+  <h1>Send campaign</h1>
+
+  <form action="{{ route('campaigns.send', $campaign->id) }}" method="POST">
+    @csrf
+
+    @foreach($lists as $list)
+      <div class="block" >
+        <input type="checkbox" name="lists[{{$list->id}}]" > {{ $list->name }}
+      </div>
+    @endforeach
+
+  <button type="submit" class="bg-blue-500 px-5 py-3 text-white mt-2" >Send</button>
+  </form>
+
+</div>
+
 
 @endsection

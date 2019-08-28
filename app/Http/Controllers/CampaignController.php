@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Campaign;
+use App\Lists;
 use App\Mail\CampaignMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -59,7 +60,8 @@ class CampaignController extends Controller
      */
     public function show(Campaign $campaign)
     {
-        return view('campaigns.show', compact('campaign'));
+        $lists = Lists::all();
+        return view('campaigns.show', compact('campaign', 'lists'));
     }
 
     /**
@@ -105,11 +107,23 @@ class CampaignController extends Controller
         return redirect()->route('campaigns.index');
     }
 
-    public function sendTest(Request $request, Campaign $campaign)
+    public function sendTestMail(Request $request, Campaign $campaign)
     {
         // @todo validation
         Mail::to($request->email)->queue(new CampaignMail($campaign));
 
         return back();
+    }
+
+    public function send(Request $request, Campaign $campaign)
+    {
+        // @todo validation - must have list
+        return array_keys($request->lists);
+        // lists
+        $lists = array_keys($request->lists);
+        // for every lists
+        foreach($lists as $list) {
+
+        }
     }
 }
