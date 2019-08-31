@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Campaign;
+use App\Jobs\SendCampaign;
 use App\Lists;
 use App\Mail\CampaignMail;
 use Illuminate\Http\Request;
@@ -118,12 +119,9 @@ class CampaignController extends Controller
     public function send(Request $request, Campaign $campaign)
     {
         // @todo validation - must have list
-        return array_keys($request->lists);
-        // lists
-        $lists = array_keys($request->lists);
-        // for every lists
-        foreach($lists as $list) {
-
+        foreach($request->lists as $key => $value) {
+            $list = Lists::find($key);
+            SendCampaign::dispatch($campaign, $list);
         }
     }
 }
