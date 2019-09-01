@@ -6,6 +6,7 @@ use App\Lists;
 use App\Campaign;
 use App\Jobs\SendEmail;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -37,7 +38,8 @@ class SendCampaign implements ShouldQueue
      */
     public function handle()
     {
-        // insert all contact to sending log
+        // @todo don't insert bounced contacts
+        DB::insert('insert into sending_logs (campaign_id , contact_id ) SELECT ? , id FROM contacts where list_id = ?', [$this->campaign->id, $this->list->id]);
         foreach($this->list->contacts as $contact) {
             SendEmail::dispatch($contact, $this->campaign);
         }

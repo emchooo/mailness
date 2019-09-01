@@ -119,6 +119,7 @@ class CampaignController extends Controller
     public function send(Request $request, Campaign $campaign)
     {
         // @todo validation - must have list
+        // if campaign is sent
         foreach($request->lists as $key => $value) {
             $list = Lists::find($key);
             SendCampaign::dispatch($campaign, $list);

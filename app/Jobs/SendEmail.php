@@ -4,6 +4,8 @@ namespace App\Jobs;
 
 use App\Contact;
 use App\Campaign;
+use Carbon\Carbon;
+use App\SendingLog;
 use App\Mail\CampaignMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Mail;
@@ -39,6 +41,8 @@ class SendEmail implements ShouldQueue
     public function handle()
     {
         Mail::to($this->contact->email)->send(new CampaignMail($this->campaign));
-        // update that email is sent
+        SendingLog::where('contact_id', $this->contact->id)
+            ->where('campaign_id', $this->campaign->id)
+            ->update(['sent_at' => Carbon::now()]);
     }
 }
