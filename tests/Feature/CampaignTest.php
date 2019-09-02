@@ -42,8 +42,6 @@ class CampaignTest extends TestCase
     public function itCanSaveNewCampaign()
     {
         $response = $this->actingAs($this->user)->post(route('campaigns.store'), [ 'subject' => 'My campaign', 'sending_name' => 'Emir', 'sending_email' => 'tom@sawyer.com', 'content' => 'Content' ]);
-        
-        $response->assertSuccessful();
 
         $this->assertEquals(1, Campaign::count());
     }
