@@ -3,8 +3,13 @@
 namespace Tests\Feature;
 
 use App\User;
+use App\Lists;
 use App\Campaign;
 use Tests\TestCase;
+use App\Jobs\SendCampaign;
+use App\Mail\CampaignMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class CampaignTest extends TestCase
@@ -84,6 +89,21 @@ class CampaignTest extends TestCase
 
         $this->assertEquals(0, Campaign::count());
         
+    }
+
+    /** @test */
+    public function itSendsTestMail()
+    {
+        Mail::fake();
+
+        $campaign = factory(Campaign::class)->create();
+
+        $email = 'emir@test.com';
+        $response = $this->actingAs($this->user)->post(route('campaigns.send.test', $campaign->id), [ 'email' => $email]);
+
+        Mail::assertQueued(CampaignMail::class, function ($mail) use ($email) {
+            return $mail->hasTo($email);
+        });
     }
 
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Lists;
 use App\Campaign;
 use App\Jobs\SendCampaign;
-use App\Lists;
 use App\Mail\CampaignMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
