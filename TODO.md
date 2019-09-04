@@ -1,43 +1,38 @@
-#To-Do list
-- Create contact to list page style
-- Show contact page style
-- Create new field page style when showing list of fields
-- Fields store add validation
-- Edit list page style
-- Edit list page - on clicking Delete add alert or some version of validation
-- Show contact page style
-- Remove unused blades
-- Refactor
-- Auth login style
-- Style "no contacts yet" on lists show page
-- Edit field page style and link on fields list to edit page
-- on show contact page link to go back to list
-- list_submenu highlight current link
-- On show contact add link to edit contact
-- Style edit contact page
-- On show contact page add link to return to list
-- On update contact redirct to show contact
-- Fix bug in test when Faker generates name with '
-
-# Contacts
-- Custom fields , bounded to list
-- Need source for contact ( form, api, added ... )
-
 # Lists
 - Imports
 - Exports ( Export subscried contacts, Export unsubscribed contacts )
-- Fields
-- Forms
+- Fields - style of fields page
+- Forms - basic subscribe page
 - On lists page add pagination
+- Settings page style
+- Add contact page style
+- Single contact show page style
+- Contact flag - active, bounced, complaint
 
 # Campaigns
 - implement duplicate option
+- Create new campaign validation
+- Create new campaign - text editor implement
+- User can edit campaign only if campaign is in draft mode
+- Send test mail validation
+- Send campaign validation
+- When creating new campaign user can select template
 
 # Templates
+- Templates index page style
+- Create new template style and editor
+- Create new template validatior
+- Implement open template
 
 # Reports
+- List available reports
+- Open report with data
+
+# Auth
+- Style all auth pages
+
+#To-Do list
+- list_submenu highlight current link
+- Fix bug in test when Faker generates name with '
 
 # Connect to SES and SNS
-
-# Global
-- check validations for all resources
