@@ -32,6 +32,7 @@
 - Style all auth pages
 
 #To-Do list
+- remove unused views
 - list_submenu highlight current link
 - Fix bug in test when Faker generates name with '
 
