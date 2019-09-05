@@ -5,9 +5,9 @@
 - Forms - basic subscribe page
 - On lists page add pagination
 - Settings page style
-- Add contact page style
-- Single contact show page style
 - Contact flag - active, bounced, complaint
+- Edit page for contact
+- Create contact dont save custom fields - bug
 
 # Campaigns
 - implement duplicate option

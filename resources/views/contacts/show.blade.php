@@ -8,20 +8,12 @@
 </div>
 
 
-
-
-<h1>Contact {{ $contact->email }}</h1>
-
-@foreach($contact->list->fields as $field)
-	{{ $field->name }}
-@endforeach
-
-<br>
-<br>
-
+<ul class="mt-4" >
+  <li class="mt-2" ><b>Email:</b> {{ $contact->email }}</li>
 @foreach($contact->fields as $f)
-	{{ $f->name }} : {{ $f->pivot->value }}
+	<li class="mt-2" ><b>{{ $f->name }}</b>: {{ $f->pivot->value }}</li>
 @endforeach
+</ul>
 		
 
 @endsection

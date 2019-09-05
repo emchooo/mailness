@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Field;
+use App\Http\Requests\FieldStoreRequest;
 use App\Lists;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,7 @@ class FieldController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($list_id, Request $request)
+    public function store($list_id, FieldStoreRequest $request)
     {
         // @todo add validation
         $field = new Field();
