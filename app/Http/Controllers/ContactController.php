@@ -44,6 +44,14 @@ class ContactController extends Controller
             $contact->email = $request->email;
             $contact->list_id = $lists->id;
             $contact->save();
+
+            foreach($request->fields as $key => $value) {
+                if($value) {
+                    $field = Field::find($key);
+                    $contact->fields()->attach($field, [ 'value' => $value ]);
+                }
+            }
+
         }
         return redirect()->route('lists.show', $lists->id); 
     }
@@ -56,20 +64,6 @@ class ContactController extends Controller
      */
     public function show(Lists $lists, Contact $contact)
     {
-        $conditions = [
-            [ 'key' => 3, 'value' => 'Travnik', 'condition' => '=' ],
-            [ 'key' => 2, 'value' => 'Emir', 'condition' => '=' ]
-        ];
-
-        $contacts = Contact::where('list_id', $lists->id);
-
-        foreach($conditions as $condition) {
-            $contacts->whereHas('fields', function($query) use ($condition) {
-                $query->where('field_id',$condition['key']);
-                $query->where('value', $condition['condition'] , $condition['value']);
-            });
-        }
-
         return view('contacts.show', [ 'contact' => $contact ]);
     }
 
@@ -91,20 +85,25 @@ class ContactController extends Controller
      * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Lists $lists, Contact $contact)
+    public function update(ContactStoreRequest $request, Lists $lists, Contact $contact)
     {
-        // @todo validation
-        $contact->fields()->detach();
-        if($request->fields) {
-            foreach($request->fields as $key => $value) {
-                if($value) {
-                    $field = Field::find($key);
-                    $contact->fields()->attach($field, [ 'value' => $value ]);
+        // @todo refactor this and save method
+        $contact_check = Contact::where('email', $request->email)->where('list_id', $lists->id)->first();
+        if(! isset($contact_check) ) {
+            $contact->fields()->detach();
+            if($request->fields) {
+                foreach($request->fields as $key => $value) {
+                    if($value) {
+                        $field = Field::find($key);
+                        $contact->fields()->attach($field, [ 'value' => $value ]);
+                    }
                 }
             }
+            $contact->email = $request->email;
+            $contact->save();
         }
-        $contact->email = $request->email;
-        $contact->save();
+
+        return view('contacts.show', [ 'list' => $lists, 'contact' => $contact ]);
     }
 
     /**

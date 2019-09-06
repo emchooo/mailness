@@ -6,8 +6,6 @@
 - On lists page add pagination
 - Settings page style
 - Contact flag - active, bounced, complaint
-- Edit page for contact
-- Create contact dont save custom fields - bug
 
 # Campaigns
 - implement duplicate option

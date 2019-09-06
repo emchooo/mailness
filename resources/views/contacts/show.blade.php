@@ -8,12 +8,13 @@
 </div>
 
 
-<ul class="mt-4" >
+<ul class="mt-4 mb-10" >
   <li class="mt-2" ><b>Email:</b> {{ $contact->email }}</li>
 @foreach($contact->fields as $f)
 	<li class="mt-2" ><b>{{ $f->name }}</b>: {{ $f->pivot->value }}</li>
 @endforeach
 </ul>
 		
+<a href="{{ route('contacts.edit', [ $contact->list->id, $contact->id ]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center" >Edit</a>
 
 @endsection
