@@ -18,4 +18,6 @@
     </div>
   @endforeach
 
+  {{ $lists->links() }}
+
 @endsection

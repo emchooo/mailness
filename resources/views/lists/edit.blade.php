@@ -9,21 +9,26 @@
 
 @include('includes.list_submenu')
 
-<h1>Edit list</h1>
+<h1 class="text-xl mb-3" >Edit list</h1>
 
 	<form method="POST" action="{{ route('lists.update', $list->id) }}" >
     <input type="hidden" name="_method" value="PUT">
 
 		@csrf
 
-		<input type="text" name="name" value="{{ $list->name }}" class="bg-gray-300 p-2 block" >
+		<div class="block mb-5 ">
+			<label for="name">Name</label>
+			<input type="text" name="name" value="{{ $list->name }}" class="bg-gray-300 p-2 block" >
+		</div>	
 
-		<input type="submit" value="Save" class="bg-blue-500 py-2 px-4 rounded" >
+		<div class="block">
+			<input type="submit" value="Save" class="bg-blue-500 py-2 px-4 rounded" >
+		</div>
 		
 	</form>
 
 
-	<form action="{{ route('lists.delete', $list->id) }}" method="POST">
+	<form action="{{ route('lists.delete', $list->id) }}" method="POST" class="mt-10" >
 	<input type="hidden" name="_method" value="DELETE">
 
 		@csrf	

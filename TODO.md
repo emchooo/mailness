@@ -1,10 +1,8 @@
 # Lists
 - Imports
 - Exports ( Export subscried contacts, Export unsubscribed contacts )
-- Fields - style of fields page
 - Forms - basic subscribe page
 - On lists page add pagination
-- Settings page style
 - Contact flag - active, bounced, complaint
 
 # Campaigns
