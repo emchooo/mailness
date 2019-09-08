@@ -9,6 +9,8 @@
 
 @include('includes.list_submenu')
 
+<a class="block text-right mb-3" href="{{ route('lists.show', $list->id) }}?subscribed={{ $subscribed ? 0 : 1 }}">{{ $subscribed ? 'Subscribed' : 'Unsubscribed' }}</a>
+
 @if($contacts->count())
 	<table class="w-full">
 		<thead class="bg-gray-100" >

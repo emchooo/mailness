@@ -12,7 +12,7 @@ class Lists extends Model
 
     public function contacts()
     {
-    	return $this->hasMany(Contact::class, 'list_id')->active();
+        return $this->hasMany(Contact::class, 'list_id')->active();
     }
 
     public function fields()

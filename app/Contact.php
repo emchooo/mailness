@@ -31,5 +31,10 @@ class Contact extends Model
     {
         return $query->where('subscribed', 1);
     }
+
+    public function scopeInactive($query)
+    {
+        return $query->where('subscribed', 0);
+    }
     
 }

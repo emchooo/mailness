@@ -52,10 +52,14 @@ class ListsController extends Controller
      * @param  \App\Lists  $lists
      * @return \Illuminate\Http\Response
      */
-    public function show(Lists $lists)
+    public function show(Request $request, Lists $lists)
     {
-        $contacts = Contact::where('list_id', $lists->id)->active()->orderBy('id', 'desc')->paginate(10);
-        return view('lists.show', [ 'list' => $lists, 'contacts' => $contacts ]);
+        if($request->subscribed) {
+            $contacts = Contact::where('list_id', $lists->id)->inactive()->orderBy('id', 'desc')->paginate(10);
+        } else {
+            $contacts = Contact::where('list_id', $lists->id)->active()->orderBy('id', 'desc')->paginate(10);
+        }
+        return view('lists.show', [ 'list' => $lists, 'contacts' => $contacts, 'subscribed' => $request->subscribed ]);
     }
 
     /**

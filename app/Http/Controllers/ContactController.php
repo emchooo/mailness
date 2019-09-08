@@ -17,7 +17,7 @@ class ContactController extends Controller
      */
     public function index(Lists $lists)
     {
-        return view('contacts.index', [ 'list' => $lists ]);
+        //
     }
 
     /**
@@ -45,10 +45,12 @@ class ContactController extends Controller
             $contact->list_id = $lists->id;
             $contact->save();
 
-            foreach($request->fields as $key => $value) {
-                if($value) {
-                    $field = Field::find($key);
-                    $contact->fields()->attach($field, [ 'value' => $value ]);
+            if($request->fields) {
+                foreach($request->fields as $key => $value) {
+                    if($value) {
+                        $field = Field::find($key);
+                        $contact->fields()->attach($field, [ 'value' => $value ]);
+                    }
                 }
             }
 

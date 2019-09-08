@@ -22,21 +22,11 @@ class ContactsTest extends TestCase
     }
 
     /** @test */
-    public function seeContactsPage()
-    {
-        $list = factory(Lists::class)->create();
-
-        $response = $this->actingAs($this->user)->get(route('contacts.index', $list->id));
-
-        $response->assertViewHas('list');
-    }
-
-    /** @test */
     public function createNewContactAndAttachToList()
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->actingAs($this->user)->post(route('contacts.store', $list->id), [ 'email' => 'billy@kid.com' ]);
+        $response = $this->actingAs($this->user)->post(route('contacts.store', $list->id), [ 'email' => 'emir.softi@gmail.com' ]);
 
         $response->assertRedirect(route('lists.show', $list->id));
     }
@@ -105,7 +95,7 @@ class ContactsTest extends TestCase
 
         $response = $this->actingAs($this->user)->get(route('contacts.edit', [ $list->id, $contact->id ]));
 
-        $response->assertSuccessful()->assertSeeText('Edit contact');
+        $response->assertSuccessful();
     }
    
     /** @test */
