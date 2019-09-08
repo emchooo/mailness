@@ -26,4 +26,10 @@ class Contact extends Model
             return $this->fields()->where('field_id', $field_id)->first()->pivot->value;
         }
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('subscribed', 1);
+    }
+    
 }

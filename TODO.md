@@ -2,7 +2,6 @@
 - Imports
 - Exports ( Export subscried contacts, Export unsubscribed contacts )
 - Forms - basic subscribe page
-- On lists page add pagination
 - Contact flag - active, bounced, complaint
 
 # Campaigns
@@ -13,16 +12,20 @@
 - Send test mail validation
 - Send campaign validation
 - When creating new campaign user can select template
+- On campaigns page add pagination
+- Dropdown filter for campaigns ( active, draft, sending, cempleted)
 
 # Templates
 - Templates index page style
 - Create new template style and editor
 - Create new template validatior
 - Implement open template
+- Add pagination
 
 # Reports
 - List available reports
 - Open report with data
+- Add pagination
 
 # Auth
 - Style all auth pages

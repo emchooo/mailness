@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Lists;
+use App\Contact;
 use Illuminate\Http\Request;
 use App\Http\Requests\ListUpdateRequest;
 use App\Http\Requests\ListStoreRequest;
@@ -53,7 +54,8 @@ class ListsController extends Controller
      */
     public function show(Lists $lists)
     {
-        return view('lists.show', [ 'list' => $lists ]);
+        $contacts = Contact::where('list_id', $lists->id)->active()->orderBy('id', 'desc')->paginate(10);
+        return view('lists.show', [ 'list' => $lists, 'contacts' => $contacts ]);
     }
 
     /**

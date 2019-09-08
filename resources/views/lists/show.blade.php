@@ -9,7 +9,7 @@
 
 @include('includes.list_submenu')
 
-@if($list->contacts()->count())
+@if($contacts->count())
 	<table class="w-full">
 		<thead class="bg-gray-100" >
 			<tr class="">
@@ -21,7 +21,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach($list->contacts as $contact)
+			@foreach($contacts as $contact)
 				<tr class="hover:bg-gray-100" >
 					<td class="py-4 px-4 border-b border-grey-light hover:text-gray-500" ><a href="{{ route('contacts.show', [ $list->id, $contact->id ]) }}">{{ $contact->email }}</a></td>
 					@foreach($list->fields as $field)
@@ -35,5 +35,7 @@
 @else
 	<p>no contacts yet</p>
 @endif
+
+{{ $contacts->links('includes.pagination') }}
 
 @endsection
