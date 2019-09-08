@@ -18,6 +18,6 @@
     </div>
   @endforeach
 
-  {{ $lists->links() }}
+  {{ $lists->links('includes.pagination') }}
 
 @endsection

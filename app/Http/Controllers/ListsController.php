@@ -16,7 +16,7 @@ class ListsController extends Controller
      */
     public function index()
     {
-        $lists = Lists::orderBy('id', 'desc')->paginate(2);
+        $lists = Lists::orderBy('id', 'desc')->paginate(10);
         return view('lists.index', compact('lists'));
     }
 

@@ -31,5 +31,6 @@
 - remove unused views
 - list_submenu highlight current link
 - Fix bug in test when Faker generates name with '
+- Responsive
 
 # Connect to SES and SNS
