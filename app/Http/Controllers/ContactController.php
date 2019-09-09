@@ -38,6 +38,7 @@ class ContactController extends Controller
      */
     public function store(Lists $lists, ContactStoreRequest $request)
     {
+        // @todo refactor this with update
         $contact = Contact::where('email', $request->email)->where('list_id', $lists->id)->first();
         if(! isset($contact) ) {
             $contact = new Contact();
@@ -53,8 +54,8 @@ class ContactController extends Controller
                     }
                 }
             }
-
         }
+        
         return redirect()->route('lists.show', $lists->id); 
     }
 

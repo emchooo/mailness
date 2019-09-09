@@ -18,6 +18,7 @@ Auth::routes();
 
 Route::get('lists/{lists}/subscribe', 'ListsController@subscribe')->name('lists.subscribe');
 Route::post('lists/{lists}/subscribe', 'ListsController@subscribeStore')->name('lists.subscribe.store');
+Route::get('lists/{lists}/subscribe/success', 'ListsController@subscribeSuccess')->name('lists.subscribe.success');
 
 Route::middleware('auth')->group(function () {
     Route::get('lists' , 'ListsController@index')->name('lists.index');
@@ -35,7 +36,6 @@ Route::middleware('auth')->group(function () {
     Route::put('lists/{lists}/fields/{field}/update', 'FieldController@update')->name('fields.update');
     Route::delete('lists/{lists}/fields/{field}/delete', 'FieldController@destroy')->name('fields.delete');
 
-
     Route::get('lists/{lists}/contacts', 'ContactController@index')->name('contacts.index');
     Route::get('lists/{lists}/contacts/create', 'ContactController@create' )->name('contacts.create');
     Route::get('lists/{lists}/contacts/{contact}', 'ContactController@show')->name('contacts.show');
@@ -43,6 +43,9 @@ Route::middleware('auth')->group(function () {
     Route::get('lists/{lists}/contacts/{contact}/edit', 'ContactController@edit')->name('contacts.edit');
     Route::put('lists/{lists}/contacts/{contact}/update', 'ContactController@update')->name('contacts.update');
     Route::delete('contact/{contact}/delete', 'ContactController@destroy')->name('contacts.delete');
+
+    Route::get('lists/{lists}/forms', 'FormController@index')->name('forms.index');
+    Route::get('lists/{lists}/forms/hosted', 'FormController@hosted')->name('forms.hosted');
 
     Route::get('templates', 'TemplateController@index')->name('templates.index');
     Route::get('templates/create', 'TemplateController@create')->name('templates.create');
