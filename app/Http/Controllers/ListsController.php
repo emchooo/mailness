@@ -102,4 +102,25 @@ class ListsController extends Controller
 
        return redirect()->route('lists.index');
     }
+
+    /**
+     * Subscribe form
+     * 
+     * @param \App\Lists $lists
+     */
+    public function subscribe(Lists $lists)
+    {
+        return view('lists.subscribe', [ 'list' => $lists ]);
+    }
+
+    /**
+     * Save subscribe
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Lists $lists
+     */
+    public function subscribeStore(Request $request, Lists $lists)
+    {
+
+    }
 }

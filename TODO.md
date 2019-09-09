@@ -2,7 +2,6 @@
 - Imports
 - Exports ( Export subscried contacts, Export unsubscribed contacts )
 - Forms - basic subscribe page
-- Contact flag - active, bounced, complaint
 
 # Campaigns
 - implement duplicate option

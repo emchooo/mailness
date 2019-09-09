@@ -162,4 +162,24 @@ class ListTest extends TestCase
         
         $this->assertEquals(1, Contact::count());
     }
+
+    /** @test */
+    public function openSubscribeToListPage()
+    {
+        $list = factory(Lists::class)->create();
+
+        $response = $this->get(route('lists.subscribe', $list->id));
+
+        $response->assertSuccessful();
+    }
+
+    /** @test */
+    public function subscribeContactFromForm()
+    {
+        $list = factory(Lists::class)->create();
+
+        $response = $this->post(route('lists.subscribe.store'), [ 'email' => 'batman@spiderman.com' ]);
+
+        $this->assertEquals(1, Contact::contant());
+    }
 }

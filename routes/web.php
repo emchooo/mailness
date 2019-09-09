@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 Auth::routes();
 
+Route::get('lists/{lists}/subscribe', 'ListsController@subscribe')->name('lists.subscribe');
+Route::post('lists/{lists}/subscribe', 'ListsController@subscribeStore')->name('lists.subscribe.store');
+
 Route::middleware('auth')->group(function () {
     Route::get('lists' , 'ListsController@index')->name('lists.index');
     Route::get('lists/create', 'ListsController@create')->name('lists.create');
