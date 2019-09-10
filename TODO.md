@@ -1,9 +1,6 @@
 # Lists
 - Imports
 - Exports ( Export subscried contacts, Export unsubscribed contacts )
-- Forms - basic subscribe page
-- List ID as UUID maybe ???
-- Tests for subscribe options
 
 # Campaigns
 - implement duplicate option
