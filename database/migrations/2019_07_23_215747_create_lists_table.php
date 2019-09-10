@@ -15,6 +15,7 @@ class CreateListsTable extends Migration
     {
         Schema::create('lists', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid');
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();

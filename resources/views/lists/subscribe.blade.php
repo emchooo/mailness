@@ -18,7 +18,7 @@
 
 <div class="flex justify-center mt-10" >
 <div class="w-full max-w-xs center">
-  <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="" >
+  <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="{{ route('lists.subscribe.store', $list->uuid) }}" >
   @csrf
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="email">

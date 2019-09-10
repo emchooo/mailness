@@ -168,7 +168,7 @@ class ListTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->get(route('lists.subscribe', $list->id));
+        $response = $this->get(route('lists.subscribe', $list->uuid));
 
         $response->assertSuccessful();
     }
@@ -178,7 +178,7 @@ class ListTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->post(route('lists.subscribe.store', $list->id), [ 'email' => 'batman@spiderman.com' ]);
+        $response = $this->post(route('lists.subscribe.store', $list->uuid), [ 'email' => 'batman@spiderman.com' ]);
 
         $this->assertEquals(1, Contact::count());
     }

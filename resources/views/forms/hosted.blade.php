@@ -10,7 +10,7 @@
 
 <div class="block">
     <p>Link for hosted subscribe page</p>
-    <input type="text" value="{{ url(route('lists.subscribe', $list->id)) }}" disabled class="bg-gray-300 p-2 block w-1/2" >
+    <input type="text" value="{{ url(route('lists.subscribe', $list->uuid)) }}" disabled class="bg-gray-300 p-2 block w-1/2" >
 </div>
 		
 

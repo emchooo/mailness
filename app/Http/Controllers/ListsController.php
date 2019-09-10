@@ -111,9 +111,10 @@ class ListsController extends Controller
      * 
      * @param \App\Lists $lists
      */
-    public function subscribe(Lists $lists)
+    public function subscribe($uuid)
     {
-        return view('lists.subscribe', [ 'list' => $lists ]);
+        $list = Lists::where('uuid', $uuid)->first();
+        return view('lists.subscribe', [ 'list' => $list ]);
     }
 
     /**
@@ -122,14 +123,15 @@ class ListsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param \App\Lists $lists
      */
-    public function subscribeStore(ContactStoreRequest $request, Lists $lists)
+    public function subscribeStore(ContactStoreRequest $request, $uuid)
     {
         // @todo refator this with ContactController@store and update
-        $contact = Contact::where('email', $request->email)->where('list_id', $lists->id)->first();
+        $list = Lists::where('uuid', $uuid)->first();
+        $contact = Contact::where('email', $request->email)->where('list_id', $list->id)->first();
         if(! isset($contact) ) {
             $contact = new Contact();
             $contact->email = $request->email;
-            $contact->list_id = $lists->id;
+            $contact->list_id = $list->id;
             $contact->save();
 
             if($request->fields) {
@@ -142,7 +144,7 @@ class ListsController extends Controller
             }
         }
 
-        return redirect()->to(route('lists.subscribe.success', $lists->id));
+        return redirect()->to(route('lists.subscribe.success', $list->uuid));
     }
 
     /**

@@ -16,9 +16,9 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-Route::get('lists/{lists}/subscribe', 'ListsController@subscribe')->name('lists.subscribe');
-Route::post('lists/{lists}/subscribe', 'ListsController@subscribeStore')->name('lists.subscribe.store');
-Route::get('lists/{lists}/subscribe/success', 'ListsController@subscribeSuccess')->name('lists.subscribe.success');
+Route::get('lists/{uuid}/subscribe', 'ListsController@subscribe')->name('lists.subscribe');
+Route::post('lists/{uuid}/subscribe', 'ListsController@subscribeStore')->name('lists.subscribe.store');
+Route::get('lists/{uuid}/subscribe/success', 'ListsController@subscribeSuccess')->name('lists.subscribe.success');
 
 Route::middleware('auth')->group(function () {
     Route::get('lists' , 'ListsController@index')->name('lists.index');
