@@ -121,4 +121,35 @@ class ContactController extends Controller
 
         return redirect()->route('lists.index');
     }
+
+    public function export(Lists $lists)
+    {
+        $headers = [
+                'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0'
+            ,   'Content-type'        => 'text/csv'
+            ,   'Content-Disposition' => 'attachment; filename=contacts.csv'
+            ,   'Expires'             => '0'
+            ,   'Pragma'              => 'public'
+        ];
+
+        $contacts = $lists->contacts->toArray();
+        $custom_fields = $lists->fields;
+        
+        $rows = ['id', 'email', 'created_at'];
+
+        foreach($custom_fields as $field) {
+            $rows[] = strtolower($field->name);
+        }
+
+
+        $callback = function() use ($rows, $contacts ) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $rows );
+            foreach ($contacts as $row) {
+                fputcsv($file, $row);
+            }
+            fclose($file);
+        };
+        return response()->stream($callback, 200, $headers);
+    }
 }

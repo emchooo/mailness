@@ -27,6 +27,13 @@
 		
 	</form>
 
+	<div class="block">
+		<form action="{{ route('contacts.export', $list->id) }}" method="POST" >
+			@csrf
+			<input type="submit" value="Download">
+		</form>
+	</div>
+
 
 	<form action="{{ route('lists.delete', $list->id) }}" method="POST" class="mt-10" >
 	<input type="hidden" name="_method" value="DELETE">
