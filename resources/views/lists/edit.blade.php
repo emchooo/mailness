@@ -27,19 +27,17 @@
 		
 	</form>
 
-	<div class="block">
+	<div class="block mt-5">
 		<form action="{{ route('contacts.export', $list->id) }}" method="POST" >
 			@csrf
-			<input type="submit" value="Download">
+			<input type="submit" value="Download" class="bg-green-500 py-2 px-4 rounded" >
 		</form>
 	</div>
 
 
 	<form action="{{ route('lists.delete', $list->id) }}" method="POST" class="mt-10" >
-	<input type="hidden" name="_method" value="DELETE">
-
-		@csrf	
-
+		<input type="hidden" name="_method" value="DELETE">
+			@csrf	
 		<input type="submit" value="DELETE" class="bg-red-500 py-2 px-4 rounded">
 	</form>
 		

@@ -124,18 +124,9 @@ class ContactController extends Controller
 
     public function export(Lists $lists)
     {
-        $headers = [
-               'Content-type'        => 'application/csv',
-               'Content-Disposition' => 'attachment; filename=contacts.csv'
-        ];
+        $contacts = Contact::where('list_id', $lists->id)->get();
 
-        // $contacts = $lists->contacts; //->toArray();
-        $contacts = Contact::with('fields')->where('list_id', $lists->id)->get()->toArray();
-
-        $all_fields = array_keys($contacts[0]);
-        if (($key = array_search('fields', $all_fields)) !== false) {
-            unset($all_fields[$key]);
-        }
+        $all_fields = array_keys($contacts->toArray()[0]);
 
         foreach($lists->fields as $field) {
             $all_fields[] = strtolower($field->name);
@@ -145,40 +136,20 @@ class ContactController extends Controller
          fputcsv($file, $all_fields );
             foreach ($contacts as $row) {
                 $data = [];
-                // foreach($row['fields'] as $field) {
-
-                // }
-                
-                fputcsv($file, $row );
+                $row_array = $row->toArray();
+                foreach($lists->fields as $field) {
+                    $custom_field_value = $row->getFieldValue($field->id);
+                    $custom_field_value ? $data[] = $custom_field_value : $data[] = " ";
+                }
+                fputcsv($file, array_merge($row_array, $data) );
             }
         fclose($file);
 
-
-        $csv = $file;
-
-//   header('Content-Disposition: attachment; filename="export.csv"');
-//   header("Cache-control: private");
-//   header("Content-type: application/force-download");
-//   header("Content-transfer-encoding: binary\n");
-
-
-  exit;
-
-        // $callback = tap($contacts);
-
-        // dd($callback);
-
-        // $callback = function() use ($all_fields, $contacts ) {
-        //     $file = fopen('php://output', 'w');
-        //     fputcsv($file, $all_fields );
-        //     foreach ($contacts as $row) {
-
-        //         fputcsv($file, $row );
-        //     }
-        //     fclose($file);
-        // };
-
-        // return response()->streamDownload($callback, 200, $headers);
+        header('Content-Disposition: attachment; filename="contacts.csv"');
+        header("Cache-control: private");
+        header("Content-type: application/force-download");
+        header("Content-transfer-encoding: binary\n");
+        exit;
     }
 
 }
