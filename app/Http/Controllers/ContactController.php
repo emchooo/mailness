@@ -139,7 +139,7 @@ class ContactController extends Controller
                 $row_array = $row->toArray();
                 foreach($lists->fields as $field) {
                     $custom_field_value = $row->getFieldValue($field->id);
-                    $custom_field_value ? $data[] = $custom_field_value : $data[] = " ";
+                    $custom_field_value ? $data[] = $custom_field_value : $data[] = '';
                 }
                 fputcsv($file, array_merge($row_array, $data) );
             }
@@ -150,6 +150,11 @@ class ContactController extends Controller
         header("Content-type: application/force-download");
         header("Content-transfer-encoding: binary\n");
         exit;
+    }
+
+    public function import(Lists $lists)
+    {
+        return view('lists.import', [ 'list' => $lists ]);
     }
 
 }

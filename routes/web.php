@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('lists/{lists}/fields/{field}/delete', 'FieldController@destroy')->name('fields.delete');
 
     Route::post('lists/{lists}/contacts/export', 'ContactController@export')->name('contacts.export');
+    Route::get('lists/{lists}/import', 'ContactController@import')->name('contacts.import');
 
     Route::get('lists/{lists}/contacts', 'ContactController@index')->name('contacts.index');
     Route::get('lists/{lists}/contacts/create', 'ContactController@create' )->name('contacts.create');

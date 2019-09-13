@@ -2,6 +2,7 @@
 - Imports
 - Exports ( Export subscried contacts, Export unsubscribed contacts )
 - bug: can't update custom field on edit if email is same
+- refactor and tests
 
 # Campaigns
 - implement duplicate option
