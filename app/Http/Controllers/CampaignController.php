@@ -125,4 +125,13 @@ class CampaignController extends Controller
             SendCampaign::dispatch($campaign, $list);
         }
     }
+
+    public function duplicate(Campaign $campaign)
+    {
+        $new_campaign = $campaign->replicate();
+        $new_campaign->status = 'draft';
+        $new_campaign->save();
+
+        return redirect()->route('campaigns.edit', $new_campaign->id);
+    }
 }

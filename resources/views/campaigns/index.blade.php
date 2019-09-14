@@ -14,7 +14,10 @@
         </div>
         <div>
             <a href="{{ route('campaigns.edit', $campaign->id) }}">Edit</a>
-            <a href="">Duplicate</a>
+            <form action="{{ route('campaigns.duplicate', $campaign->id) }}" method="POST" >
+                @csrf   
+                <input type="submit" value="Duplicate">
+            </form>
         </div>
     </div>
 @endforeach

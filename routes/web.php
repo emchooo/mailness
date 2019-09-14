@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::get('campaigns/{campaign}/edit', 'CampaignController@edit')->name('campaigns.edit');
     Route::put('campaigns/{campaign}/update', 'CampaignController@update')->name('campaigns.update');
     Route::delete('campaigns/{campaign}/delete', 'CampaignController@destroy')->name('campaigns.delete');
+    Route::post('campaigns/{campaign}/duplicate', 'CampaignController@duplicate')->name('campaigns.duplicate');
 
 });
 
