@@ -106,4 +106,17 @@ class CampaignTest extends TestCase
         });
     }
 
+    /** @test */
+    public function itCanDuplicateCampaign()
+    {
+        $campaign = factory(Campaign::class)->state('sent')->create();
+
+        $response = $this->actingAs($this->user)->post(route('campaigns.duplicate', $campaign->id));
+
+        $record = Campaign::all()->last();
+
+        $this->assertEquals(2, Campaign::count());
+        $this->assertEquals('draft', $record->status);
+    }
+
 }

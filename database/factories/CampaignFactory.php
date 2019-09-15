@@ -14,3 +14,7 @@ $factory->define(Campaign::class, function (Faker $faker) {
         'content'   => $faker->text,
     ];
 });
+
+$factory->state(Campaign::class, 'sent', [
+    'status' => 'sent',
+]);
