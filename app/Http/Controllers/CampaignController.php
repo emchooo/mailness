@@ -8,6 +8,7 @@ use App\Jobs\SendCampaign;
 use App\Mail\CampaignMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\CampaignStoreRequest;
 
 class CampaignController extends Controller
 {
@@ -39,7 +40,7 @@ class CampaignController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CampaignStoreRequest $request)
     {
         // @todo add validation
         $campaign = new Campaign();

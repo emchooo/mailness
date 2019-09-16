@@ -9,13 +9,37 @@
 <form action="{{ route('campaigns.store') }}" method="POST" >
 @csrf 
 
-<input type="text" name="subject" placeholder="Subject" class="bg-gray-300 p-2 mb-2 block">  
+<input type="text" name="subject" value="{{ old('subject') }}" placeholder="Subject" class="bg-gray-300 p-2 mb-2 block">  
 
-<input type="text" name="sending_name" placeholder="Sending name" class="bg-gray-300 mb-2 p-2 block">
+  @if($errors->has('subject'))
+    <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
+      <p>{{ $errors->first('subject') }}</p>
+    </div>
+  @endif
 
-<input type="text" name="sending_email" placeholder="Sending email" class="bg-gray-300 mb-2 p-2 block" >
+<input type="text" name="sending_name" value="{{ old('sending_name') }}" placeholder="Sending name" class="bg-gray-300 mb-2 p-2 block">
 
-<textarea name="content" id="" cols="30" rows="10" class="bg-gray-300 mb-2 p-2 block" ></textarea>
+@if($errors->has('sending_name'))
+    <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
+      <p>{{ $errors->first('sending_name') }}</p>
+    </div>
+  @endif
+
+
+<input type="text" name="sending_email" value="{{ old('sending_email') }}" placeholder="Sending email" class="bg-gray-300 mb-2 p-2 block" >
+@if($errors->has('sending_email'))
+    <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
+      <p>{{ $errors->first('sending_email') }}</p>
+    </div>
+  @endif
+
+<textarea name="content" id="" cols="30" rows="10" class="bg-gray-300 mb-2 p-2 block" >{{ old('content') }}</textarea>
+
+  @if($errors->has('content'))
+    <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
+      <p>{{ $errors->first('content') }}</p>
+    </div>
+  @endif
 
 <input type="submit" value="Save" class="bg-blue-500 px-4 py-2 text-white" >
 

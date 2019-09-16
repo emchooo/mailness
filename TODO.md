@@ -5,8 +5,6 @@
 - refactor and tests
 
 # Campaigns
-- implement duplicate option
-- Create new campaign validation
 - Create new campaign - text editor implement
 - User can edit campaign only if campaign is in draft mode
 - Send test mail validation
@@ -14,6 +12,7 @@
 - When creating new campaign user can select template
 - On campaigns page add pagination
 - Dropdown filter for campaigns ( active, draft, sending, cempleted)
+- Create new campaign error display design
 
 # Templates
 - Templates index page style
