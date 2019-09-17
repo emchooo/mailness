@@ -19,8 +19,7 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        // @todo order and pagination
-        $campaigns = Campaign::all();
+        $campaigns = Campaign::orderBy('id', 'desc')->paginate(10);
         return view('campaigns.index', compact('campaigns'));
     }
 

@@ -22,4 +22,6 @@
     </div>
 @endforeach
 
+{{ $campaigns->links('includes.pagination') }}
+
 @endsection
