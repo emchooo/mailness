@@ -11,10 +11,14 @@
 
 <h3>Import</h3>
 
-<form action="" method="POST" class="mt-10" >
+<form action="{{ route('contacts.import.save', $list->id) }}" enctype="multipart/form-data" method="POST" class="mt-10" >
     @csrf 
 
     <input type="file" name="file">
+
+    <div class="block mt-5">
+      <input type="submit" value="Import" class="bg-blue-500 py-2 px-4 rounded" >
+    </div>
 
 </form>
 

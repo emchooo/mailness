@@ -34,6 +34,10 @@
 		</form>
 	</div>
 
+	<div class="block mt-5">
+		<a href="{{ route('contacts.import', $list->id) }}" class="bg-blue-500 py-2 px-4 rounded" >Import contacts</a>
+	</div>
+
 
 	<form action="{{ route('lists.delete', $list->id) }}" method="POST" class="mt-10" >
 		<input type="hidden" name="_method" value="DELETE">

@@ -1,6 +1,5 @@
 # Lists
 - Imports
-- Exports ( Export subscried contacts, Export unsubscribed contacts )
 - bug: can't update custom field on edit if email is same
 - refactor and tests
 
@@ -10,7 +9,6 @@
 - Send test mail validation
 - Send campaign validation
 - When creating new campaign user can select template
-- On campaigns page add pagination
 - Dropdown filter for campaigns ( active, draft, sending, cempleted)
 - Create new campaign error display design
 

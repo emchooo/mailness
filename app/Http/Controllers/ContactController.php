@@ -7,6 +7,7 @@ use App\Lists;
 use App\Contact;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactStoreRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller
 {
@@ -155,6 +156,15 @@ class ContactController extends Controller
     public function import(Lists $lists)
     {
         return view('lists.import', [ 'list' => $lists ]);
+    }
+
+    public function importSave(Lists $lists, Request $request)
+    {
+        // @todo validation, check if file is valid
+        // Storage::disk('local')->put($request->file, 'import_'.$lists->id);
+        $path = $request->file('file')->store('imports');
+        return $path;
+        return $request->file;
     }
 
 }
