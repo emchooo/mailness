@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Field;
 use App\Lists;
 use App\Contact;
+use App\Import;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactStoreRequest;
 use Illuminate\Support\Facades\Storage;
@@ -160,11 +162,40 @@ class ContactController extends Controller
 
     public function importSave(Lists $lists, Request $request)
     {
-        // @todo validation, check if file is valid
-        // Storage::disk('local')->put($request->file, 'import_'.$lists->id);
-        $path = $request->file('file')->store('imports');
-        return $path;
-        return $request->file;
+
+        $path = Storage::putFileAs('imports', $request->file('file') , Str::uuid() . '.csv' );
+        
+        $import = new Import();
+        $import->path = $path;
+        $import->list_id = $lists->id;
+        $import->save();
+
+        return back();
+    }
+
+    public function importParse()
+    {
+        $path = Import::first()->path;
+
+        $file = Storage::get($path);
+
+        $columns = explode( "\n" , $file);
+        $headers = explode(',', $columns[0]);
+
+        $data = [];
+
+        foreach($columns as $key => $value) {
+            if($value and $key != $value) {
+                $d = [];
+                foreach(explode(',',$value) as $k => $v) {
+                    $d[$headers[$k]] = $v;
+                }
+                $data[$key] = $d;
+            }
+        }
+
+        dd($data);
+
     }
 
 }
