@@ -95,7 +95,7 @@ class ContactController extends Controller
     {
         // @todo refactor this and save method
         $contact_check = Contact::where('email', $request->email)->where('list_id', $lists->id)->first();
-        if(! isset($contact_check) ) {
+
             $contact->fields()->detach();
             if($request->fields) {
                 foreach($request->fields as $key => $value) {
@@ -107,7 +107,6 @@ class ContactController extends Controller
             }
             $contact->email = $request->email;
             $contact->save();
-        }
 
         return view('contacts.show', [ 'list' => $lists, 'contact' => $contact ]);
     }
@@ -195,6 +194,25 @@ class ContactController extends Controller
         }
 
         dd($data);
+
+        // $stream = fopen('php://memory','r+');
+        // fwrite($stream, $file);
+        // rewind($stream);
+
+        // $header = fgetcsv($stream);
+
+        // var_dump($header);
+
+        // echo '<br><br>';
+
+        // var_dump($file);
+
+        // echo '<br><br>';
+
+        // while (($data = fgetcsv($stream, 1000, ',')) !== FALSE)
+        // {
+        //     var_dump($data);
+        // }
 
     }
 
