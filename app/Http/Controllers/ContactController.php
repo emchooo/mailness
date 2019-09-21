@@ -162,7 +162,7 @@ class ContactController extends Controller
     public function importSave(Lists $lists, Request $request)
     {
 
-        $path = Storage::putFileAs('imports', $request->file('file') , Str::uuid() . '.csv' );
+        $path = Storage::drive('public')->putFileAs('imports', $request->file('file') , Str::uuid() . '.csv' );
         
         $import = new Import();
         $import->path = $path;
@@ -176,43 +176,21 @@ class ContactController extends Controller
     {
         $path = Import::first()->path;
 
-        $file = Storage::get($path);
+        $url = Storage::url($path);
+        $url = asset($url);
 
-        $columns = explode( "\n" , $file);
-        $headers = explode(',', $columns[0]);
 
-        $data = [];
+        $handle = fopen($url, "r");
+        $headers = fgetcsv($handle);
 
-        foreach($columns as $key => $value) {
-            if($value and $key != $value) {
-                $d = [];
-                foreach(explode(',',$value) as $k => $v) {
-                    $d[$headers[$k]] = $v;
-                }
-                $data[$key] = $d;
-            }
+        var_dump($headers);
+
+        echo '<br> <br>';
+
+        for ($i = 0; $row = fgetcsv($handle ); ++$i) {
+            var_dump($row);
         }
-
-        dd($data);
-
-        // $stream = fopen('php://memory','r+');
-        // fwrite($stream, $file);
-        // rewind($stream);
-
-        // $header = fgetcsv($stream);
-
-        // var_dump($header);
-
-        // echo '<br><br>';
-
-        // var_dump($file);
-
-        // echo '<br><br>';
-
-        // while (($data = fgetcsv($stream, 1000, ',')) !== FALSE)
-        // {
-        //     var_dump($data);
-        // }
+        fclose($handle);
 
     }
 

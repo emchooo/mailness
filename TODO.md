@@ -1,6 +1,5 @@
 # Lists
 - Imports
-- bug: can't update custom field on edit if email is same
 - refactor and tests
 
 # Campaigns
