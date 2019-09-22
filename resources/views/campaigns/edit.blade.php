@@ -22,7 +22,13 @@
 
 </form>
 
-<form action="{{ route('campaigns.delete', $campaign->id) }}" method="POST" ></form>
+<div class="block mt-10">
+  <form action="{{ route('campaigns.delete', $campaign->id) }}" method="POST" >
+  <input type="hidden" name="_method" value="DELETE">
+    @csrf 
+    <input type="submit" value="Delete" class="bg-red-500 px-4 py-2 text-white">
+  </form>
+</div>
 
 
 @endsection
