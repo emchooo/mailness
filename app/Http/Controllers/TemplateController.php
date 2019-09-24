@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Template;
 use Illuminate\Http\Request;
+use App\Http\Requests\TemplateStoreRequest;
 
 class TemplateController extends Controller
 {
@@ -35,9 +36,8 @@ class TemplateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TemplateStoreRequest $request)
     {
-        // @todo validation
         $template = new Template();
         $template->name = $request->name;
         $template->content = $request->content;
