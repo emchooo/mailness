@@ -73,6 +73,10 @@ class CampaignController extends Controller
      */
     public function edit(Campaign $campaign)
     {
+        // @todo refactor this
+        if($campaign->status != 'draft') {
+            return back();
+        }
         return view('campaigns.edit', compact('campaign'));
     }
 
@@ -85,6 +89,10 @@ class CampaignController extends Controller
      */
     public function update(Request $request, Campaign $campaign)
     {
+        // @todo refactor this
+        if($campaign->status != 'draft') {
+            return back();
+        }
         // @todo add validation
         $campaign->subject = $request->subject;
         $campaign->sending_name = $request->sending_name;

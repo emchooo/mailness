@@ -13,7 +13,9 @@
         <a href="{{ route('campaigns.show', $campaign->id) }}">{{ $campaign->subject }} </a> <span class="text-xs text-gray-500 pl-4" >{{ $campaign->status }}</span>
         </div>
         <div>
-            <a href="{{ route('campaigns.edit', $campaign->id) }}">Edit</a>
+            @if($campaign->status == 'draft')
+                <a href="{{ route('campaigns.edit', $campaign->id) }}">Edit</a>
+            @endif
             <form action="{{ route('campaigns.duplicate', $campaign->id) }}" method="POST" >
                 @csrf   
                 <input type="submit" value="Duplicate">
