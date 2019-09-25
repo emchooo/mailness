@@ -75,9 +75,8 @@ class TemplateController extends Controller
      * @param  \App\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Template $template)
+    public function update(TemplateStoreRequest $request, Template $template)
     {
-        // @todo validation
         $template->name = $request->name;
         $template->content = $request->content;
         $template->save();
