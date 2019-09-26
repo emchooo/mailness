@@ -15,7 +15,7 @@
         <a href="{{ route('templates.index') }}">Templates</a>
       </li>
       <li>
-        <a href="#">Reports</a>
+        <a href="{{route('reports.index') }}">Reports</a>
       </li>
     </ul>
   </div>

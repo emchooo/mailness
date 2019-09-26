@@ -21,6 +21,7 @@
 - List available reports
 - Open report with data
 - Add pagination
+- Test
 
 # Auth
 - Style all auth pages
