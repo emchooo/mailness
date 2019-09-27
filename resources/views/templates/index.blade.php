@@ -23,4 +23,6 @@
     </div>
 @endforeach
 
+{{ $templates->links('includes.pagination') }}
+
 @endsection

@@ -16,7 +16,7 @@ class TemplateController extends Controller
     public function index()
     {
         // @todo add pagination and order by id desc
-        $templates = Template::all();
+        $templates = Template::orderBy('id', 'desc')->paginate(1);
         return view('templates.index', compact('templates'));
     }
 
