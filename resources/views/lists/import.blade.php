@@ -16,6 +16,12 @@
 
     <input type="file" name="file">
 
+    @if($errors->has('file'))
+			<div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
+				<p>{{ $errors->first('file') }}</p>
+			</div>
+		@endif
+
     <div class="block mt-5">
       <input type="submit" value="Import" class="bg-blue-500 py-2 px-4 rounded" >
     </div>

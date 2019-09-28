@@ -9,6 +9,7 @@ use App\Import;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactStoreRequest;
+use App\Http\Requests\ImportSaveRequest;
 use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller
@@ -159,7 +160,7 @@ class ContactController extends Controller
         return view('lists.import', [ 'list' => $lists ]);
     }
 
-    public function importSave(Lists $lists, Request $request)
+    public function importSave(Lists $lists, ImportSaveRequest $request)
     {
 
         $path = Storage::drive('public')->putFileAs('imports', $request->file('file') , Str::uuid() . '.csv' );

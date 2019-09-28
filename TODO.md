@@ -20,7 +20,6 @@
 # Reports
 - List available reports
 - Open report with data
-- Add pagination
 - Test
 
 # Auth
