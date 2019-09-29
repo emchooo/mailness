@@ -9,6 +9,7 @@ use App\Mail\CampaignMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\CampaignStoreRequest;
+use App\Http\Requests\SendCampaignRequest;
 
 class CampaignController extends Controller
 {
@@ -124,14 +125,18 @@ class CampaignController extends Controller
         return back();
     }
 
-    public function send(Request $request, Campaign $campaign)
+    public function send(SendCampaignRequest $request, Campaign $campaign)
     {
-        // @todo validation - must have list
         // if campaign is sent
         foreach($request->lists as $key => $value) {
             $list = Lists::find($key);
             SendCampaign::dispatch($campaign, $list);
         }
+
+        $campaign->status = 'sending';
+        $campaign->save();
+
+        return redirect()->route('campaigns.index');
     }
 
     public function duplicate(Campaign $campaign)

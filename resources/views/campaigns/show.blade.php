@@ -18,6 +18,12 @@
 <div class="mt-10">
   <h1>Send campaign</h1>
 
+  @if($errors->has('lists'))
+    <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
+      <p>{{ $errors->first('lists') }}</p>
+    </div>
+  @endif
+
   <form action="{{ route('campaigns.send', $campaign->id) }}" method="POST">
     @csrf
 
@@ -28,6 +34,7 @@
     @endforeach
 
   <button type="submit" class="bg-blue-500 px-5 py-3 text-white mt-2" >Send</button>
+
   </form>
 
 </div>
