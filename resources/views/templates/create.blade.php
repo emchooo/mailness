@@ -1,6 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
+
+<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+
   
 <div class="flex items-center justify-between mb-3">
   <h1 class="text-gray-700 text-2xl py-4" >Create new template</h1>
@@ -19,6 +22,9 @@
 <br>
 
 <textarea name="content" id="editor" cols="30" rows="10" class="border bg-gray-300 border-1" >{{ old('content') }}</textarea>
+<script>
+    CKEDITOR.replace( 'content' );
+</script>
     @if($errors->has('content'))
 			<div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
 				<p>{{ $errors->first('content') }}</p>
