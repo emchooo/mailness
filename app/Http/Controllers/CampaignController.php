@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Lists;
 use App\Campaign;
+use App\Template;
 use App\Jobs\SendCampaign;
 use App\Mail\CampaignMail;
 use Illuminate\Http\Request;
@@ -31,7 +32,8 @@ class CampaignController extends Controller
      */
     public function create()
     {
-        return view('campaigns.create');
+        $templates = Template::all();
+        return view('campaigns.create', compact('templates'));
     }
 
     /**
@@ -42,13 +44,18 @@ class CampaignController extends Controller
      */
     public function store(CampaignStoreRequest $request)
     {
-        // @todo add validation
+        $content = '';
+        if($request->template) {
+            $template = Template::find($request->template);
+            $content = $template->content;
+        }
+
         $campaign = new Campaign();
         $campaign->status = $request->status ? $request->status : 'draft';
         $campaign->subject = $request->subject;
         $campaign->sending_name = $request->sending_name;
         $campaign->sending_email = $request->sending_email;
-        $campaign->content = $request->content;
+        $campaign->content = $content;
         $campaign->save();
 
         return redirect()->route('campaigns.index');

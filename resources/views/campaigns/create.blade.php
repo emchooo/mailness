@@ -33,15 +33,18 @@
     </div>
   @endif
 
-<textarea name="content" id="" cols="30" rows="10" class="bg-gray-300 mb-2 p-2 block" >{{ old('content') }}</textarea>
+  <div>
+    Select template:
+    @foreach($templates as $template)
+      <div class="block" >
+        <input type="radio" name="template" value="{{ $template->id }}" >
+        {{ $template->name }}
+      </div>
+    @endforeach
+  </div>
 
-  @if($errors->has('content'))
-    <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
-      <p>{{ $errors->first('content') }}</p>
-    </div>
-  @endif
 
-<input type="submit" value="Save" class="bg-blue-500 px-4 py-2 text-white" >
+<input type="submit" value="Save" class="bg-blue-500 px-4 py-2 text-white mt-3" >
 
 </form>
 
