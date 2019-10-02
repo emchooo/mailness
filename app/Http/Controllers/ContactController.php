@@ -177,19 +177,38 @@ class ContactController extends Controller
     {
         $path = Import::first()->path;
 
-        $url = Storage::url($path);
-        $url = asset($url);
+        $file_path = storage_path( 'app/public/' . $path);
 
+        // $url = Storage::url($path);
+        // $url = asset($url);
+
+        $file = new \SplFileObject($file_path, 'r');
+        $file->setFlags(\SplFileObject::READ_CSV);
+        
+        $file->seek(PHP_INT_MAX);
+
+        echo $file->key() + 1;
+
+        // while (!$file->eof()) {
+        //     var_dump($file->fgetcsv());
+        //     echo '<br><br>';
+        // }
+
+        return $file;
 
         $handle = fopen($url, "r");
         $headers = fgetcsv($handle);
 
-        var_dump($headers);
+        var_dump($handle);
+        var_dump(count($handle));
+
+        //var_dump($headers);
 
         echo '<br> <br>';
 
         for ($i = 0; $row = fgetcsv($handle ); ++$i) {
             var_dump($row);
+            echo '<br><br>';
         }
         fclose($handle);
 
