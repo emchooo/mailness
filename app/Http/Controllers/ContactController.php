@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ImportSaveRequest;
+use App\Jobs\ImportFile;
 use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller
@@ -170,6 +171,8 @@ class ContactController extends Controller
         $import->list_id = $lists->id;
         $import->save();
 
+        ImportFile::dispatch($path);
+
         return back();
     }
 
@@ -179,38 +182,19 @@ class ContactController extends Controller
 
         $file_path = storage_path( 'app/public/' . $path);
 
-        // $url = Storage::url($path);
-        // $url = asset($url);
-
         $file = new \SplFileObject($file_path, 'r');
         $file->setFlags(\SplFileObject::READ_CSV);
         
-        $file->seek(PHP_INT_MAX);
+        // @todo lowercase array key names
+        $headers = $file->current();
 
-        echo $file->key() + 1;
+        // @todo map import fields with our custom fields
 
-        // while (!$file->eof()) {
-        //     var_dump($file->fgetcsv());
-        //     echo '<br><br>';
-        // }
-
-        return $file;
-
-        $handle = fopen($url, "r");
-        $headers = fgetcsv($handle);
-
-        var_dump($handle);
-        var_dump(count($handle));
-
-        //var_dump($headers);
-
-        echo '<br> <br>';
-
-        for ($i = 0; $row = fgetcsv($handle ); ++$i) {
-            var_dump($row);
-            echo '<br><br>';
+        while (!$file->eof()) {
+            $single =  $file->fgetcsv();
+            $row = array_combine($headers, $single);
+            $email = $row['Email'];
         }
-        fclose($handle);
 
     }
 
