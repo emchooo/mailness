@@ -1,6 +1,8 @@
 @extends('layouts.main')
 
 @section('content')
+
+<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
   
 <div class="flex items-center justify-between mb-3">
   <h1 class="text-gray-700 text-2xl py-4" >Edit campaign</h1>
@@ -30,5 +32,8 @@
   </form>
 </div>
 
+<script>
+    CKEDITOR.replace( 'content' );
+</script>
 
 @endsection
