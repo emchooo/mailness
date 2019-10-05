@@ -171,9 +171,19 @@ class ContactController extends Controller
         $import->list_id = $lists->id;
         $import->save();
 
-        ImportFile::dispatch($path);
+        // ImportFile::dispatch($path);
 
         return back();
+    }
+
+    public function mapFields(Lists $lists, $file_id)
+    {
+        $file = Import::find($file_id);
+
+        $fields = [ 'email', 'name' ];
+
+        return view('lists.mapFields', [ 'fields' => $fields, 'list' => $lists ]);
+
     }
 
     public function importParse()
