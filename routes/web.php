@@ -39,7 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::post('lists/{lists}/contacts/export', 'ContactController@export')->name('contacts.export');
     Route::get('lists/{lists}/import', 'ContactController@import')->name('contacts.import');
     Route::post('lists/{lists}/import', 'ContactController@importSave')->name('contacts.import.save');
-    Route::get('lists/{lists}/import/{id}', 'ContactController@mapFields')->name('contact.import.mapFields');
+    Route::get('lists/{lists}/import/{id}/map', 'ContactController@map')->name('contact.import.map');
+    
     Route::get('lists/{lists}/parse', 'ContactController@importParse');
 
     Route::get('lists/{lists}/contacts', 'ContactController@index')->name('contacts.index');

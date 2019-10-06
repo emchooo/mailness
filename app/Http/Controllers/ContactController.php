@@ -176,13 +176,21 @@ class ContactController extends Controller
         return back();
     }
 
-    public function mapFields(Lists $lists, $file_id)
+    public function map(Lists $lists, $file_id)
     {
-        $file = Import::find($file_id);
+        // @todo refactor this
+        $file = Import::findOrFail($file_id);
 
-        $fields = [ 'email', 'name' ];
+        $file_path = storage_path( 'app/public/' . $file->path);
 
-        return view('lists.mapFields', [ 'fields' => $fields, 'list' => $lists ]);
+        $file = new \SplFileObject($file_path, 'r');
+        $file->setFlags(\SplFileObject::READ_CSV);
+        
+        $headers = $file->current();
+
+        $fields = $lists->fields->pluck('name');
+
+        return view('lists.map', [ 'headers' => $headers, 'fields' => $fields, 'list' => $lists ]);
 
     }
 

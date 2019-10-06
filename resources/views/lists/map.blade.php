@@ -9,12 +9,21 @@
 
 @include('includes.list_submenu')
 
-<h3>Map fields</h3>
+<h3 class="text-xl pb-3 " >Map fields</h3>
+
+<p class="text-gray-500 pb-3" >Fields from file</p>
+<ul>
+  @foreach($headers as $header)
+    <li>{{ $header }}</li>
+  @endforeach
+</ul>
+
+<p class="text-gray-500 py-3" >Fields from list</p>
 
 <ul>
-    @foreach($fields as $field)
-        <li>{{ $field }}</li>
-    @endforeach
+  @foreach($fields as $field)
+    <li>{{ $field }}</li>
+  @endforeach
 </ul>
 
 @endsection
