@@ -190,8 +190,13 @@ class ContactController extends Controller
 
         $fields = $lists->fields->pluck('name');
 
-        return view('lists.map', [ 'headers' => $headers, 'fields' => $fields, 'list' => $lists ]);
+        return view('lists.map', [ 'headers' => $headers, 'fields' => $fields, 'list' => $lists, 'file_id' => $file_id ]);
 
+    }
+
+    public function importProcess(Request $request)
+    {
+        return $request;
     }
 
     public function importParse()

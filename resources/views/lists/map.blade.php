@@ -11,6 +11,38 @@
 
 <h3 class="text-xl pb-3 " >Map fields</h3>
 
+<form action="{{ route('contacts.import.process', [ $list->id, $file_id ]) }}" method="POST" >
+
+@csrf
+
+  <div class="block mt-2">
+    <label for="">Email</label>
+    <select name="email" id="">
+      <option value=""></option>
+      @foreach($headers as $header)
+        <option value="{{ $header }}">{{ $header }}</option>
+      @endforeach
+    </select>
+  </div>
+
+    @foreach($fields as $field)
+      <div class="block mt-2">
+        <label for="">{{ $field }}</label>
+        <select name="{{ $field }}" id="">
+          <option value=""></option>
+          @foreach($headers as $header)
+            <option value="{{ $header }}">{{ $header }}</option>
+          @endforeach
+        </select>
+      </div>
+    @endforeach
+
+    <input type="submit" value="Save" class="px-4 py-2 bg-gray-500 mt-5" >
+
+</form>
+
+<br><br><br><br>
+
 <p class="text-gray-500 pb-3" >Fields from file</p>
 <ul>
   @foreach($headers as $header)
