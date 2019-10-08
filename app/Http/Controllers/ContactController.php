@@ -173,7 +173,7 @@ class ContactController extends Controller
 
         // ImportFile::dispatch($path);
 
-        return back();
+        return redirect()->route('contacts.import.map', [ 'lists' => $lists, 'id' => $import->id ]);
     }
 
     public function map(Lists $lists, $file_id)
@@ -194,9 +194,20 @@ class ContactController extends Controller
 
     }
 
-    public function importProcess(Request $request)
+    public function importProcess(Request $request, Lists $lists, $import_id)
     {
-        return $request;
+        $import = Import::findOrFail($import_id);
+        $file_path = storage_path( 'app/public/' . $import->path);
+        
+        $file = new \SplFileObject($file_path, 'r');
+        $file->setFlags(\SplFileObject::READ_CSV);
+
+        $headers = $file->current();
+
+        while (!$file->eof()) {
+            // for each record dispatch job with matching fields
+        }
+        
     }
 
     public function importParse()
