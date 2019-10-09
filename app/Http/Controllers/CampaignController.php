@@ -95,7 +95,7 @@ class CampaignController extends Controller
      * @param  \App\Campaign  $campaign
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Campaign $campaign)
+    public function update(Request $request, CampaignStoreRequest $campaign)
     {
         // @todo refactor this
         if($campaign->status != 'draft') {
