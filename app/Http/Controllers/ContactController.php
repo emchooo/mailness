@@ -205,8 +205,21 @@ class ContactController extends Controller
         $headers = $file->current();
 
         while (!$file->eof()) {
-            // for each record dispatch job with matching fields
+            $single = $file->fgetcsv();
+
+            if($single[0]) {
+                $row = array_combine($headers, $single);
+
+                // for test now, later add as job
+                $contact = new Contact();
+                $contact->list_id = $lists->id;
+                $contact->email = $row[$request['email']];
+                $contact->save();
+            }
+
         }
+
+        return;
         
     }
 
@@ -222,6 +235,7 @@ class ContactController extends Controller
         // @todo lowercase array key names
         $headers = $file->current();
 
+        return $headers;
         // @todo map import fields with our custom fields
 
         while (!$file->eof()) {
