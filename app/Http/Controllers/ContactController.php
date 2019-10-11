@@ -202,6 +202,10 @@ class ContactController extends Controller
         $file = new \SplFileObject($file_path, 'r');
         $file->setFlags(\SplFileObject::READ_CSV);
 
+        $custom_fields = $request->all();
+        unset($custom_fields['_token']);
+        unset($custom_fields['email']);
+
         $headers = $file->current();
 
         while (!$file->eof()) {
@@ -215,6 +219,14 @@ class ContactController extends Controller
                 $contact->list_id = $lists->id;
                 $contact->email = $row[$request['email']];
                 $contact->save();
+
+                foreach($custom_fields as $key => $value) {
+                    // @todo: use ID here
+                    echo "Key: " . $key . ' Value: ' . $value . '<br>';
+                    $field = Field::where('name', $key)->first();
+                    $contact->fields()->attach($field, [ 'value' => $row[$value] ]); 
+                }
+
             }
 
         }
