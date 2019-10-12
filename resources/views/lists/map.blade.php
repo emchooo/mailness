@@ -41,21 +41,5 @@
 
 </form>
 
-<br><br><br><br>
-
-<p class="text-gray-500 pb-3" >Fields from file</p>
-<ul>
-  @foreach($headers as $header)
-    <li>{{ $header }}</li>
-  @endforeach
-</ul>
-
-<p class="text-gray-500 py-3" >Fields from list</p>
-
-<ul>
-  @foreach($fields as $field)
-    <li>{{ $field }}</li>
-  @endforeach
-</ul>
 
 @endsection

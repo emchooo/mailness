@@ -235,27 +235,4 @@ class ContactController extends Controller
         
     }
 
-    public function importParse()
-    {
-        $path = Import::first()->path;
-
-        $file_path = storage_path( 'app/public/' . $path);
-
-        $file = new \SplFileObject($file_path, 'r');
-        $file->setFlags(\SplFileObject::READ_CSV);
-        
-        // @todo lowercase array key names
-        $headers = $file->current();
-
-        return $headers;
-        // @todo map import fields with our custom fields
-
-        while (!$file->eof()) {
-            $single =  $file->fgetcsv();
-            $row = array_combine($headers, $single);
-            $email = $row['Email'];
-        }
-
-    }
-
 }
