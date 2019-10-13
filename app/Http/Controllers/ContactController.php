@@ -196,6 +196,13 @@ class ContactController extends Controller
 
     public function importProcess(Request $request, Lists $lists, $import_id)
     {
+        
+        // @todo refactor this
+
+        if(!$request->email) {
+            return back()->withErrors([ 'email_field' => 'Email field is empty' ]);
+        }
+
         $import = Import::findOrFail($import_id);
         $file_path = storage_path( 'app/public/' . $import->path);
         
@@ -207,6 +214,17 @@ class ContactController extends Controller
         unset($custom_fields['email']);
 
         $headers = $file->current();
+
+        $file->seek(1);
+
+        $first_line = array_combine($headers, $file->current());
+
+        $first_line_email = $first_line[$request['email']];
+
+        // is email field properly mapped ?
+        if(!filter_var($first_line_email, FILTER_VALIDATE_EMAIL)) {
+            return back()->withErrors([ 'email_field' => 'Email field is not valid' ]);
+        }
 
         while (!$file->eof()) {
             $single = $file->fgetcsv();
@@ -223,8 +241,10 @@ class ContactController extends Controller
                 foreach($custom_fields as $key => $value) {
                     // @todo: use ID here
                     echo "Key: " . $key . ' Value: ' . $value . '<br>';
-                    $field = Field::where('name', $key)->first();
-                    $contact->fields()->attach($field, [ 'value' => $row[$value] ]); 
+                   if($value) {
+                        $field = Field::where('name', $key)->first();
+                        $contact->fields()->attach($field, [ 'value' => $row[$value] ]);
+                   } 
                 }
 
             }
