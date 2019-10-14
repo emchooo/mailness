@@ -166,9 +166,12 @@ class ContactController extends Controller
 
         $path = Storage::drive('public')->putFileAs('imports', $request->file('file') , Str::uuid() . '.csv' );
         
+
         $import = new Import();
         $import->path = $path;
         $import->list_id = $lists->id;
+        $import->contacts_subscribed = $request->contacts_subscribed;
+        $import->skip_duplicate = $request->skip_duplicate;
         $import->save();
 
         // ImportFile::dispatch($path);

@@ -17,6 +17,8 @@ class CreateImportsTable extends Migration
             $table->bigIncrements('id');
             $table->string('path');
             $table->integer('list_id');
+            $table->boolean('contacts_subscribed')->default(1);
+            $table->boolean('skip_duplicate')->default(1);
             $table->timestamps();
         });
     }

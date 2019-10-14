@@ -24,16 +24,16 @@
     
     <h2 class="mt-4">Contacts status</h2>
     <div class="block">
-      <input type="radio" name="status" value="subscribed" checked > Subscribed 
+      <input type="radio" name="contacts_subscribed" value="1" checked > Subscribed 
       <br>
-      <input type="radio" name="status" value="unsubscribed"> Unsubscribed
+      <input type="radio" name="contacts_subscribed" value="0"> Unsubscribed
     </div>
 
     <h2 class="mt-4" >What if a contact already exists in the list?</h2>
     <div class="block">
-      <input type="radio" name="duplicate_contact" value="skip" checked > Skip
+      <input type="radio" name="skip_duplicate" value="1" checked > Skip
       <br>
-      <input type="radio" name="duplicate_contact" value="update"> Update
+      <input type="radio" name="skip_duplicate" value="0"> Update
     </div>
 
     <div class="block mt-5">
