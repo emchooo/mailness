@@ -5,8 +5,8 @@
 
 # Campaigns
 - Create new campaign - text editor implement
-- Send test mail validation
 - Send campaign validation
+- Send test mail success message
 - When creating new campaign user can select template
 - Dropdown filter for campaigns ( active, draft, sending, cempleted)
 - Create new campaign error display design

@@ -11,6 +11,13 @@
   <form action="{{ route('campaigns.send.test', $campaign->id) }}" method="POST" > 
     @csrf
     <input type="text" name="email" placeholder="Email" class="block bg-gray-300 p-2" >
+
+    @if($errors->has('email'))
+      <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
+        <p>{{ $errors->first('email') }}</p>
+      </div>
+    @endif 
+
     <button type="submit" class="bg-blue-500 px-5 py-3 text-white mt-2" >Send</button> 
   </form>
 </div>

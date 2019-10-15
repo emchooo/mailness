@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\CampaignStoreRequest;
 use App\Http\Requests\SendCampaignRequest;
+use App\Http\Requests\SendTestMailRequest;
 
 class CampaignController extends Controller
 {
@@ -124,9 +125,8 @@ class CampaignController extends Controller
         return redirect()->route('campaigns.index');
     }
 
-    public function sendTestMail(Request $request, Campaign $campaign)
+    public function sendTestMail(SendTestMailRequest $request, Campaign $campaign)
     {
-        // @todo validation
         Mail::to($request->email)->queue(new CampaignMail($campaign));
 
         return back();
