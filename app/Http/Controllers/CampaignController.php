@@ -129,7 +129,7 @@ class CampaignController extends Controller
     {
         Mail::to($request->email)->queue(new CampaignMail($campaign));
 
-        return back();
+        return back()->with([ 'success' => 'Test mail sent!' ]);
     }
 
     public function send(SendCampaignRequest $request, Campaign $campaign)

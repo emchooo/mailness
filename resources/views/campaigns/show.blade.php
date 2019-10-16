@@ -18,6 +18,13 @@
       </div>
     @endif 
 
+    @if(Session::has('success'))
+    <div class="bg-red-100 border-l-4 border-green-500 text-green-700 p-2 mx-2" role="alert">
+        <p>{{ Session::get('success') }}</p>
+      </div>
+      
+    @endif
+
     <button type="submit" class="bg-blue-500 px-5 py-3 text-white mt-2" >Send</button> 
   </form>
 </div>
