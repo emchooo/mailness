@@ -59,7 +59,7 @@ class CampaignController extends Controller
         $campaign->content = $content;
         $campaign->save();
 
-        return redirect()->route('campaigns.index');
+        return redirect()->route('campaigns.edit', $campaign->id);
     }
 
     /**
@@ -96,7 +96,7 @@ class CampaignController extends Controller
      * @param  \App\Campaign  $campaign
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CampaignStoreRequest $campaign)
+    public function update(CampaignStoreRequest $request, Campaign $campaign)
     {
         // @todo refactor this
         if($campaign->status != 'draft') {
@@ -109,7 +109,7 @@ class CampaignController extends Controller
         $campaign->content = $request->content;
         $campaign->save();
     
-        return redirect()->route('campaigns.index');
+        return redirect()->route('campaigns.show', $campaign->id);
     }
 
     /**
