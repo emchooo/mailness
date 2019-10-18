@@ -12,14 +12,20 @@ use App\Http\Requests\ContactStoreRequest;
 
 class ListsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $lists = Lists::orderBy('id', 'desc')->paginate(10);
+        $lists = Lists::query()
+                    ->latest('id')
+                    ->paginate(10)
+                    ->onEachSide(3)
+                    ->appends($request->all());
+
         return view('lists.index', compact('lists'));
     }
 
@@ -41,9 +47,7 @@ class ListsController extends Controller
      */
     public function store(ListStoreRequest $request)
     {
-        $list = new Lists();
-        $list->name = $request->name;
-        $list->save();
+        $list = Lists::create($request->only(['name']));
 
         return redirect()->route('lists.show', $list->id);
     }
