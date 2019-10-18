@@ -9,6 +9,13 @@ use Illuminate\Support\Str;
 
 class Lists extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name','uuid'];
+
     protected $guarded = [];
 
     protected static function boot()

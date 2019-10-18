@@ -130,6 +130,12 @@ class ContactController extends Controller
     {
         $contacts = Contact::where('list_id', $lists->id)->get();
 
+        if($contacts->isEmpty()){
+            return redirect()
+                    ->route('lists.edit', $lists)
+                    ->with('error','No Contacts Found');
+        }
+        
         $all_fields = array_keys($contacts->toArray()[0]);
 
         foreach($lists->fields as $field) {
