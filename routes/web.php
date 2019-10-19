@@ -21,6 +21,9 @@ Route::post('lists/{uuid}/subscribe', 'ListsController@subscribeStore')->name('l
 Route::get('lists/{uuid}/subscribe/success', 'ListsController@subscribeSuccess')->name('lists.subscribe.success');
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('settings', 'SettingController@index');
+
     Route::get('lists' , 'ListsController@index')->name('lists.index');
     Route::get('lists/create', 'ListsController@create')->name('lists.create');
     Route::post('lists/store', 'ListsController@store')->name('lists.store');
@@ -77,8 +80,5 @@ Route::middleware('auth')->group(function () {
     Route::get('reports', 'ReportController@index')->name('reports.index');
 
 });
-
-
-
 
 Route::get('/home', 'HomeController@index')->name('home');

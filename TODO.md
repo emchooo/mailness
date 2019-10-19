@@ -23,10 +23,15 @@
 # Auth
 - Style all auth pages
 
-#To-Do list
+# Settings page
+- update password
+- set AWS keys
+
+# To-Do list
 - remove unused views
 - list_submenu highlight current link
 - Fix bug in test when Faker generates name with '
 - Responsive
+- Translation ???
 
 # Connect to SES and SNS
