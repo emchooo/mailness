@@ -3,6 +3,9 @@ language: php
 php:
   - 7.3
 
+services:
+  - mysql
+
 before_script:
   - cp .env.travis .env
   - composer self-update
