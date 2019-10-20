@@ -1,5 +1,9 @@
 # Mailness - self hosted email marketing platform
 
+<p align="center">
+<a href="https://travis-ci.org/emchooo/mailness"><img src="https://travis-ci.org/emchooo/mailness.svg?branch=master" alt="Build Status"></a>
+</p>
+
 Mailness is free open-source self-hosted email marketing tool for sending newsletter via AmazonSES.
 Mailness is self-hosted alternative for paid email marketing services - MailChimp, Sendy.co, Campaign Monitor ...
 
