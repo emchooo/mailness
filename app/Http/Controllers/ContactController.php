@@ -230,6 +230,9 @@ class ContactController extends Controller
 
         $first_line_email = $first_line[$request['email']];
 
+        $file->rewind();
+        $headers = $file->current();
+
         // is email field properly mapped ?
         if(!filter_var($first_line_email, FILTER_VALIDATE_EMAIL)) {
             return back()->withErrors([ 'email_field' => 'Email field is not valid' ]);
@@ -241,26 +244,44 @@ class ContactController extends Controller
             if($single[0]) {
                 $row = array_combine($headers, $single);
 
-                // for test now, later add as job
-                $contact = new Contact();
-                $contact->list_id = $lists->id;
-                $contact->email = $row[$request['email']];
-                $contact->save();
+                $checkContact = Contact::where('email', $row[$request['email']])->where('list_id', $lists->id)->first();
 
-                foreach($custom_fields as $key => $value) {
-                    // @todo: use ID here
-                    echo "Key: " . $key . ' Value: ' . $value . '<br>';
-                   if($value) {
-                        $field = Field::where('name', $key)->first();
-                        $contact->fields()->attach($field, [ 'value' => $row[$value] ]);
-                   } 
+                if($checkContact and $import->skip_duplicate) { continue; } 
+
+                if($checkContact) {
+                    $checkContact->subscribed = $import->contacts_subscribed;
+                    $checkContact->save();
+
+                    $checkContact->fields()->detach();
+                    foreach($custom_fields as $key => $value) {
+                        // @todo: use ID here
+                        echo "Key: " . $key . ' Value: ' . $value . '<br>';
+                    if($value) {
+                            $field = Field::where('name', $key)->first();
+                            $checkContact->fields()->attach($field, [ 'value' => $row[$value] ]);
+                    } 
+                    }
+                } else {
+                    // for test now, later add as job
+                    $contact = new Contact();
+                    $contact->list_id = $lists->id;
+                    $contact->email = $row[$request['email']];
+                    $contact->subscribed = $import->contacts_subscribed;
+                    $contact->save();
+
+                    foreach($custom_fields as $key => $value) {
+                    if($value) {
+                            $field = Field::where('name', $key)->first();
+                            $contact->fields()->attach($field, [ 'value' => $row[$value] ]);
+                    } 
+                    }
                 }
 
             }
 
         }
 
-        return;
+        return redirect()->route('lists.show', $lists->id); 
         
     }
 

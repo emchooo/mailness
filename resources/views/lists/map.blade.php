@@ -26,7 +26,8 @@
     <select name="email" id="">
       <option value=""></option>
       @foreach($headers as $header)
-        <option value="{{ $header }}">{{ $header }}</option>
+      
+        <option value="{{ $header }}" @if(stripos($header, 'email') !== false) selected="selected" @endif >{{ $header }}</option>
       @endforeach
     </select>
   </div>
