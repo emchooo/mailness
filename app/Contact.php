@@ -8,7 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
     protected $guarded = [];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['email','list_id','subscribed','unsubscribed_at','bounced_at','complaint_at'];
 
     public function list()
     {

@@ -41,9 +41,9 @@
   <form action="{{ route('campaigns.send', $campaign->id) }}" method="POST">
     @csrf
 
-    @foreach($lists as $list)
+    @foreach($lists as $listId => $listName)
       <div class="block" >
-        <input type="checkbox" name="lists[{{$list->id}}]" > {{ $list->name }}
+        <input type="checkbox" name="lists[{{$listId}}]" > {{ $listName }}
       </div>
     @endforeach
 

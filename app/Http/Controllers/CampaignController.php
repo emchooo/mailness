@@ -20,9 +20,14 @@ class CampaignController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $campaigns = Campaign::orderBy('id', 'desc')->paginate(10);
+        $campaigns = Campaign::query()
+                        ->latest('id')
+                        ->paginate()
+                        ->onEachSide(3)
+                        ->appends($request->all());
+
         return view('campaigns.index', compact('campaigns'));
     }
 
@@ -33,7 +38,8 @@ class CampaignController extends Controller
      */
     public function create()
     {
-        $templates = Template::all();
+        $templates = Template::pluck('name','id');
+                
         return view('campaigns.create', compact('templates'));
     }
 
@@ -45,19 +51,7 @@ class CampaignController extends Controller
      */
     public function store(CampaignStoreRequest $request)
     {
-        $content = '';
-        if($request->template) {
-            $template = Template::find($request->template);
-            $content = $template->content;
-        }
-
-        $campaign = new Campaign();
-        $campaign->status = $request->status ? $request->status : 'draft';
-        $campaign->subject = $request->subject;
-        $campaign->sending_name = $request->sending_name;
-        $campaign->sending_email = $request->sending_email;
-        $campaign->content = $content;
-        $campaign->save();
+        $campaign = Campaign::create($request->only(['subject','sending_name','sending_email']));
 
         return redirect()->route('campaigns.edit', $campaign->id);
     }
@@ -70,7 +64,8 @@ class CampaignController extends Controller
      */
     public function show(Campaign $campaign)
     {
-        $lists = Lists::all();
+        $lists = Lists::pluck('name','id');
+        
         return view('campaigns.show', compact('campaign', 'lists'));
     }
 

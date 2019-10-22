@@ -9,6 +9,7 @@ use App\Import;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactStoreRequest;
+use App\Http\Requests\ContactUpdateRequest;
 use App\Http\Requests\ImportSaveRequest;
 use App\Jobs\ImportFile;
 use Illuminate\Support\Facades\Storage;
@@ -41,15 +42,16 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Lists $lists, ContactStoreRequest $request)
+    public function store(ContactStoreRequest $request, Lists $lists)
     {
-        // @todo refactor this with update
-        $contact = Contact::where('email', $request->email)->where('list_id', $lists->id)->first();
-        if(! isset($contact) ) {
-            $contact = new Contact();
-            $contact->email = $request->email;
-            $contact->list_id = $lists->id;
-            $contact->save();
+        $contactCreationArray = array_merge(
+            $request->only(['email']),
+            [
+                'list_id' => $lists->id,
+            ]
+        );
+
+       $contact = Contact::create($contactCreationArray);
 
             if($request->fields) {
                 foreach($request->fields as $key => $value) {
@@ -59,8 +61,7 @@ class ContactController extends Controller
                     }
                 }
             }
-        }
-        
+
         return redirect()->route('lists.show', $lists->id); 
     }
 
@@ -93,11 +94,9 @@ class ContactController extends Controller
      * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(ContactStoreRequest $request, Lists $lists, Contact $contact)
+    public function update(ContactUpdateRequest $request, Lists $lists, Contact $contact)
     {
-        // @todo refactor this and save method
-        $contact_check = Contact::where('email', $request->email)->where('list_id', $lists->id)->first();
-
+        
             $contact->fields()->detach();
             if($request->fields) {
                 foreach($request->fields as $key => $value) {

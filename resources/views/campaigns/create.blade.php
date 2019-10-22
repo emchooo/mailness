@@ -35,10 +35,11 @@
 
   <div>
     Select template:
-    @foreach($templates as $template)
+    
+    @foreach($templates as $templateId => $templateName)
       <div class="block" >
-        <input type="radio" name="template" value="{{ $template->id }}" >
-        {{ $template->name }}
+        <input type="radio" name="template" value="{{ $templateId }}" >
+        {{ $templateName }}
       </div>
     @endforeach
   </div>
