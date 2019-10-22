@@ -20,7 +20,7 @@ class EmailUniqueForEachListRule implements Rule
      *
      * @return void
      */
-    public function __construct(Lists $list, ?Contact $contact = null)
+    public function __construct(?Lists $list = null, ?Contact $contact = null)
     {
         $this->list = $list;   
         $this->contact = $contact;
@@ -39,7 +39,9 @@ class EmailUniqueForEachListRule implements Rule
 
         return null === Contact::query()
                                 ->where('email', $value)
-                                ->where('list_id', $this->list->id)
+                                ->when($this->list,function(Builder $query) use ($contact) {
+                                    return $query->where('list_id','=',$this->list->id);
+                                })
                                 ->when($contact,function(Builder $query) use ($contact) {
                                         return $query->where('id','!=',$contact->id);
                                 })

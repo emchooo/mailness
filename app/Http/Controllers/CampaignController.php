@@ -51,7 +51,20 @@ class CampaignController extends Controller
      */
     public function store(CampaignStoreRequest $request)
     {
-        $campaign = Campaign::create($request->only(['subject','sending_name','sending_email']));
+        $content = '';
+
+        if($request->template) {
+            $template = Template::find($request->template);
+            $content = $template->content;
+        }
+
+        $creationArray = array_merge($request->only(['subject','sending_name','sending_email']),
+            [
+                'content' => $content,
+            ]
+        );
+
+        $campaign = Campaign::create($creationArray);
 
         return redirect()->route('campaigns.edit', $campaign->id);
     }

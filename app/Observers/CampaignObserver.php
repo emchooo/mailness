@@ -15,17 +15,8 @@ class CampaignObserver
      */
     public function creating(Campaign $campaign)
     {
-        $content = '';
-
         $request = request();
         
         $campaign->status = $request->status ? $request->status : 'draft';
-
-        if($request->template) {
-            $template = Template::find($request->template);
-            $content = $template->content;
-        }
-        
-        $campaign->content  = $content;
     }
 }

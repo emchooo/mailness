@@ -180,6 +180,7 @@ class ListTest extends TestCase
 
         $response = $this->post(route('lists.subscribe.store', $list->uuid), [ 'email' => 'batman@spiderman.com' ]);
 
+
         $this->assertEquals(1, Contact::count());
     }
 }
