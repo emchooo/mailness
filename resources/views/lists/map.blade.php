@@ -25,20 +25,19 @@
     <label for="">Email</label>
     <select name="email" id="">
       <option value=""></option>
-      @foreach($headers as $header)
-      
-        <option value="{{ $header }}" @if(stripos($header, 'email') !== false) selected="selected" @endif >{{ $header }}</option>
+      @foreach($fileFields as $field)
+        <option value="{{ $field }}" @if(stripos($field, 'email') !== false) selected="selected" @endif >{{ $field }}</option>
       @endforeach
     </select>
   </div>
 
-    @foreach($fields as $field)
+    @foreach($listFields as $field)
       <div class="block mt-2">
         <label for="">{{ $field }}</label>
         <select name="{{ $field }}" id="">
           <option value=""></option>
-          @foreach($headers as $header)
-            <option value="{{ $header }}">{{ $header }}</option>
+          @foreach($fileFields as $f)
+            <option value="{{ $f }}">{{ $f }}</option>
           @endforeach
         </select>
       </div>

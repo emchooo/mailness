@@ -13,6 +13,7 @@ use App\Http\Requests\ContactUpdateRequest;
 use App\Http\Requests\ImportSaveRequest;
 use App\Jobs\ImportFile;
 use Illuminate\Support\Facades\Storage;
+use App\Services\ImportContacts;
 
 class ContactController extends Controller
 {
@@ -179,26 +180,17 @@ class ContactController extends Controller
         $import->skip_duplicate = $request->skip_duplicate;
         $import->save();
 
-        // ImportFile::dispatch($path);
-
         return redirect()->route('contacts.import.map', [ 'lists' => $lists, 'id' => $import->id ]);
     }
 
-    public function map(Lists $lists, $file_id)
+    public function map(Lists $lists, $file_id, ImportContacts $import)
     {
-        // @todo refactor this
-        $file = Import::findOrFail($file_id);
 
-        $file_path = storage_path( 'app/public/' . $file->path);
+        $fileFields = $import->getFileFields($file_id);
 
-        $file = new \SplFileObject($file_path, 'r');
-        $file->setFlags(\SplFileObject::READ_CSV);
-        
-        $headers = $file->current();
+        $listFields = $import->getListFields($lists);
 
-        $fields = $lists->fields->pluck('name');
-
-        return view('lists.map', [ 'headers' => $headers, 'fields' => $fields, 'list' => $lists, 'file_id' => $file_id ]);
+        return view('lists.map', [ 'fileFields' => $fileFields, 'listFields' => $listFields, 'list' => $lists, 'file_id' => $file_id ]);
 
     }
 

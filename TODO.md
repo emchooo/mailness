@@ -32,6 +32,7 @@
 - list_submenu highlight current link
 - Fix bug in test when Faker generates name with '
 - Responsive
+- Update to 6.2
 - Translation ???
 
 # Connect to SES and SNS
