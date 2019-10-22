@@ -72,8 +72,8 @@ class CampaignTest extends TestCase
         'sending_email' => $campaign->sending_email,
         'content' => $campaign->content
         ]);
-
-        $response->assertRedirect();
+        
+        $response->assertRedirect(route('campaigns.show', $campaign->id));
 
         $campaign = Campaign::first();
 

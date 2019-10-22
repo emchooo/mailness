@@ -131,6 +131,7 @@ class ListsController extends Controller
     {
         // @todo refator this with ContactController@store and update
         $list = Lists::where('uuid', $uuid)->first();
+
         $contact = Contact::where('email', $request->email)->where('list_id', $list->id)->first();
         if(! isset($contact) ) {
             $contact = new Contact();

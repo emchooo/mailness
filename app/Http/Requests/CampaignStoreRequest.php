@@ -29,4 +29,32 @@ class CampaignStoreRequest extends FormRequest
             'sending_email' => 'required|email',
         ];
     }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'subject.required' => 'The :attribute is required',
+            'sending_name.required' => 'The :attribute is required',
+            'sending_email.required' => 'The :attribute is required',
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'subject' => 'Subject',
+            'sending_name' => 'Sending Name',
+            'sending_email' => 'Sending Email',
+        ];
+    }
 }
