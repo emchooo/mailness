@@ -3,13 +3,10 @@
 namespace Tests\Feature;
 
 use App\User;
-use App\Lists;
 use App\Campaign;
 use Tests\TestCase;
-use App\Jobs\SendCampaign;
 use App\Mail\CampaignMail;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Queue;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class CampaignTest extends TestCase
@@ -46,7 +43,7 @@ class CampaignTest extends TestCase
     /** @test */
     public function itCanSaveNewCampaign()
     {
-        $response = $this->actingAs($this->user)->post(route('campaigns.store'), [ 'subject' => 'My campaign', 'sending_name' => 'Emir', 'sending_email' => 'tom@sawyer.com', 'content' => 'Content' ]);
+        $response = $this->actingAs($this->user)->post(route('campaigns.store'), ['subject' => 'My campaign', 'sending_name' => 'Emir', 'sending_email' => 'tom@sawyer.com', 'content' => 'Content']);
 
         $this->assertEquals(1, Campaign::count());
     }
@@ -66,13 +63,13 @@ class CampaignTest extends TestCase
     {
         $campaign = factory(Campaign::class)->create();
 
-        $response = $this->actingAs($this->user)->put(route('campaigns.update', $campaign->id), 
-        [ 'subject' => 'Edited subject',
+        $response = $this->actingAs($this->user)->put(route('campaigns.update', $campaign->id),
+        ['subject' => 'Edited subject',
         'sending_name' => $campaign->sending_name,
         'sending_email' => $campaign->sending_email,
-        'content' => $campaign->content
+        'content' => $campaign->content,
         ]);
-        
+
         $response->assertRedirect(route('campaigns.show', $campaign->id));
 
         $campaign = Campaign::first();
@@ -88,7 +85,6 @@ class CampaignTest extends TestCase
         $response = $this->actingAs($this->user)->delete(route('campaigns.delete', $campaign->id));
 
         $this->assertEquals(0, Campaign::count());
-        
     }
 
     /** @test */
@@ -99,7 +95,7 @@ class CampaignTest extends TestCase
         $campaign = factory(Campaign::class)->create();
 
         $email = 'emir@test.com';
-        $response = $this->actingAs($this->user)->post(route('campaigns.send.test', $campaign->id), [ 'email' => $email]);
+        $response = $this->actingAs($this->user)->post(route('campaigns.send.test', $campaign->id), ['email' => $email]);
 
         Mail::assertQueued(CampaignMail::class, function ($mail) use ($email) {
             return $mail->hasTo($email);
@@ -118,5 +114,4 @@ class CampaignTest extends TestCase
         $this->assertEquals(2, Campaign::count());
         $this->assertEquals('draft', $record->status);
     }
-
 }

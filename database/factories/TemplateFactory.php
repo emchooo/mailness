@@ -9,6 +9,6 @@ $factory->define(Template::class, function (Faker $faker) {
     return [
         'name'  => $faker->name,
         'content'   => $faker->text,
-        'type'      => 'editor'
+        'type'      => 'editor',
     ];
 });

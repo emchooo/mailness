@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Field;
-use App\Http\Requests\FieldStoreRequest;
 use App\Lists;
 use Illuminate\Http\Request;
+use App\Http\Requests\FieldStoreRequest;
 
 class FieldController extends Controller
 {
@@ -17,6 +17,7 @@ class FieldController extends Controller
     public function index($list_id)
     {
         $list = Lists::find($list_id);
+
         return view('fields.index', compact('list'));
     }
 
@@ -28,6 +29,7 @@ class FieldController extends Controller
     public function create($list_id)
     {
         $list = Lists::find($list_id);
+
         return view('fields.create', compact('list'));
     }
 
@@ -45,7 +47,7 @@ class FieldController extends Controller
         $field->list_id = $list_id;
         $field->save();
 
-        return redirect()->route('fields.index', $list_id); 
+        return redirect()->route('fields.index', $list_id);
     }
 
     /**

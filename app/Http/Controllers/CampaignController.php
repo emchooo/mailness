@@ -9,9 +9,9 @@ use App\Jobs\SendCampaign;
 use App\Mail\CampaignMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Requests\CampaignStoreRequest;
 use App\Http\Requests\SendCampaignRequest;
 use App\Http\Requests\SendTestMailRequest;
+use App\Http\Requests\CampaignStoreRequest;
 
 class CampaignController extends Controller
 {
@@ -38,8 +38,8 @@ class CampaignController extends Controller
      */
     public function create()
     {
-        $templates = Template::pluck('name','id');
-                
+        $templates = Template::pluck('name', 'id');
+
         return view('campaigns.create', compact('templates'));
     }
 
@@ -53,12 +53,12 @@ class CampaignController extends Controller
     {
         $content = '';
 
-        if($request->template) {
+        if ($request->template) {
             $template = Template::find($request->template);
             $content = $template->content;
         }
 
-        $creationArray = array_merge($request->only(['subject','sending_name','sending_email']),
+        $creationArray = array_merge($request->only(['subject', 'sending_name', 'sending_email']),
             [
                 'content' => $content,
             ]
@@ -77,8 +77,8 @@ class CampaignController extends Controller
      */
     public function show(Campaign $campaign)
     {
-        $lists = Lists::pluck('name','id');
-        
+        $lists = Lists::pluck('name', 'id');
+
         return view('campaigns.show', compact('campaign', 'lists'));
     }
 
@@ -91,9 +91,10 @@ class CampaignController extends Controller
     public function edit(Campaign $campaign)
     {
         // @todo refactor this
-        if($campaign->status != 'draft') {
+        if ($campaign->status != 'draft') {
             return back();
         }
+
         return view('campaigns.edit', compact('campaign'));
     }
 
@@ -107,7 +108,7 @@ class CampaignController extends Controller
     public function update(CampaignStoreRequest $request, Campaign $campaign)
     {
         // @todo refactor this
-        if($campaign->status != 'draft') {
+        if ($campaign->status != 'draft') {
             return back();
         }
         // @todo add validation
@@ -116,7 +117,7 @@ class CampaignController extends Controller
         $campaign->sending_email = $request->sending_email;
         $campaign->content = $request->content;
         $campaign->save();
-    
+
         return redirect()->route('campaigns.show', $campaign->id);
     }
 
@@ -137,13 +138,13 @@ class CampaignController extends Controller
     {
         Mail::to($request->email)->queue(new CampaignMail($campaign));
 
-        return back()->with([ 'success' => 'Test mail sent!' ]);
+        return back()->with(['success' => 'Test mail sent!']);
     }
 
     public function send(SendCampaignRequest $request, Campaign $campaign)
     {
         // if campaign is sent
-        foreach($request->lists as $key => $value) {
+        foreach ($request->lists as $key => $value) {
             $list = Lists::find($key);
             SendCampaign::dispatch($campaign, $list);
         }
