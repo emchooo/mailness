@@ -25,7 +25,7 @@ class ContactStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required','email',new EmailUniqueForEachListRule($this->lists)]
+            'email' => ['required', 'email', new EmailUniqueForEachListRule($this->lists)],
         ];
     }
 

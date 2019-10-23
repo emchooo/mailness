@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Lists;
-use App\ContactField;
 use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
@@ -20,7 +18,7 @@ class Contact extends Model
      *
      * @var array
      */
-    protected $fillable = ['email','list_id','subscribed','unsubscribed_at','bounced_at','complaint_at'];
+    protected $fillable = ['email', 'list_id', 'subscribed', 'unsubscribed_at', 'bounced_at', 'complaint_at'];
 
     public function list()
     {
@@ -34,7 +32,7 @@ class Contact extends Model
 
     public function getFieldValue($field_id)
     {
-        if($this->fields()->where('field_id', $field_id)->first()) {
+        if ($this->fields()->where('field_id', $field_id)->first()) {
             return $this->fields()->where('field_id', $field_id)->first()->pivot->value;
         }
     }
@@ -48,5 +46,4 @@ class Contact extends Model
     {
         return $query->where('subscribed', 0);
     }
-    
 }

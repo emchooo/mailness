@@ -17,6 +17,7 @@ class TemplateController extends Controller
     {
         // @todo add pagination and order by id desc
         $templates = Template::orderBy('id', 'desc')->paginate(10);
+
         return view('templates.index', compact('templates'));
     }
 

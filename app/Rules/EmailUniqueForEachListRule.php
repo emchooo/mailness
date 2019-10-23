@@ -2,8 +2,8 @@
 
 namespace App\Rules;
 
-use App\Contact;
 use App\Lists;
+use App\Contact;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -12,7 +12,7 @@ class EmailUniqueForEachListRule implements Rule
     /** @var \App\Lists */
     private $list;
 
-    /** @var \App\Contact  */
+    /** @var \App\Contact */
     private $contact;
 
     /**
@@ -22,7 +22,7 @@ class EmailUniqueForEachListRule implements Rule
      */
     public function __construct(?Lists $list = null, ?Contact $contact = null)
     {
-        $this->list = $list;   
+        $this->list = $list;
         $this->contact = $contact;
     }
 
@@ -39,13 +39,13 @@ class EmailUniqueForEachListRule implements Rule
 
         return null === Contact::query()
                                 ->where('email', $value)
-                                ->when($this->list,function(Builder $query) use ($contact) {
-                                    return $query->where('list_id','=',$this->list->id);
+                                ->when($this->list, function (Builder $query) use ($contact) {
+                                    return $query->where('list_id', '=', $this->list->id);
                                 })
-                                ->when($contact,function(Builder $query) use ($contact) {
-                                        return $query->where('id','!=',$contact->id);
+                                ->when($contact, function (Builder $query) use ($contact) {
+                                    return $query->where('id', '!=', $contact->id);
                                 })
-                                ->first();        
+                                ->first();
     }
 
     /**
