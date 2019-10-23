@@ -6,8 +6,6 @@ use App\User;
 use App\Lists;
 use App\Contact;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ListTest extends TestCase
@@ -24,11 +22,10 @@ class ListTest extends TestCase
     public function itIsPossibleToCreateNewList()
     {
         $list = factory(Lists::class)->create();
-        
+
         $inserted_list = Lists::first();
 
         $this->assertEquals($list->name, $inserted_list->name);
-
     }
 
     /** @test */
@@ -41,12 +38,11 @@ class ListTest extends TestCase
         $response->assertSeeText($list->name);
     }
 
-
     /** @test */
     public function createNewList()
     {
         $name = 'My best list';
-        $response = $this->actingAs($this->user)->post(route('lists.store'), [ 'name' => $name ]);
+        $response = $this->actingAs($this->user)->post(route('lists.store'), ['name' => $name]);
 
         $list = Lists::first();
 
@@ -113,15 +109,14 @@ class ListTest extends TestCase
     {
         $list_name = 'My best list';
         $list = factory(Lists::class)->create();
-        
-        $response = $this->actingAs($this->user)->put(route('lists.update', $list->id), [ 'name' => $list_name ]);
+
+        $response = $this->actingAs($this->user)->put(route('lists.update', $list->id), ['name' => $list_name]);
 
         $response->assertRedirect();
 
         $edited_list = Lists::find($list->id);
 
         $this->assertEquals($list_name, $edited_list->name);
-
     }
 
     /** @test */
@@ -129,10 +124,9 @@ class ListTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->actingAs($this->user)->put(route('lists.update', $list->id), [ 'name' => '' ]);
-    
-        $response->assertSessionHasErrors();
+        $response = $this->actingAs($this->user)->put(route('lists.update', $list->id), ['name' => '']);
 
+        $response->assertSessionHasErrors();
     }
 
     /** @test */
@@ -141,11 +135,10 @@ class ListTest extends TestCase
         $list = factory(Lists::class)->create();
         $list2 = factory(Lists::class)->create();
         $list3 = factory(Lists::class)->create();
-        
+
         $response = $this->actingAs($this->user)->delete(route('lists.delete', $list->id));
 
         $this->assertEquals(2, $list->count());
-
     }
 
     /** @test */
@@ -154,12 +147,12 @@ class ListTest extends TestCase
         $list = factory(Lists::class)->create();
         $list1 = factory(Lists::class)->create();
 
-        $contact1 = $this->actingAs($this->user)->post(route('contacts.store', $list->id), [ 'email' => 'tom@sawyer.com' ]);
-        $contact2 = $this->actingAs($this->user)->post(route('contacts.store', $list->id), [ 'email' => 'tom@sawyer.net' ]);
-        $contac3 =  $this->actingAs($this->user)->post(route('contacts.store', $list1->id), [ 'email' => 'tom@sawyer.org' ]);
+        $contact1 = $this->actingAs($this->user)->post(route('contacts.store', $list->id), ['email' => 'tom@sawyer.com']);
+        $contact2 = $this->actingAs($this->user)->post(route('contacts.store', $list->id), ['email' => 'tom@sawyer.net']);
+        $contac3 = $this->actingAs($this->user)->post(route('contacts.store', $list1->id), ['email' => 'tom@sawyer.org']);
 
-        $response = $this->delete(route('lists.delete', $list->id)); 
-        
+        $response = $this->delete(route('lists.delete', $list->id));
+
         $this->assertEquals(1, Contact::count());
     }
 
@@ -178,8 +171,7 @@ class ListTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->post(route('lists.subscribe.store', $list->uuid), [ 'email' => 'batman@spiderman.com' ]);
-
+        $response = $this->post(route('lists.subscribe.store', $list->uuid), ['email' => 'batman@spiderman.com']);
 
         $this->assertEquals(1, Contact::count());
     }

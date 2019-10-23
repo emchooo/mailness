@@ -31,11 +31,11 @@ class ImportFile implements ShouldQueue
      */
     public function handle()
     {
-        $file_path = storage_path( 'app/public/' . $this->path);
+        $file_path = storage_path('app/public/'.$this->path);
 
         $file = new \SplFileObject($file_path, 'r');
         $file->setFlags(\SplFileObject::READ_CSV);
-        
+
         // @todo every record add to ImportContact job
     }
 }

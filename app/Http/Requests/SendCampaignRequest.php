@@ -24,7 +24,7 @@ class SendCampaignRequest extends FormRequest
     public function rules()
     {
         return [
-            'lists' => 'required'
+            'lists' => 'required',
         ];
     }
 }

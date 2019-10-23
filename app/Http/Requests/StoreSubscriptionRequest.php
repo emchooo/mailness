@@ -25,7 +25,7 @@ class StoreSubscriptionRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required','email',new EmailUniqueForEachListRule($this->listUuid)]
+            'email' => ['required', 'email', new EmailUniqueForEachListRule($this->listUuid)],
         ];
     }
 

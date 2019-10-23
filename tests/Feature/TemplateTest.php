@@ -20,7 +20,6 @@ class TemplateTest extends TestCase
     /** @test */
     public function openTemplatesListPage()
     {
-
         $template = factory(Template::class)->create();
 
         $response = $this->actingAs($this->user)->get(route('templates.index'));
@@ -41,7 +40,7 @@ class TemplateTest extends TestCase
     /** @test */
     public function saveNewTemplate()
     {
-        $response = $this->actingAs($this->user)->post(route('templates.store', [ 'name' => 'My first template', 'content' => 'This is content' ]));
+        $response = $this->actingAs($this->user)->post(route('templates.store', ['name' => 'My first template', 'content' => 'This is content']));
 
         $template = Template::first();
 
@@ -73,7 +72,7 @@ class TemplateTest extends TestCase
     {
         $template = factory(Template::class)->create();
 
-        $response = $this->actingAs($this->user)->put(route('templates.update', $template->id), [ 'name' => 'Updated template', 'content' => 'Updated content' ]);
+        $response = $this->actingAs($this->user)->put(route('templates.update', $template->id), ['name' => 'Updated template', 'content' => 'Updated content']);
 
         $template = Template::first();
 

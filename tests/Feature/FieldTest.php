@@ -6,8 +6,6 @@ use App\User;
 use App\Field;
 use App\Lists;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class FieldTest extends TestCase
@@ -25,7 +23,7 @@ class FieldTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $field = factory(Field::class)->create([ 'list_id' => $list->id ]);
+        $field = factory(Field::class)->create(['list_id' => $list->id]);
 
         $response = $this->actingAs($this->user)->get(route('fields.index', $list->id));
 
@@ -47,8 +45,8 @@ class FieldTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $response = $this->actingAs($this->user)->post(route('fields.store', $list->id), [ 'name' => 'City' ]);
-        $response = $this->actingAs($this->user)->post(route('fields.store', $list->id), [ 'name' => 'Name' ]);
+        $response = $this->actingAs($this->user)->post(route('fields.store', $list->id), ['name' => 'City']);
+        $response = $this->actingAs($this->user)->post(route('fields.store', $list->id), ['name' => 'Name']);
 
         $this->assertEquals(2, Field::count());
     }
@@ -58,9 +56,9 @@ class FieldTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $field = factory(Field::class)->create([ 'list_id' => $list->id ]);
+        $field = factory(Field::class)->create(['list_id' => $list->id]);
 
-        $response = $this->actingAs($this->user)->get(route('fields.edit', [ $list->id, $field->id ] ));
+        $response = $this->actingAs($this->user)->get(route('fields.edit', [$list->id, $field->id]));
 
         $response->assertSuccessful();
     }
@@ -70,9 +68,9 @@ class FieldTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $field = factory(Field::class)->create([ 'list_id' => $list->id, 'name' => 'Town' ]);
+        $field = factory(Field::class)->create(['list_id' => $list->id, 'name' => 'Town']);
 
-        $response = $this->actingAs($this->user)->put(route('fields.update', [ $list->id, $field->id ]), [ 'name' => 'City' ]);
+        $response = $this->actingAs($this->user)->put(route('fields.update', [$list->id, $field->id]), ['name' => 'City']);
 
         $this->assertEquals('City', Field::first()->name);
     }
@@ -82,12 +80,11 @@ class FieldTest extends TestCase
     {
         $list = factory(Lists::class)->create();
 
-        $field = factory(Field::class)->create([ 'list_id' => $list->id ]);
-        $field2 = factory(Field::class)->create([ 'list_id' => $list->id ]);
+        $field = factory(Field::class)->create(['list_id' => $list->id]);
+        $field2 = factory(Field::class)->create(['list_id' => $list->id]);
 
-        $response = $this->actingAs($this->user)->delete(route('fields.delete', [ $list->id , $field->id ] ));
+        $response = $this->actingAs($this->user)->delete(route('fields.delete', [$list->id, $field->id]));
 
         $this->assertEquals(1, Field::count());
     }
-
 }

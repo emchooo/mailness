@@ -2,10 +2,8 @@
 
 namespace App;
 
-use App\Contact;
-use App\Field;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 
 class Lists extends Model
 {
@@ -14,7 +12,7 @@ class Lists extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','uuid'];
+    protected $fillable = ['name', 'uuid'];
 
     protected $guarded = [];
 
@@ -22,7 +20,7 @@ class Lists extends Model
     {
         parent::boot();
 
-        static::creating(function($list) {
+        static::creating(function ($list) {
             $list->uuid = (string) Str::uuid();
         });
     }

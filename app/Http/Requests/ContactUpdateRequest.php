@@ -25,7 +25,7 @@ class ContactUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required','email',new EmailUniqueForEachListRule($this->lists,$this->contact)]
+            'email' => ['required', 'email', new EmailUniqueForEachListRule($this->lists, $this->contact)],
         ];
     }
 

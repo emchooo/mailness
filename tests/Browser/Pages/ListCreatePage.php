@@ -27,7 +27,7 @@ class ListCreatePage extends Page
         $browser->assertPathIs($this->url());
     }
 
-    /**
+    /*
      * Get the element shortcuts for the page.
      *
      * @return array

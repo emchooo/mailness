@@ -21,10 +21,9 @@ Route::post('lists/{listUuid}/subscribe', 'ListsController@subscribeStore')->nam
 Route::get('lists/{listUuid}/subscribe/success', 'ListsController@subscribeSuccess')->name('lists.subscribe.success');
 
 Route::middleware('auth')->group(function () {
-
     Route::get('settings', 'SettingController@index');
 
-    Route::get('lists' , 'ListsController@index')->name('lists.index');
+    Route::get('lists', 'ListsController@index')->name('lists.index');
     Route::get('lists/create', 'ListsController@create')->name('lists.create');
     Route::post('lists/store', 'ListsController@store')->name('lists.store');
     Route::get('lists/{lists}', 'ListsController@show')->name('lists.show');
@@ -44,11 +43,11 @@ Route::middleware('auth')->group(function () {
     Route::post('lists/{lists}/import', 'ContactController@importSave')->name('contacts.import.save');
     Route::get('lists/{lists}/import/{id}/map', 'ContactController@map')->name('contacts.import.map');
     Route::post('lists/{lists}/import/{id}/process', 'ContactController@importProcess')->name('contacts.import.process');
-    
+
     Route::get('lists/{lists}/parse', 'ContactController@importParse');
 
     Route::get('lists/{lists}/contacts', 'ContactController@index')->name('contacts.index');
-    Route::get('lists/{lists}/contacts/create', 'ContactController@create' )->name('contacts.create');
+    Route::get('lists/{lists}/contacts/create', 'ContactController@create')->name('contacts.create');
     Route::get('lists/{lists}/contacts/{contact}', 'ContactController@show')->name('contacts.show');
     Route::post('lists/{lists}/contacts', 'ContactController@store')->name('contacts.store');
     Route::get('lists/{lists}/contacts/{contact}/edit', 'ContactController@edit')->name('contacts.edit');
@@ -78,7 +77,6 @@ Route::middleware('auth')->group(function () {
     Route::post('campaigns/{campaign}/duplicate', 'CampaignController@duplicate')->name('campaigns.duplicate');
 
     Route::get('reports', 'ReportController@index')->name('reports.index');
-
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -5,9 +5,9 @@ namespace Tests\Browser;
 use App\Lists;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\Browser\Pages\ListsPage;
 use Tests\Browser\Pages\ListCreatePage;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ListsTest extends DuskTestCase
 {
@@ -26,10 +26,10 @@ class ListsTest extends DuskTestCase
     public function isThereListOnListsPage()
     {
         $list = factory(Lists::class)->create([
-            'name'  => 'My testing list'
+            'name'  => 'My testing list',
         ]);
 
-        $this->browse(function(Browser $browser) use ($list) {
+        $this->browse(function (Browser $browser) use ($list) {
             $browser->visit(new ListsPage)
             ->assertSee($list->name);
         });
@@ -38,7 +38,7 @@ class ListsTest extends DuskTestCase
     /** @test */
     public function openCreateListPageFromLists()
     {
-        $this->browse(function(Browser $browser) {
+        $this->browse(function (Browser $browser) {
             $browser->visit(new ListsPage)
             ->clickLink('Create list')
             ->assertSee('Create new list');
@@ -48,7 +48,7 @@ class ListsTest extends DuskTestCase
     /** @test */
     public function createNewList()
     {
-        $this->browse(function(Browser $browser) {
+        $this->browse(function (Browser $browser) {
             $browser->visit(new ListCreatePage)
             ->type('name', 'My latest list')
             ->press('Save')
