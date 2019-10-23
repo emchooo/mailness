@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Campaign;
-use App\Template;
 
 class CampaignObserver
 {
@@ -16,7 +15,7 @@ class CampaignObserver
     public function creating(Campaign $campaign)
     {
         $request = request();
-        
+
         $campaign->status = $request->status ? $request->status : 'draft';
     }
 }

@@ -19,7 +19,7 @@
 <div class="flex justify-center mt-10" >
 <div class="w-full max-w-xs center">
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" >
-        <h1 class="text-center" >Thank you for subscribing.</h1>
+    <h1 class="text-center" >Thank you for subscribing. <b> {{$list->name}} <b></h1>
     </div>
 </div>
 </div>

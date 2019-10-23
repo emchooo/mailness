@@ -4,14 +4,12 @@ namespace Tests\Feature;
 
 use App\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ReportTest extends TestCase
 {
     use DatabaseMigrations;
-    
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -25,5 +23,4 @@ class ReportTest extends TestCase
 
         $response->assertSuccessful();
     }
-
 }

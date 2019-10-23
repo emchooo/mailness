@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\EmailUniqueForEachListRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ListStoreRequest extends FormRequest
+class StoreSubscriptionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +25,7 @@ class ListStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  => 'required',
+            'email' => ['required', 'email', new EmailUniqueForEachListRule($this->listUuid)],
         ];
     }
 
@@ -36,7 +37,7 @@ class ListStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'The :attribute is required',
+            'email.required' => 'The :attribute is required',
         ];
     }
 
@@ -48,7 +49,7 @@ class ListStoreRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'Name',
+            'email' => 'Email',
         ];
     }
 }

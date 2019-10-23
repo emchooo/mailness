@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Field;
 use App\Lists;
-use App\Contact;
 use App\Import;
+use App\Contact;
+use App\Jobs\ImportFile;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ImportSaveRequest;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ContactUpdateRequest;
-use App\Http\Requests\ImportSaveRequest;
-use App\Jobs\ImportFile;
-use Illuminate\Support\Facades\Storage;
 use App\Services\ImportContacts;
 
 class ContactController extends Controller
@@ -34,7 +34,7 @@ class ContactController extends Controller
      */
     public function create(Lists $lists)
     {
-        return view('contacts.create', [ 'list' => $lists ]);
+        return view('contacts.create', ['list' => $lists]);
     }
 
     /**
@@ -52,18 +52,18 @@ class ContactController extends Controller
             ]
         );
 
-       $contact = Contact::create($contactCreationArray);
+        $contact = Contact::create($contactCreationArray);
 
-            if($request->fields) {
-                foreach($request->fields as $key => $value) {
-                    if($value) {
-                        $field = Field::find($key);
-                        $contact->fields()->attach($field, [ 'value' => $value ]);
-                    }
+        if ($request->fields) {
+            foreach ($request->fields as $key => $value) {
+                if ($value) {
+                    $field = Field::find($key);
+                    $contact->fields()->attach($field, ['value' => $value]);
                 }
             }
+        }
 
-        return redirect()->route('lists.show', $lists->id); 
+        return redirect()->route('lists.show', $lists->id);
     }
 
     /**
@@ -74,7 +74,7 @@ class ContactController extends Controller
      */
     public function show(Lists $lists, Contact $contact)
     {
-        return view('contacts.show', [ 'contact' => $contact ]);
+        return view('contacts.show', ['contact' => $contact]);
     }
 
     /**
@@ -85,7 +85,7 @@ class ContactController extends Controller
      */
     public function edit(Lists $lists, Contact $contact)
     {
-        return view('contacts.edit', [ 'list' => $lists, 'contact' => $contact ]);
+        return view('contacts.edit', ['list' => $lists, 'contact' => $contact]);
     }
 
     /**
@@ -97,20 +97,19 @@ class ContactController extends Controller
      */
     public function update(ContactUpdateRequest $request, Lists $lists, Contact $contact)
     {
-        
-            $contact->fields()->detach();
-            if($request->fields) {
-                foreach($request->fields as $key => $value) {
-                    if($value) {
-                        $field = Field::find($key);
-                        $contact->fields()->attach($field, [ 'value' => $value ]);
-                    }
+        $contact->fields()->detach();
+        if ($request->fields) {
+            foreach ($request->fields as $key => $value) {
+                if ($value) {
+                    $field = Field::find($key);
+                    $contact->fields()->attach($field, ['value' => $value]);
                 }
             }
-            $contact->email = $request->email;
-            $contact->save();
+        }
+        $contact->email = $request->email;
+        $contact->save();
 
-        return view('contacts.show', [ 'list' => $lists, 'contact' => $contact ]);
+        return view('contacts.show', ['list' => $lists, 'contact' => $contact]);
     }
 
     /**
@@ -130,48 +129,46 @@ class ContactController extends Controller
     {
         $contacts = Contact::where('list_id', $lists->id)->get();
 
-        if($contacts->isEmpty()){
+        if ($contacts->isEmpty()) {
             return redirect()
                     ->route('lists.edit', $lists)
-                    ->with('error','No Contacts Found');
+                    ->with('error', 'No Contacts Found');
         }
-        
+
         $all_fields = array_keys($contacts->toArray()[0]);
 
-        foreach($lists->fields as $field) {
+        foreach ($lists->fields as $field) {
             $all_fields[] = strtolower($field->name);
         }
 
         $file = fopen('php://output', 'w');
-         fputcsv($file, $all_fields );
-            foreach ($contacts as $row) {
-                $data = [];
-                $row_array = $row->toArray();
-                foreach($lists->fields as $field) {
-                    $custom_field_value = $row->getFieldValue($field->id);
-                    $custom_field_value ? $data[] = $custom_field_value : $data[] = '';
-                }
-                fputcsv($file, array_merge($row_array, $data) );
+        fputcsv($file, $all_fields);
+        foreach ($contacts as $row) {
+            $data = [];
+            $row_array = $row->toArray();
+            foreach ($lists->fields as $field) {
+                $custom_field_value = $row->getFieldValue($field->id);
+                $custom_field_value ? $data[] = $custom_field_value : $data[] = '';
             }
+            fputcsv($file, array_merge($row_array, $data));
+        }
         fclose($file);
 
         header('Content-Disposition: attachment; filename="contacts.csv"');
-        header("Cache-control: private");
-        header("Content-type: application/force-download");
+        header('Cache-control: private');
+        header('Content-type: application/force-download');
         header("Content-transfer-encoding: binary\n");
         exit;
     }
 
     public function import(Lists $lists)
     {
-        return view('lists.import', [ 'list' => $lists ]);
+        return view('lists.import', ['list' => $lists]);
     }
 
     public function importSave(Lists $lists, ImportSaveRequest $request)
     {
-
-        $path = Storage::drive('public')->putFileAs('imports', $request->file('file') , Str::uuid() . '.csv' );
-        
+        $path = Storage::drive('public')->putFileAs('imports', $request->file('file'), Str::uuid().'.csv');
 
         $import = new Import();
         $import->path = $path;
@@ -217,25 +214,27 @@ class ContactController extends Controller
 
             $single = $file->fgetcsv();
 
-            if($single[0]) {
+            if ($single[0]) {
                 $row = array_combine($headers, $single);
 
                 $checkContact = Contact::where('email', $row[$request['email']])->where('list_id', $lists->id)->first();
 
-                if($checkContact and $import->skip_duplicate) { continue; } 
+                if ($checkContact and $import->skip_duplicate) {
+                    continue;
+                }
 
-                if($checkContact) {
+                if ($checkContact) {
                     $checkContact->subscribed = $import->contacts_subscribed;
                     $checkContact->save();
 
                     $checkContact->fields()->detach();
-                    foreach($custom_fields as $key => $value) {
+                    foreach ($custom_fields as $key => $value) {
                         // @todo: use ID here
-                        echo "Key: " . $key . ' Value: ' . $value . '<br>';
-                    if($value) {
+                        echo 'Key: '.$key.' Value: '.$value.'<br>';
+                        if ($value) {
                             $field = Field::where('name', $key)->first();
-                            $checkContact->fields()->attach($field, [ 'value' => $row[$value] ]);
-                    } 
+                            $checkContact->fields()->attach($field, ['value' => $row[$value]]);
+                        }
                     }
                 } else {
                     // for test now, later add as job
@@ -245,20 +244,16 @@ class ContactController extends Controller
                     $contact->subscribed = $import->contacts_subscribed;
                     $contact->save();
 
-                    foreach($custom_fields as $key => $value) {
-                    if($value) {
+                    foreach ($custom_fields as $key => $value) {
+                        if ($value) {
                             $field = Field::where('name', $key)->first();
-                            $contact->fields()->attach($field, [ 'value' => $row[$value] ]);
-                    } 
+                            $contact->fields()->attach($field, ['value' => $row[$value]]);
+                        }
                     }
                 }
-
             }
-
         }
 
-        return redirect()->route('lists.show', $lists->id); 
-        
+        return redirect()->route('lists.show', $lists->id);
     }
-
 }

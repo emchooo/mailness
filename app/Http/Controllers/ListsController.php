@@ -8,11 +8,10 @@ use App\Contact;
 use Illuminate\Http\Request;
 use App\Http\Requests\ListStoreRequest;
 use App\Http\Requests\ListUpdateRequest;
-use App\Http\Requests\ContactStoreRequest;
+use App\Http\Requests\StoreSubscriptionRequest;
 
 class ListsController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -61,12 +60,13 @@ class ListsController extends Controller
     public function show(Request $request, Lists $lists)
     {
         // @todo refactor this
-        if($request->subscribed) {
+        if ($request->subscribed) {
             $contacts = Contact::where('list_id', $lists->id)->inactive()->orderBy('id', 'desc')->paginate(10);
         } else {
             $contacts = Contact::where('list_id', $lists->id)->active()->orderBy('id', 'desc')->paginate(10);
         }
-        return view('lists.show', [ 'list' => $lists, 'contacts' => $contacts, 'subscribed' => $request->subscribed ]);
+
+        return view('lists.show', ['list' => $lists, 'contacts' => $contacts, 'subscribed' => $request->subscribed]);
     }
 
     /**
@@ -77,7 +77,7 @@ class ListsController extends Controller
      */
     public function edit(Lists $lists)
     {
-        return view('lists.edit', [ 'list' => $lists ]);
+        return view('lists.edit', ['list' => $lists]);
     }
 
     /**
@@ -91,7 +91,7 @@ class ListsController extends Controller
     {
         $lists->name = $request->name;
         $lists->save();
-    
+
         return redirect(route('lists.show', $lists->id));
     }
 
@@ -104,47 +104,43 @@ class ListsController extends Controller
     public function destroy(Lists $lists)
     {
         // @todo who can delete list ?
-       $lists->contacts()->delete(); 
-       $lists->delete();
+        $lists->contacts()->delete();
+        $lists->delete();
 
-       return redirect()->route('lists.index');
+        return redirect()->route('lists.index');
     }
 
     /**
-     * Subscribe form
-     * 
+     * Subscribe form.
+     *
      * @param \App\Lists $lists
      */
-    public function subscribe($uuid)
+    public function subscribe(Lists $list)
     {
-        $list = Lists::where('uuid', $uuid)->first();
-        return view('lists.subscribe', [ 'list' => $list ]);
+        return view('lists.subscribe', ['list' => $list]);
     }
 
     /**
-     * Save subscribe
-     * 
+     * Save subscribe.
+     *
      * @param  \Illuminate\Http\Request  $request
      * @param \App\Lists $lists
      */
-    public function subscribeStore(ContactStoreRequest $request, $uuid)
+    public function subscribeStore(StoreSubscriptionRequest $request, Lists $list)
     {
-        // @todo refator this with ContactController@store and update
-        $list = Lists::where('uuid', $uuid)->first();
+        $contactCreationArray = array_merge(
+            $request->only(['email']),
+            [
+                'list_id' => $list->id,
+            ]
+        );
+        $contact = Contact::create($contactCreationArray);
 
-        $contact = Contact::where('email', $request->email)->where('list_id', $list->id)->first();
-        if(! isset($contact) ) {
-            $contact = new Contact();
-            $contact->email = $request->email;
-            $contact->list_id = $list->id;
-            $contact->save();
-
-            if($request->fields) {
-                foreach($request->fields as $key => $value) {
-                    if($value) {
-                        $field = Field::find($key);
-                        $contact->fields()->attach($field, [ 'value' => $value ]);
-                    }
+        if ($request->fields) {
+            foreach ($request->fields as $key => $value) {
+                if ($value) {
+                    $field = Field::find($key);
+                    $contact->fields()->attach($field, ['value' => $value]);
                 }
             }
         }
@@ -152,11 +148,8 @@ class ListsController extends Controller
         return redirect()->to(route('lists.subscribe.success', $list->uuid));
     }
 
-    /**
-     * 
-     */
-    public function subscribeSuccess()
+    public function subscribeSuccess(Lists $list)
     {
-        return view('lists.subscribeSuccess');
+        return view('lists.subscribeSuccess', compact('list'));
     }
 }

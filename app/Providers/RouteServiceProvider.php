@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Lists;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -23,7 +25,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::bind('listUuid', function (?string $uuid = null) {
+            return Lists::query()
+                    ->when($uuid, function (Builder $builder) use ($uuid) {
+                        return $builder->where('uuid', $uuid);
+                    })
+                    ->firstOrFail();
+        });
 
         parent::boot();
     }

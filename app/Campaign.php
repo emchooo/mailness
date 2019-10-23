@@ -15,15 +15,16 @@ class Campaign extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::observe(CampaignObserver::class);
     }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['status','subject','sending_name','sending_email','preview_text','content'];
+    protected $fillable = ['status', 'subject', 'sending_name', 'sending_email', 'preview_text', 'content'];
     /**
      * The number of models to return for pagination.
      *
