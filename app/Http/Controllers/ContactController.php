@@ -196,40 +196,25 @@ class ContactController extends Controller
 
     public function importProcess(Request $request, Lists $lists, $import_id)
     {
-        
-        // @todo refactor this
+        $import = Import::findOrFail($import_id);
 
-        if(!$request->email) {
+        $importer = new ImportContacts();
+        $importer->setFile($request, $lists, $import);
+
+        if(! $request->email) {
             return back()->withErrors([ 'email_field' => 'Email field is empty' ]);
         }
 
-        $import = Import::findOrFail($import_id);
-        $file_path = storage_path( 'app/public/' . $import->path);
-        
-        $file = new \SplFileObject($file_path, 'r');
-        $file->setFlags(\SplFileObject::READ_CSV);
-
-        $custom_fields = $request->all();
-        unset($custom_fields['_token']);
-        unset($custom_fields['email']);
-
-        $headers = $file->current();
-
-        $file->seek(1);
-
-        $first_line = array_combine($headers, $file->current());
-
-        $first_line_email = $first_line[$request['email']];
-
-        $file->rewind();
-        $headers = $file->current();
-
-        // is email field properly mapped ?
-        if(!filter_var($first_line_email, FILTER_VALIDATE_EMAIL)) {
+        if(! $importer->isEmailFieldsValidEmailAddress($request)) {
             return back()->withErrors([ 'email_field' => 'Email field is not valid' ]);
         }
 
+        $file = $importer->getFile();
+        $headers = $importer->getHeaders();
+        $custom_fields = $request->except(['_token', 'email']);
+
         while (!$file->eof()) {
+
             $single = $file->fgetcsv();
 
             if($single[0]) {
