@@ -193,18 +193,28 @@ class ContactController extends Controller
 
     public function importProcess(Request $request, Lists $lists, $import_id)
     {
-        $import = Import::findOrFail($import_id);
-
-        $importer = new ImportContacts();
-        $importer->setFile($request, $lists, $import);
 
         if(! $request->email) {
             return back()->withErrors([ 'email_field' => 'Email field is empty' ]);
         }
 
+        $import = Import::findOrFail($import_id);
+
+        $importer = new ImportContacts();
+        $importer->setFile($import);
+
         if(! $importer->isEmailFieldsValidEmailAddress($request)) {
             return back()->withErrors([ 'email_field' => 'Email field is not valid' ]);
         }
+
+        $custom_fields = $request->except(['_token']);
+
+        ImportFile::dispatch($custom_fields, $lists, $import_id);
+
+        return redirect()->route('lists.show', $lists->id); 
+
+
+       
 
         $file = $importer->getFile();
         $headers = $importer->getHeaders();

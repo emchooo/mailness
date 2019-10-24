@@ -9,7 +9,7 @@ class ImportContacts
 {
     protected $file;
 
-    public function setFile($request, $lists, $import)
+    public function setFile($import)
     {
         $file_path = storage_path( 'app/public/' . $import->path);
         
