@@ -9,14 +9,13 @@ class ImportContacts
 {
     protected $file;
 
-    public function setFile($import)
+    public function __construct($file_id)
     {
+        $import = Import::findOrFail($file_id);
         $file_path = storage_path( 'app/public/' . $import->path);
         
         $this->file = new \SplFileObject($file_path, 'r');
         $this->file->setFlags(\SplFileObject::READ_CSV);
-
-        return $this;
     }
 
     public function getFile()
@@ -49,16 +48,9 @@ class ImportContacts
         return true;
     }
 
-    public function getFileFields($file_id)
+    public function getFileFields()
     {
-        $file = Import::findOrFail($file_id);
-
-        $file_path = storage_path( 'app/public/' . $file->path);
-
-        $file = new \SplFileObject($file_path, 'r');
-        $file->setFlags(\SplFileObject::READ_CSV);
-        
-        return $file->current();
+        return $this->file->current();
     }
 
     public function getListFields($lists)

@@ -42,8 +42,7 @@ class ImportFile implements ShouldQueue
      */
     public function handle()
     {
-        $importer = new ImportContacts();
-        $importer->setFile($this->import);
+        $importer = new ImportContacts($this->import->id);
 
         $file = $importer->getFile();
         $headers = $importer->getHeaders();

@@ -17,7 +17,7 @@
 			</div>
     @endif
 
-<form action="{{ route('contacts.import.process', [ $list->id, $file_id ]) }}" method="POST" >
+<form action="{{ route('contacts.import.process', [ $list->id, $import_id ]) }}" method="POST" >
 
 @csrf
 

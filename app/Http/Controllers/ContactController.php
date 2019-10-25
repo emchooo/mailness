@@ -180,90 +180,34 @@ class ContactController extends Controller
         return redirect()->route('contacts.import.map', [ 'lists' => $lists, 'id' => $import->id ]);
     }
 
-    public function map(Lists $lists, $file_id, ImportContacts $import)
+    public function map(Lists $lists, $import_id)
     {
 
-        $fileFields = $import->getFileFields($file_id);
+        $import = new ImportContacts($import_id);
+
+        $fileFields = $import->getFileFields();
 
         $listFields = $import->getListFields($lists);
 
-        return view('lists.map', [ 'fileFields' => $fileFields, 'listFields' => $listFields, 'list' => $lists, 'file_id' => $file_id ]);
+        return view('lists.map', [ 'fileFields' => $fileFields, 'listFields' => $listFields, 'list' => $lists, 'import_id' => $import_id ]);
 
     }
 
     public function importProcess(Request $request, Lists $lists, $import_id)
     {
+        
+        $importer = new ImportContacts($import_id);
 
         if(! $request->email) {
             return back()->withErrors([ 'email_field' => 'Email field is empty' ]);
         }
 
-        $import = Import::findOrFail($import_id);
-
-        $importer = new ImportContacts();
-        $importer->setFile($import);
-
         if(! $importer->isEmailFieldsValidEmailAddress($request)) {
             return back()->withErrors([ 'email_field' => 'Email field is not valid' ]);
         }
 
-        $custom_fields = $request->except(['_token']);
-
-        ImportFile::dispatch($custom_fields, $lists, $import_id);
+        ImportFile::dispatch($request->except(['_token']), $lists, $import_id);
 
         return redirect()->route('lists.show', $lists->id); 
-
-
-       
-
-        $file = $importer->getFile();
-        $headers = $importer->getHeaders();
-        $custom_fields = $request->except(['_token', 'email']);
-
-        while (!$file->eof()) {
-
-            $single = $file->fgetcsv();
-
-            if ($single[0]) {
-                $row = array_combine($headers, $single);
-
-                $checkContact = Contact::where('email', $row[$request['email']])->where('list_id', $lists->id)->first();
-
-                if ($checkContact and $import->skip_duplicate) {
-                    continue;
-                }
-
-                if ($checkContact) {
-                    $checkContact->subscribed = $import->contacts_subscribed;
-                    $checkContact->save();
-
-                    $checkContact->fields()->detach();
-                    foreach ($custom_fields as $key => $value) {
-                        // @todo: use ID here
-                        echo 'Key: '.$key.' Value: '.$value.'<br>';
-                        if ($value) {
-                            $field = Field::where('name', $key)->first();
-                            $checkContact->fields()->attach($field, ['value' => $row[$value]]);
-                        }
-                    }
-                } else {
-                    // for test now, later add as job
-                    $contact = new Contact();
-                    $contact->list_id = $lists->id;
-                    $contact->email = $row[$request['email']];
-                    $contact->subscribed = $import->contacts_subscribed;
-                    $contact->save();
-
-                    foreach ($custom_fields as $key => $value) {
-                        if ($value) {
-                            $field = Field::where('name', $key)->first();
-                            $contact->fields()->attach($field, ['value' => $row[$value]]);
-                        }
-                    }
-                }
-            }
-        }
-
-        return redirect()->route('lists.show', $lists->id);
     }
 }
