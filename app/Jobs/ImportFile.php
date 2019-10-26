@@ -45,50 +45,16 @@ class ImportFile implements ShouldQueue
         $importer = new ImportContacts($this->import->id);
 
         $file = $importer->getFile();
-        $headers = $importer->getHeaders();
+        $header = $importer->getHeaders();
+        
 
         while (!$file->eof()) {
 
-            $single = $file->fgetcsv();
+            $contact = $file->fgetcsv();
 
-            if ($single[0]) {
-                $row = array_combine($headers, $single);
+            ImportContact::dispatch($contact, $header, $this->list, $this->import, $this->custom_fields);
 
-                $checkContact = Contact::where('email', $row[$this->custom_fields['email']])->where('list_id', $this->list->id)->first();
-
-                if ($checkContact and $this->import->skip_duplicate) {
-                    continue;
-                }
-
-                if ($checkContact) {
-                    $checkContact->subscribed = $this->import->contacts_subscribed;
-                    $checkContact->save();
-
-                    $checkContact->fields()->detach();
-                    foreach ($this->custom_fields as $key => $value) {
-                        // @todo: use ID here
-                        echo 'Key: '.$key.' Value: '.$value.'<br>';
-                        if ($value) {
-                            $field = Field::where('name', $key)->first();
-                            $checkContact->fields()->attach($field, ['value' => $row[$value]]);
-                        }
-                    }
-                } else {
-                    // for test now, later add as job
-                    $contact = new Contact();
-                    $contact->list_id = $this->list->id;
-                    $contact->email = $row[$this->custom_fields['email']];
-                    $contact->subscribed = $this->import->contacts_subscribed;
-                    $contact->save();
-
-                    foreach ($this->custom_fields as $key => $value) {
-                        if ($value) {
-                            $field = Field::where('name', $key)->first();
-                            $contact->fields()->attach($field, ['value' => $row[$value]]);
-                        }
-                    }
-                }
-            }
+            
         }
     }
 }

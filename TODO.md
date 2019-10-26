@@ -1,7 +1,7 @@
 # Lists
-- Imports
 - refactor and tests
 - Double opt-in 
+- Import large lists ( split file and process)
 
 # Campaigns
 - Create new campaign - text editor implement

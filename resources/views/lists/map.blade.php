@@ -37,7 +37,7 @@
         <select name="{{ $field }}" id="">
           <option value=""></option>
           @foreach($fileFields as $f)
-            <option value="{{ $f }}">{{ $f }}</option>
+            <option value="{{ $f }}" @if(stripos($field, $f) !== false) selected="selected" @endif >{{ $f }}</option>
           @endforeach
         </select>
       </div>
