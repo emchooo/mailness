@@ -12,7 +12,7 @@ class Lists extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'uuid'];
+    protected $fillable = ['name', 'uuid', 'double_opt_in'];
 
     protected $guarded = [];
 

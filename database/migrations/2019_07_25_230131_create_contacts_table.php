@@ -17,6 +17,7 @@ class CreateContactsTable extends Migration
             $table->bigIncrements('id');
             $table->string('email');
             $table->integer('list_id');
+            $table->datetime('approved_at')->nullable();
             $table->boolean('subscribed')->default(1);
             $table->datetime('unsubscribed_at')->nullable();
             $table->datetime('bounced_at')->nullable();

@@ -20,7 +20,7 @@ class CreateCampaignsTable extends Migration
             $table->string('sending_name');
             $table->string('sending_email');
             $table->string('preview_text')->nullable();
-            $table->mediumText('content');
+            $table->longText('content');
             $table->timestamps();
         });
     }

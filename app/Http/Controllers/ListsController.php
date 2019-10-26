@@ -46,7 +46,8 @@ class ListsController extends Controller
      */
     public function store(ListStoreRequest $request)
     {
-        $list = Lists::create($request->only(['name']));
+        $double_opt_in = $request->double_opt_in ? $request->double_opt_in : 0;
+        $list = Lists::create([ 'name' => $request->name, 'double_opt_in' => $double_opt_in ]);
 
         return redirect()->route('lists.show', $list->id);
     }

@@ -16,7 +16,7 @@ class CreateTemplatesTable extends Migration
         Schema::create('templates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->mediumText('content');
+            $table->longText('content');
             $table->string('type')->default('editor');
             $table->timestamps();
         });

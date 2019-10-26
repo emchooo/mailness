@@ -17,6 +17,7 @@ class CreateListsTable extends Migration
             $table->bigIncrements('id');
             $table->uuid('uuid');
             $table->string('name');
+            $table->boolean('double_opt_in')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

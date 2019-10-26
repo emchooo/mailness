@@ -20,6 +20,9 @@
 			</div>
 		@endif
 
+		<input type="checkbox" name="double_opt_in" value="1">
+		<span>Double Opt-In</span>
+
 		<div>
 			<input type="submit" value="Create" class="m-2 p-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center" >
 		</div>
