@@ -90,6 +90,9 @@ class ListsController extends Controller
      */
     public function update(ListUpdateRequest $request, Lists $lists)
     {
+        $double_opt_in = $request->double_opt_in ? $request->double_opt_in : 0;
+
+        $lists->double_opt_in = $double_opt_in;
         $lists->name = $request->name;
         $lists->save();
 
@@ -133,6 +136,7 @@ class ListsController extends Controller
             $request->only(['email']),
             [
                 'list_id' => $list->id,
+                'subscribed' => $list->double_opt_in ? 0 : 1
             ]
         );
         $contact = Contact::create($contactCreationArray);
@@ -144,6 +148,10 @@ class ListsController extends Controller
                     $contact->fields()->attach($field, ['value' => $value]);
                 }
             }
+        }
+
+        if($list->double_opt_in) {
+            // send confirmation email
         }
 
         return redirect()->to(route('lists.subscribe.success', $list->uuid));

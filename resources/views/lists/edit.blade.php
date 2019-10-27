@@ -21,6 +21,11 @@
 			<input type="text" name="name" value="{{ $list->name }}" class="bg-gray-300 p-2 block" >
 		</div>	
 
+		<div class="block mb-5">
+			<label for="name">Double Opt-in</label>
+			<input type="checkbox" name="double_opt_in" value="1" @if($list->double_opt_in) checked @endif >
+		</div>
+
 		<div class="block">
 			<input type="submit" value="Save" class="bg-blue-500 py-2 px-4 rounded" >
 		</div>
