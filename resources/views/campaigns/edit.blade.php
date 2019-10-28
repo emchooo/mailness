@@ -49,7 +49,9 @@
 </div>
 
 <script>
-    CKEDITOR.replace( 'content' );
+    CKEDITOR.replace( 'content', {
+      fullPage: true,
+    });
 </script>
 
 @endsection

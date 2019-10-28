@@ -15,7 +15,6 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        // @todo add pagination and order by id desc
         $templates = Template::orderBy('id', 'desc')->paginate(10);
 
         return view('templates.index', compact('templates'));
@@ -96,5 +95,11 @@ class TemplateController extends Controller
         $template->delete();
 
         return redirect()->route('templates.index');
+    }
+
+    public function preview(Template $template)
+    {
+        // @todo implement preview email
+        return $template;
     }
 }

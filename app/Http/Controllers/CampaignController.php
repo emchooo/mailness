@@ -51,7 +51,13 @@ class CampaignController extends Controller
      */
     public function store(CampaignStoreRequest $request)
     {
-        $content = '';
+        $content = '<html>
+        <head>
+            <title></title>
+        </head>
+        <body></body>
+        </html>
+        ';
 
         if ($request->template) {
             $template = Template::find($request->template);

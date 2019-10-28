@@ -21,7 +21,9 @@
 
 <textarea name="content" id="" cols="30" rows="10" class="block bg-gray-200 p-2 m-2">{{ $template->content }}</textarea>
 <script>
-    CKEDITOR.replace( 'content' );
+    CKEDITOR.replace( 'content', {
+		fullPage: true,
+	} );
 </script>
 @if($errors->has('content'))
 			<div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">

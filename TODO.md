@@ -1,19 +1,12 @@
 # Lists
 - refactor and tests
-- Double opt-in 
+- Double opt-in  - send confirmation email
 - Import large lists ( split file and process)
 
 # Campaigns
-- Create new campaign - text editor implement
-- Dropdown filter for campaigns ( active, draft, sending, cempleted)
-- Create new campaign error display design
 
 # Templates
-- Templates index page style
-- Create new template style and editor
-- Create new template validatior
 - Implement open template
-- Add pagination
 
 # Reports
 - List available reports
