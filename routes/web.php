@@ -77,6 +77,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('campaigns/{campaign}/delete', 'CampaignController@destroy')->name('campaigns.delete');
     Route::post('campaigns/{campaign}/duplicate', 'CampaignController@duplicate')->name('campaigns.duplicate');
 
+    Route::get('campaigns/{campaign}/report', 'ReportController@show')->name('campaigns.report');
     Route::get('reports', 'ReportController@index')->name('reports.index');
 });
 
