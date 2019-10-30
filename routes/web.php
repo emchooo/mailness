@@ -1,19 +1,11 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/dashboard');
+
 Auth::routes();
 
 Route::get('lists/{listUuid}/subscribe', 'ListsController@subscribe')->name('lists.subscribe');
@@ -21,7 +13,7 @@ Route::post('lists/{listUuid}/subscribe', 'ListsController@subscribeStore')->nam
 Route::get('lists/{listUuid}/subscribe/success', 'ListsController@subscribeSuccess')->name('lists.subscribe.success');
 
 Route::middleware('auth')->group(function () {
-    Route::get('settings', 'SettingController@index');
+    Route::get('settings', 'SettingController@index')->name('settings.index');
 
     Route::get('lists', 'ListsController@index')->name('lists.index');
     Route::get('lists/create', 'ListsController@create')->name('lists.create');
@@ -79,6 +71,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('campaigns/{campaign}/report', 'ReportController@show')->name('campaigns.report');
     Route::get('reports', 'ReportController@index')->name('reports.index');
+
+    Route::get('dashboard', 'DashboardController@show')->name('dashboard.show');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

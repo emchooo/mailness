@@ -2,7 +2,7 @@
   <div class="container mx-auto py-3">
 
   <div class="flex px-3">
-    <a href="" class="mr-10 text-2xl font-bold" >Mailness</a>
+    <a href="/" class="mr-10 text-2xl font-bold" >Mailness</a>
 
     <ul class="flex pt-2" >
       <li class="pr-5">
@@ -14,8 +14,11 @@
       <li class="pr-5" >
         <a href="{{ route('templates.index') }}">Templates</a>
       </li>
-      <li>
+      <li class="pr-5" >
         <a href="{{route('reports.index') }}">Reports</a>
+      </li>
+      <li>
+        <a href="{{ route('settings.index') }}">Settings</a>
       </li>
     </ul>
   </div>
