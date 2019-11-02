@@ -30,3 +30,6 @@
 - Translation ???
 
 # Connect to SES and SNS
+- Check is there AWS keys
+- Email address is not verified
+- The security token included in the request is invalid.

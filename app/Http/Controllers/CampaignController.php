@@ -142,7 +142,7 @@ class CampaignController extends Controller
 
     public function sendTestMail(SendTestMailRequest $request, Campaign $campaign)
     {
-        Mail::to($request->email)->queue(new CampaignMail($campaign));
+        Mail::to($request->email)->send(new CampaignMail($campaign));
 
         return back()->with(['success' => 'Test mail sent!']);
     }
