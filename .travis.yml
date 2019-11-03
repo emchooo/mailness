@@ -9,9 +9,10 @@ services:
 before_script:
   - cp .env.travis .env
   - sudo mysql -e 'CREATE DATABASE testing;'
+  - php artisan migrate --no-interaction -vvv
   - composer self-update
   - composer install --no-interaction
-  - php artisan migrate --no-interaction -vvv
+
 
 script:
   - php artisan key:generate
