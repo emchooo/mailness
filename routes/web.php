@@ -14,6 +14,7 @@ Route::get('lists/{listUuid}/subscribe/success', 'ListsController@subscribeSucce
 
 Route::middleware('auth')->group(function () {
     Route::get('settings', 'SettingController@index')->name('settings.index');
+    Route::post('settings/aws', 'SettingController@updateAws')->name('settings.update.aws');
 
     Route::get('lists', 'ListsController@index')->name('lists.index');
     Route::get('lists/create', 'ListsController@create')->name('lists.create');

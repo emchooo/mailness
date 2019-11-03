@@ -8,6 +8,7 @@ use App\Template;
 use App\Jobs\SendCampaign;
 use App\Mail\CampaignMail;
 use Illuminate\Http\Request;
+use Aws\Exception\AwsException;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\SendCampaignRequest;
 use App\Http\Requests\SendTestMailRequest;
@@ -142,9 +143,14 @@ class CampaignController extends Controller
 
     public function sendTestMail(SendTestMailRequest $request, Campaign $campaign)
     {
-        Mail::to($request->email)->send(new CampaignMail($campaign));
+        try {
+            Mail::to($request->email)->send(new CampaignMail($campaign));
 
-        return back()->with(['success' => 'Test mail sent!']);
+            return back()->with(['success' => 'Test mail sent!']);
+        }
+        catch (AwsException $e) {
+            return back()->with([ 'success' =>  $e->getAwsErrorMessage() ]);
+        }
     }
 
     public function send(SendCampaignRequest $request, Campaign $campaign)
