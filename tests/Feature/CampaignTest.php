@@ -97,7 +97,7 @@ class CampaignTest extends TestCase
         $email = 'emir@test.com';
         $response = $this->actingAs($this->user)->post(route('campaigns.send.test', $campaign->id), ['email' => $email]);
 
-        Mail::assertQueued(CampaignMail::class, function ($mail) use ($email) {
+        Mail::assertSent(CampaignMail::class, function ($mail) use ($email) {
             return $mail->hasTo($email);
         });
     }
