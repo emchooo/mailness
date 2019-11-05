@@ -34,11 +34,9 @@
 # To-Do list
 - remove unused views
 - list_submenu highlight current link
-- Fix bug in test when Faker generates name with '
 - Responsive
 - Update to 6.2
 - Translation ???
-- Fix TravisCI error
 
 # Connect to SES and SNS
 - Check is there AWS keys

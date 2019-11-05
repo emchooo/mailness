@@ -31,15 +31,17 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         if(Schema::hasTable('services')) {
             $service = Service::first();
-            config([
-                'services'  => [
-                    'ses'   => [
-                        'key'   => $service->key,
-                        'secret'    => $service->secret,
-                        'region'    => $service->region
+            if($service) {
+                config([
+                    'services'  => [
+                        'ses'   => [
+                            'key'   => $service->key,
+                            'secret'    => $service->secret,
+                            'region'    => $service->region
+                        ]
                     ]
-                ]
-            ]);
+                ]);
+            } 
         }
     }
 }
