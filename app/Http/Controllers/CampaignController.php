@@ -86,6 +86,10 @@ class CampaignController extends Controller
     {
         $lists = Lists::pluck('name', 'id');
 
+        if($campaign->status == 'finished') {
+            return redirect()->to(route('campaigns.report', $campaign->id));
+        }
+
         return view('campaigns.show', compact('campaign', 'lists'));
     }
 
@@ -155,7 +159,9 @@ class CampaignController extends Controller
 
     public function send(SendCampaignRequest $request, Campaign $campaign)
     {
-        // if campaign is sent
+        if($campaign->status != 'draft') {
+            return back()->with([ 'error' => 'Campaign must be in draft mode.' ]);
+        }
         foreach ($request->lists as $key => $value) {
             $list = Lists::find($key);
             SendCampaign::dispatch($campaign, $list);

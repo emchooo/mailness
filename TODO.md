@@ -7,7 +7,6 @@
 # Campaigns
 - When all mails are sent mark campaign as sent
 - Status as consts
-- Campaing can only be sent to sending if in draft mode
 
 # Sending
 - Track open for links
