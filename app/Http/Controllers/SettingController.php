@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SettingsUpdateRequest;
 use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,17 @@ class SettingController extends Controller
         $service = Service::first();
 
         return view('settings.index', compact('auth', 'service'));
+    }
+
+    public function update(SettingsUpdateRequest $request)
+    {
+        $auth = Auth::user();
+
+        $auth->name = $request->name;
+        $auth->email = $request->email;
+        $auth->save();
+
+        return back();
     }
 
     public function updateAWS(Request $request)

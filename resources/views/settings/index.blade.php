@@ -6,7 +6,7 @@
 
 <div class="mt-5" >
     <h4>Account settings</h4>
-    <form action="">
+    <form action="{{ route('settings.update') }}" method="POST" >
     <div class="block">
             @csrf
             <label for="Name">Name</label>
