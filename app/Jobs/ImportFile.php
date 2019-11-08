@@ -3,15 +3,13 @@
 namespace App\Jobs;
 
 use App\Import;
-use App\Services\ImportContacts;
-use App\Contact;
-use App\Field;
 use App\Lists;
+use App\Services\ImportContacts;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class ImportFile implements ShouldQueue
 {
@@ -46,15 +44,11 @@ class ImportFile implements ShouldQueue
 
         $file = $importer->getFile();
         $header = $importer->getHeaders();
-        
 
-        while (!$file->eof()) {
-
+        while (! $file->eof()) {
             $contact = $file->fgetcsv();
 
             ImportContact::dispatch($contact, $header, $this->list, $this->import, $this->custom_fields);
-
-            
         }
     }
 }

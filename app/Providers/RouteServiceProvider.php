@@ -3,9 +3,9 @@
 namespace App\Providers;
 
 use App\Lists;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {

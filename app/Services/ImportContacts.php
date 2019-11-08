@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Contact;
 use App\Import;
 
 class ImportContacts
@@ -12,8 +11,8 @@ class ImportContacts
     public function __construct($file_id)
     {
         $import = Import::findOrFail($file_id);
-        $file_path = storage_path( 'app/public/' . $import->path);
-        
+        $file_path = storage_path('app/public/'.$import->path);
+
         $this->file = new \SplFileObject($file_path, 'r');
         $this->file->setFlags(\SplFileObject::READ_CSV);
     }
@@ -26,6 +25,7 @@ class ImportContacts
     public function getHeaders()
     {
         $headers = $this->file->current();
+
         return $headers;
     }
 
@@ -42,9 +42,10 @@ class ImportContacts
         $this->file->rewind();
         $this->file->current();
 
-        if(!filter_var($first_line_email, FILTER_VALIDATE_EMAIL)) {
+        if (! filter_var($first_line_email, FILTER_VALIDATE_EMAIL)) {
             return false;
         }
+
         return true;
     }
 

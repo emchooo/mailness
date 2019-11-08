@@ -34,7 +34,7 @@ class SettingController extends Controller
         $service = Service::first();
 
         $service->key = $request->aws_id;
-        if(strlen($request->aws_key) > 25) {
+        if (strlen($request->aws_key) > 25) {
             $service->secret = $request->aws_key;
         }
         $service->save();
