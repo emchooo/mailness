@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Field;
-use App\Lists;
 use App\Contact;
-use Illuminate\Http\Request;
+use App\Field;
 use App\Http\Requests\ListStoreRequest;
 use App\Http\Requests\ListUpdateRequest;
 use App\Http\Requests\StoreSubscriptionRequest;
+use App\Lists;
+use Illuminate\Http\Request;
 
 class ListsController extends Controller
 {
@@ -47,7 +47,7 @@ class ListsController extends Controller
     public function store(ListStoreRequest $request)
     {
         $double_opt_in = $request->double_opt_in ? $request->double_opt_in : 0;
-        $list = Lists::create([ 'name' => $request->name, 'double_opt_in' => $double_opt_in ]);
+        $list = Lists::create(['name' => $request->name, 'double_opt_in' => $double_opt_in]);
 
         return redirect()->route('lists.show', $list->id);
     }
@@ -136,7 +136,7 @@ class ListsController extends Controller
             $request->only(['email']),
             [
                 'list_id' => $list->id,
-                'subscribed' => $list->double_opt_in ? 0 : 1
+                'subscribed' => $list->double_opt_in ? 0 : 1,
             ]
         );
         $contact = Contact::create($contactCreationArray);
@@ -150,7 +150,7 @@ class ListsController extends Controller
             }
         }
 
-        if($list->double_opt_in) {
+        if ($list->double_opt_in) {
             // send confirmation email
         }
 

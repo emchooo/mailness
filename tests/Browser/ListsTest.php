@@ -3,11 +3,11 @@
 namespace Tests\Browser;
 
 use App\Lists;
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
-use Tests\Browser\Pages\ListsPage;
-use Tests\Browser\Pages\ListCreatePage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
+use Tests\Browser\Pages\ListCreatePage;
+use Tests\Browser\Pages\ListsPage;
+use Tests\DuskTestCase;
 
 class ListsTest extends DuskTestCase
 {
