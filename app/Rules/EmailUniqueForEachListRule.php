@@ -2,8 +2,8 @@
 
 namespace App\Rules;
 
-use App\Lists;
 use App\Contact;
+use App\Lists;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Database\Eloquent\Builder;
 

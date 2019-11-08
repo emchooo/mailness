@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\User;
 use App\Campaign;
-use Tests\TestCase;
 use App\Mail\CampaignMail;
-use Illuminate\Support\Facades\Mail;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Mail;
+use Tests\TestCase;
 
 class CampaignTest extends TestCase
 {
