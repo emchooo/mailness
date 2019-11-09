@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\User;
+use App\Contact;
 use App\Field;
 use App\Lists;
-use App\Contact;
-use Tests\TestCase;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class ContactsTest extends TestCase
 {

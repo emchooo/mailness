@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\User;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class ReportTest extends TestCase
 {

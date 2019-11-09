@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
-use App\Field;
 use App\Contact;
+use App\Field;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class ImportContact implements ShouldQueue
 {
@@ -68,7 +68,7 @@ class ImportContact implements ShouldQueue
             } else {
                 $email = $row[$this->custom_fields['email']];
 
-                if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $contact = new Contact();
                     $contact->list_id = $this->list->id;
                     $contact->email = $email;

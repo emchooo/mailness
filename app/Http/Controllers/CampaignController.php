@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Lists;
 use App\Campaign;
-use App\Template;
-use App\Jobs\SendCampaign;
-use App\Mail\CampaignMail;
-use Illuminate\Http\Request;
-use Aws\Exception\AwsException;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\CampaignStoreRequest;
 use App\Http\Requests\SendCampaignRequest;
 use App\Http\Requests\SendTestMailRequest;
-use App\Http\Requests\CampaignStoreRequest;
+use App\Jobs\SendCampaign;
+use App\Lists;
+use App\Mail\CampaignMail;
+use App\Template;
+use Aws\Exception\AwsException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CampaignController extends Controller
 {
@@ -86,7 +86,7 @@ class CampaignController extends Controller
     {
         $lists = Lists::pluck('name', 'id');
 
-        if($campaign->status == 'finished') {
+        if ($campaign->status == 'finished') {
             return redirect()->to(route('campaigns.report', $campaign->id));
         }
 
@@ -151,16 +151,15 @@ class CampaignController extends Controller
             Mail::to($request->email)->send(new CampaignMail($campaign));
 
             return back()->with(['success' => 'Test mail sent!']);
-        }
-        catch (AwsException $e) {
-            return back()->with([ 'success' =>  $e->getAwsErrorMessage() ]);
+        } catch (AwsException $e) {
+            return back()->with(['success' =>  $e->getAwsErrorMessage()]);
         }
     }
 
     public function send(SendCampaignRequest $request, Campaign $campaign)
     {
-        if($campaign->status != 'draft') {
-            return back()->with([ 'error' => 'Campaign must be in draft mode.' ]);
+        if ($campaign->status != 'draft') {
+            return back()->with(['error' => 'Campaign must be in draft mode.']);
         }
         foreach ($request->lists as $key => $value) {
             $list = Lists::find($key);
