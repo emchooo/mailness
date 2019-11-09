@@ -21,6 +21,8 @@ class CreateCampaignsTable extends Migration
             $table->string('sending_email');
             $table->string('preview_text')->nullable();
             $table->longText('content');
+            $table->boolean('track_opens')->default(false);
+            $table->boolean('track_clicks')->default(false);
             $table->timestamps();
         });
     }
