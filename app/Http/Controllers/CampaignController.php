@@ -68,6 +68,8 @@ class CampaignController extends Controller
         $creationArray = array_merge($request->only(['subject', 'sending_name', 'sending_email']),
             [
                 'content' => $content,
+                'track_clicks'  => $request->track_clicks ? 0 : 1,
+                'track_opens'   => $request->track_opens ? 0 : 1,
             ]
         );
 

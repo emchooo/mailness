@@ -24,7 +24,7 @@ class Campaign extends Model
      *
      * @var array
      */
-    protected $fillable = ['status', 'subject', 'sending_name', 'sending_email', 'preview_text', 'content'];
+    protected $fillable = ['status', 'subject', 'sending_name', 'sending_email', 'preview_text', 'content', 'track_opens', 'track_clicks'];
     /**
      * The number of models to return for pagination.
      *

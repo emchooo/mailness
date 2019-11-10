@@ -33,6 +33,26 @@
     </div>
   @endif
 
+  <div class="block">
+    <input type="checkbox" name="track_clicks" value="1" >
+    <label for="">Track clicks</label>
+  </div>
+  @if($errors->has('track_clicks'))
+    <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
+      <p>{{ $errors->first('track_clicks') }}</p>
+    </div>
+  @endif
+
+  <div class="block">
+    <input type="checkbox" name="track_opens" value="1" >
+    <label for="">Track opens</label>
+  </div>
+  @if($errors->has('track_opens'))
+    <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
+      <p>{{ $errors->first('track_opens') }}</p>
+    </div>
+  @endif
+
   <div>
     Select template:
     

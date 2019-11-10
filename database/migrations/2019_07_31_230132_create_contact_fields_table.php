@@ -29,6 +29,6 @@ class CreateContactFieldsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contact_fields');
+        Schema::dropIfExists('contact_field');
     }
 }
