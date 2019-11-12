@@ -20,6 +20,11 @@
                 @csrf   
                 <input type="submit" value="Duplicate">
             </form>
+            <form action="{{ route('campaigns.delete', $campaign->id) }}" method="POST">
+                @csrf
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="submit" value="Delete">
+            </form>
         </div>
     </div>
 @endforeach
