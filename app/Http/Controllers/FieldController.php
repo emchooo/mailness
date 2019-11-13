@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Field;
-use App\Http\Requests\FieldStoreRequest;
 use App\Lists;
 use Illuminate\Http\Request;
+use App\Http\Requests\FieldStoreRequest;
 
 class FieldController extends Controller
 {

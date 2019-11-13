@@ -14,7 +14,7 @@
         <p class="text-xs text-gray-600 leading-normal" >Created at {{ $list->created_at->format('Y-m-d') }} </span>
       </div>
 
-      <div class="py-3 px-6" >{{ $list->contacts->count() }} subscribers</div>
+      <div class="py-3 px-6" >{{ $list->contactCount }} subscribers</div>
     </div>
   @endforeach
 

@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Builder;
 
 class EmailUniqueForEachListRule implements Rule
 {
-    /** @var \App\Lists */
+    /** @var \App\Lists|null */
     private $list;
 
-    /** @var \App\Contact */
+    /** @var \App\Contact|null */
     private $contact;
 
     /**
@@ -36,6 +36,7 @@ class EmailUniqueForEachListRule implements Rule
     public function passes($attribute, $value)
     {
         $contact = $this->contact;
+        $lits = $this->contact;
 
         return null === Contact::query()
                                 ->where('email', $value)
