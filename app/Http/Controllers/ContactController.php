@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Contact;
 use App\Field;
+use App\Lists;
+use App\Import;
+use App\Contact;
+use App\Jobs\ImportFile;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Services\ImportContacts;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ImportSaveRequest;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ContactUpdateRequest;
-use App\Http\Requests\ImportSaveRequest;
-use App\Import;
-use App\Jobs\ImportFile;
-use App\Lists;
-use App\Services\ImportContacts;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class ContactController extends Controller
 {

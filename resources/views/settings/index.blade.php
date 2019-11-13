@@ -29,12 +29,12 @@
     <div class="block">
             @csrf
             <label for="aws_id">AWS Access Key ID</label>
-            <input type="text" name="aws_id" value="{{ $service->key }}" class="m-2 p-2 bg-gray-200 hover:bg-gray-100 hover:border-gray-900 focus:outline-none focus:bg-white focus:shadow-outline focus:border-gray-303" placeholder="AWS Access Key ID"> 
+            <input type="text" name="aws_id" value="{{ optional($service)->key }}" class="m-2 p-2 bg-gray-200 hover:bg-gray-100 hover:border-gray-900 focus:outline-none focus:bg-white focus:shadow-outline focus:border-gray-303" placeholder="AWS Access Key ID"> 
         </div>
         <div class="block">
             @csrf
             <label for="aws_key">AWS Secret Access Key</label>
-            <input type="text" name="aws_key" value="{{ $service->secret }}" class="m-2 p-2 bg-gray-200 hover:bg-gray-100 hover:border-gray-900 focus:outline-none focus:bg-white focus:shadow-outline focus:border-gray-303" placeholder="AWS Secret Access Key"> 
+            <input type="text" name="aws_key" value="{{ optional($service)->secret }}" class="m-2 p-2 bg-gray-200 hover:bg-gray-100 hover:border-gray-900 focus:outline-none focus:bg-white focus:shadow-outline focus:border-gray-303" placeholder="AWS Secret Access Key"> 
         </div>
         <div class="block">
             <input type="submit" value="Save" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center" >

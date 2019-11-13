@@ -14,8 +14,18 @@ class Lists extends Model
      */
     protected $fillable = ['name', 'uuid', 'double_opt_in'];
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
     protected $guarded = [];
 
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
     protected static function boot()
     {
         parent::boot();
@@ -34,4 +44,11 @@ class Lists extends Model
     {
         return $this->hasMany(Field::class, 'list_id');
     }
+
+    /**
+     * The number of models to return for pagination.
+     *
+     * @var int
+     */
+    protected $perPage = 10;
 }

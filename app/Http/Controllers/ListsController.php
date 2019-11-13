@@ -21,10 +21,13 @@ class ListsController extends Controller
     {
         $lists = Lists::query()
                     ->latest('id')
-                    ->paginate(10)
+                    ->withCount(['contacts as contactCount'])
+                    ->paginate(null,['*'],'listPage')
                     ->onEachSide(3)
-                    ->appends($request->all());
-
+                    // @todo Add the Required Parameters to add in 
+                    //pagination
+                    ->appends($request->only([]));
+                    
         return view('lists.index', compact('lists'));
     }
 

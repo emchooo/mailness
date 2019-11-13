@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Lists;
 use App\Campaign;
-use App\Http\Requests\CampaignStoreRequest;
+use App\Template;
+use App\Jobs\SendCampaign;
+use App\Mail\CampaignMail;
+use Illuminate\Http\Request;
+use Aws\Exception\AwsException;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\SendCampaignRequest;
 use App\Http\Requests\SendTestMailRequest;
-use App\Jobs\SendCampaign;
-use App\Lists;
-use App\Mail\CampaignMail;
-use App\Template;
-use Aws\Exception\AwsException;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\CampaignStoreRequest;
 
 class CampaignController extends Controller
 {
