@@ -26,10 +26,6 @@
 # Auth
 - Style all auth pages
 
-# Settings page
-- update password
-- set AWS keys
-
 # To-Do list
 - remove unused views
 - list_submenu highlight current link
