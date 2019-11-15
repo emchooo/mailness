@@ -30,7 +30,6 @@
 - remove unused views
 - list_submenu highlight current link
 - Responsive
-- Update to 6.2
 - Translation ???
 
 # Connect to SES and SNS
