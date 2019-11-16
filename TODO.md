@@ -2,7 +2,6 @@
 - refactor and tests
 - Double opt-in  - send confirmation email
 - Import large lists ( split file and process )
-- On show contact for list display all campaings sent
 
 # Campaigns
 - When all mails are sent mark campaign as sent

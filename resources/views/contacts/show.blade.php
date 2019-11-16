@@ -14,6 +14,14 @@
 	<li class="mt-2" ><b>{{ $f->name }}</b>: {{ $f->pivot->value }}</li>
 @endforeach
 </ul>
+
+<p>Campaings recived:</p>
+<ul class="mb-5" >
+  @foreach( $contact->sent as $sent )
+    <li><a href="{{ route('campaigns.show', $sent->campaign->id) }}">{{ $sent->campaign->subject }}</a></li>
+  @endforeach
+</ul>
+
 		
 <a href="{{ route('contacts.edit', [ $contact->list->id, $contact->id ]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center" >Edit</a>
 

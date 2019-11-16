@@ -41,6 +41,7 @@ class SendEmail implements ShouldQueue
     public function handle()
     {
         Mail::to($this->contact->email)->send(new CampaignMail($this->campaign));
+        // @todo if sent save to SendingLog
         SendingLog::where('contact_id', $this->contact->id)
             ->where('campaign_id', $this->campaign->id)
             ->update(['sent_at' => Carbon::now()]);
