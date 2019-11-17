@@ -1,7 +1,9 @@
 <nav class="bg-gray-200 shadow-lg" >
   <div class="container mx-auto py-3">
 
-  <div class="flex px-3">
+  <div class="flex px-3 justify-between">
+    
+    <div class="flex" >
     <a href="/" class="mr-10 text-2xl font-bold" >Mailness</a>
 
     <ul class="flex pt-2" >
@@ -17,7 +19,11 @@
       <li class="pr-5" >
         <a href="{{route('reports.index') }}">Reports</a>
       </li>
-      <li>
+    </ul>
+    </div>
+
+    <ul class="pt-2" >
+    <li>
         <a href="{{ route('settings.index') }}">Settings</a>
       </li>
     </ul>

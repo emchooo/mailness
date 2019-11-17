@@ -26,7 +26,6 @@
 - Style all auth pages
 
 # To-Do list
-- remove unused views
 - list_submenu highlight current link
 - Responsive
 - Translation ???

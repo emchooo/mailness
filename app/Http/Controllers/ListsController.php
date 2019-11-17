@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Contact;
+use App\Lists;
 use App\Field;
+use App\Contact;
 use App\Http\Requests\ListStoreRequest;
 use App\Http\Requests\ListUpdateRequest;
 use App\Http\Requests\StoreSubscriptionRequest;
-use App\Lists;
 use Illuminate\Http\Request;
 
 class ListsController extends Controller
