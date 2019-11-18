@@ -63,12 +63,7 @@ class ListsController extends Controller
      */
     public function show(Request $request, Lists $lists)
     {
-        // @todo refactor this
-        if ($request->subscribed) {
-            $contacts = Contact::where('list_id', $lists->id)->inactive()->orderBy('id', 'desc')->paginate(10);
-        } else {
-            $contacts = Contact::where('list_id', $lists->id)->active()->orderBy('id', 'desc')->paginate(10);
-        }
+        $contacts = Contact::where('list_id', $lists->id)->where('subscribed', ! $request->subscribed)->orderBy('id', 'desc')->paginate(10);
 
         return view('lists.show', ['list' => $lists, 'contacts' => $contacts, 'subscribed' => $request->subscribed]);
     }
@@ -135,14 +130,11 @@ class ListsController extends Controller
      */
     public function subscribeStore(StoreSubscriptionRequest $request, Lists $list)
     {
-        $contactCreationArray = array_merge(
-            $request->only(['email']),
-            [
-                'list_id' => $list->id,
-                'subscribed' => $list->double_opt_in ? 0 : 1,
-            ]
-        );
-        $contact = Contact::create($contactCreationArray);
+        $contact = Contact::create([
+            'email' => $request->email,
+            'list_id'   => $list->id,
+            'subscribed'    => $list->double_opt_in ? 0 : 1
+        ]);
 
         if ($request->fields) {
             foreach ($request->fields as $key => $value) {

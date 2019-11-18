@@ -1,7 +1,7 @@
 # Lists
-- refactor and tests
 - Double opt-in  - send confirmation email
 - Import large lists ( split file and process )
+- On contact add option to unsubscribe
 
 # Campaigns
 - When all mails are sent mark campaign as sent
