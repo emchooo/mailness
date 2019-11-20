@@ -131,73 +131,36 @@ class ContactController extends Controller
     public function export(Lists $lists)
     {
 
-$writer = WriterEntityFactory::createCSVWriter();
+        $contacts = Contact::where('list_id', $lists->id)->take(20000)->orderBy('id','DESC')->get();
 
-$fileName = 'contacts.csv';
-$writer->openToBrowser($fileName); 
+        $writer = WriterEntityFactory::createCSVWriter();
 
-$cells = [
-    WriterEntityFactory::createCell('Carl'),
-    WriterEntityFactory::createCell('is'),
-    WriterEntityFactory::createCell('great!'),
-];
+        $fileName = 'contacts.csv';
+        $writer->openToBrowser($fileName); 
 
-/** add a row at a time */
-$singleRow = WriterEntityFactory::createRow($cells);
-$writer->addRow($singleRow);
+        // csv file headers
+        $headers = array_keys($contacts->toArray()[0]);
+        // add custom fields to headres
+        foreach ($lists->fields as $field) {
+            $headers[] = strtolower($field->name);
+        }
 
-/** add multiple rows at a time */
-$multipleRows = [
-    WriterEntityFactory::createRow($cells),
-    WriterEntityFactory::createRow($cells),
-];
-$writer->addRows($multipleRows); 
+        $singleRow = WriterEntityFactory::createRowFromArray($headers);
+        $writer->addRow($singleRow);
 
-/** Shortcut: add a row from an array of values */
-$values = ['Carl', 'is', 'great!'];
-$rowFromValues = WriterEntityFactory::createRowFromArray($values);
-$writer->addRow($rowFromValues);
+        foreach ($contacts as $row) {
+                $data = [];
+                $row_array = $row->toArray();
+                foreach ($lists->fields as $field) {
+                    $custom_field_value = $row->getFieldValue($field->id);
+                    $custom_field_value ? $data[] = $custom_field_value : $data[] = '';
+                }
+                $final = array_merge($row_array, $data);
+                $singleRow2 = WriterEntityFactory::createRowFromArray($final);
+                $writer->addRow($singleRow2);
+            }
 
-$writer->close();
-
-        // $contacts = Contact::where('list_id', $lists->id)->take(10)->get();
-
-        // //dd($contacts);
-
-        // if ($contacts->isEmpty()) {
-        //     return redirect()
-        //             ->route('lists.edit', $lists)
-        //             ->with('error', 'No Contacts Found');
-        // }
-
-        // $all_fields = array_keys($contacts->toArray()[0]);
-
-        // foreach ($lists->fields as $field) {
-        //     $all_fields[] = strtolower($field->name);
-        // }
-
-        // $file = fopen('php://output', 'w');
-        // fputcsv($file, $all_fields);
-        // foreach ($contacts as $row) {
-        //     $data = [];
-        //     $row_array = $row->toArray();
-        //     foreach ($lists->fields as $field) {
-        //         $custom_field_value = $row->getFieldValue($field->id);
-        //         $custom_field_value ? $data[] = $custom_field_value : $data[] = '';
-        //     }
-        //     fputcsv($file, array_merge($row_array, $data));
-        // }
-        // fclose($file);
-
-        // // var_dump($file);
-
-        // // return;
-
-        // header('Content-Disposition: attachment; filename="contacts.csv"');
-        // header('Cache-control: private');
-        // header('Content-type: application/force-download');
-        // header("Content-transfer-encoding: binary\n");
-        // exit;
+        $writer->close();
     }
 
     public function import(Lists $lists)
