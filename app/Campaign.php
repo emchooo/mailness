@@ -31,4 +31,9 @@ class Campaign extends Model
      * @var int
      */
     protected $perPage = 10;
+
+    public function links()
+    {
+        return $this->hasMany(CampaignLink::class);
+    }
 }

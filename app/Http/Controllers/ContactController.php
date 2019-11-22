@@ -131,7 +131,7 @@ class ContactController extends Controller
     public function export(Lists $lists)
     {
 
-        $contacts = Contact::where('list_id', $lists->id)->take(20000)->orderBy('id','DESC')->get();
+        $contacts = Contact::with('fields')->where('list_id', $lists->id)->take(1000000)->orderBy('id','DESC')->get();
 
         $writer = WriterEntityFactory::createCSVWriter();
 
@@ -151,10 +151,10 @@ class ContactController extends Controller
         foreach ($contacts as $row) {
                 $data = [];
                 $row_array = $row->toArray();
-                foreach ($lists->fields as $field) {
-                    $custom_field_value = $row->getFieldValue($field->id);
-                    $custom_field_value ? $data[] = $custom_field_value : $data[] = '';
-                }
+                // foreach ($lists->fields as $field) {
+                //     $custom_field_value = $row->getFieldValue($field->id);
+                //     $custom_field_value ? $data[] = $custom_field_value : $data[] = '';
+                // }
                 $final = array_merge($row_array, $data);
                 $singleRow2 = WriterEntityFactory::createRowFromArray($final);
                 $writer->addRow($singleRow2);

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use DOMDocument;
+use DOMElement;
 use App\Lists;
 use App\Campaign;
 use App\Template;
 use App\Jobs\SendCampaign;
+use Illuminate\Support\Str;
 use App\Mail\CampaignMail;
 use Illuminate\Http\Request;
 use Aws\Exception\AwsException;
@@ -163,6 +166,9 @@ class CampaignController extends Controller
         if ($campaign->status != 'draft') {
             return back()->with(['error' => 'Campaign must be in draft mode.']);
         }
+
+
+
         foreach ($request->lists as $key => $value) {
             $list = Lists::find($key);
             SendCampaign::dispatch($campaign, $list);
