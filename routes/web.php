@@ -12,9 +12,7 @@ Route::get('lists/{listUuid}/subscribe', 'ListsController@subscribe')->name('lis
 Route::post('lists/{listUuid}/subscribe', 'ListsController@subscribeStore')->name('lists.subscribe.store');
 Route::get('lists/{listUuid}/subscribe/success', 'ListsController@subscribeSuccess')->name('lists.subscribe.success');
 
-Route::get('t/{campaign_uuid}/{contact_id}', function() {
-    // implement
-})->name('open.link');
+Route::get('t/{link_uuid}/{contact_id?}', 'TrackClickController@index')->name('open.link');
 
 Route::middleware('auth')->group(function () {
     Route::get('settings', 'SettingController@index')->name('settings.index');

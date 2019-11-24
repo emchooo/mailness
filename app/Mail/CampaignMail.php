@@ -11,16 +11,16 @@ class CampaignMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $campaign;
+    protected $content;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Campaign $campaign)
+    public function __construct($content)
     {
-        $this->campaign = $campaign;
+        $this->content = $content;
     }
 
     /**
@@ -30,6 +30,6 @@ class CampaignMail extends Mailable
      */
     public function build()
     {
-        return $this->html($this->campaign->content);
+        return $this->html($this->content);
     }
 }

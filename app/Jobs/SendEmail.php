@@ -42,7 +42,31 @@ class SendEmail implements ShouldQueue
      */
     public function handle()
     {
-        // @todo refactor this
+        $mail_content = $this->mailContent();
+
+        Mail::to($this->contact->email)->send(new CampaignMail($mail_content));
+        // @todo if sent save to SendingLog
+        SendingLog::where('contact_id', $this->contact->id)
+            ->where('campaign_id', $this->campaign->id)
+            ->update(['sent_at' => Carbon::now()]);
+    }
+
+    /**
+     * 
+     */
+    protected function mailContent()
+    {
+        if($this->campaign->track_clicks) {
+            return $this->addContactIdToTrackingLinks();
+        }
+        return $this->campaign;
+    }
+
+    /**
+     * 
+     */
+    protected function addContactIdToTrackingLinks()
+    {
         $dom = new DOMDocument();
 
         $dom->loadHTML($this->campaign->content);
@@ -51,22 +75,10 @@ class SendEmail implements ShouldQueue
 
             $oldLink = $link->getAttribute('href');
 
-            $campaignLink = $this->campaign->links()->create([ 
-                'uuid'  => Str::uuid(),
-                'link'  => $oldLink
-             ]);
-
-             // add route
-            $newLink = '/t/'. $campaignLink->uuid . '/' . $this->contact->id ;
+            $newLink = $oldLink . '/' . $this->contact->id;
 
             $link->setAttribute('href',$newLink);
         }
-        $this->campaign->content = $dom->saveHtml();
-
-        Mail::to($this->contact->email)->send(new CampaignMail($this->campaign));
-        // @todo if sent save to SendingLog
-        SendingLog::where('contact_id', $this->contact->id)
-            ->where('campaign_id', $this->campaign->id)
-            ->update(['sent_at' => Carbon::now()]);
+        return $dom->saveHtml();
     }
 }
