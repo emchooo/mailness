@@ -42,8 +42,13 @@ class Campaign extends Model
         return $this->hasMany(CampaignLink::class);
     }
 
-    public function opens()
+    public function opensTracking()
     {
         return $this->hasMany(CampaignOpen::class);
+    }
+
+    public function linksTracking()
+    {
+        return $this->hasMany(CampaignClickLink::class);
     }
 }

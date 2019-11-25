@@ -16,6 +16,6 @@ class ReportController extends Controller
     public function show(Campaign $campaign)
     {
         // @tood implement report view
-        return $campaign->opens()->count();
+        return $campaign->linksTracking()->count();
     }
 }

@@ -75,7 +75,7 @@ class SendEmail implements ShouldQueue
 
             $oldLink = $link->getAttribute('href');
 
-            $newLink = $oldLink . '/' . $this->contact->id;
+            $newLink = $oldLink . '/' . $this->contact->uuid;
 
             $link->setAttribute('href',$newLink);
         }

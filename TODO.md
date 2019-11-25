@@ -6,6 +6,8 @@
 # Campaigns
 - When all mails are sent mark campaign as sent
 - Status as consts
+- On edit campaign add tracks options
+- On duplicate return original links
 
 # Sending
 - Track open for links
