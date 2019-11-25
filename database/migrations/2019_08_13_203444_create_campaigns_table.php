@@ -15,6 +15,7 @@ class CreateCampaignsTable extends Migration
     {
         Schema::create('campaigns', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid');
             $table->string('status');
             $table->string('subject');
             $table->string('sending_name');

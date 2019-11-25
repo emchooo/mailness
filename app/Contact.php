@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Contact extends Model
 {
@@ -19,6 +20,15 @@ class Contact extends Model
      * @var array
      */
     protected $fillable = ['email', 'list_id', 'subscribed', 'unsubscribed_at', 'bounced_at', 'complaint_at'];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function(Model $model){
+            $model->uuid = Str::uuid();
+        });
+    }
 
     public function list()
     {

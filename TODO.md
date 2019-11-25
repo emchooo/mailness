@@ -39,3 +39,6 @@
 - AWS setup info
 - Last campaings
 - Statistics
+
+# Bugs
+- After registration it redirects to /home which doesn't exist

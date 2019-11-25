@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use App\Observers\CampaignObserver;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +18,10 @@ class Campaign extends Model
         parent::boot();
 
         static::observe(CampaignObserver::class);
+
+        static::creating(function(Model $model){
+            $model->uuid = Str::uuid();
+        });
     }
 
     /**
@@ -35,5 +40,10 @@ class Campaign extends Model
     public function links()
     {
         return $this->hasMany(CampaignLink::class);
+    }
+
+    public function opens()
+    {
+        return $this->hasMany(CampaignOpen::class);
     }
 }

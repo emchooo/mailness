@@ -59,7 +59,7 @@ class SendEmail implements ShouldQueue
         if($this->campaign->track_clicks) {
             return $this->addContactIdToTrackingLinks();
         }
-        return $this->campaign;
+        return $this->campaign->content;
     }
 
     /**
