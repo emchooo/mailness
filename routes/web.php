@@ -17,6 +17,7 @@ Route::get('w/{campaign_uuid}/{contact_uuid}', 'TrackOpenController@index')->nam
 
 Route::middleware('auth')->group(function () {
     Route::get('settings', 'SettingController@index')->name('settings.index');
+    Route::get('settings/sending', 'SettingController@sending')->name('settings.sending');
     Route::post('settings/update', 'SettingController@update')->name('settings.update');
     Route::post('settings/aws', 'SettingController@updateAws')->name('settings.update.aws');
 

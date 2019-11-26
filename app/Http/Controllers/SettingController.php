@@ -29,6 +29,11 @@ class SettingController extends Controller
         return back();
     }
 
+    public function sending()
+    {
+        return view('settings.sending');
+    }
+
     public function updateAWS(Request $request)
     {
         $service = Service::first();

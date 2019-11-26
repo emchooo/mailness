@@ -2,6 +2,10 @@
 - Double opt-in  - send confirmation email
 - Import large lists ( split file and process )
 - On contact add option to unsubscribe
+- Refactor import and export
+- External unsubscrive link
+- Number of unsubscribed
+- Number of bounced
 
 # Campaigns
 - When all mails are sent mark campaign as sent
@@ -10,8 +14,7 @@
 - On duplicate return original links
 
 # Sending
-- Track open for links
-- Track click on links in mail
+- Attach img for tracking open
 - If bounced update record
 - If compaint update record
 - When sending send only to valid records, escape unsubscribed, bounced and complaint mails
@@ -24,6 +27,9 @@
 - Open report with data
 - Test
 
+# Settings
+- Add sending method ( AmazonSES, SMTP )
+
 # Auth
 - Style all auth pages
 
@@ -31,6 +37,7 @@
 - list_submenu highlight current link
 - Responsive
 - Translation ???
+- Fix migrations add foreign keys and indexes
 
 # Connect to SES and SNS
 - Check is there AWS keys
