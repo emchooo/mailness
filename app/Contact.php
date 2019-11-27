@@ -28,7 +28,7 @@ class Contact extends Model
     {
         parent::boot();
 
-        static::creating(function(Model $model){
+        static::creating(function (Model $model) {
             $model->uuid = Str::uuid();
         });
     }

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Contact;
 use App\Campaign;
 use App\CampaignOpen;
-use Illuminate\Http\Request;
+use App\Contact;
 
 class TrackOpenController extends Controller
 {
@@ -17,7 +16,7 @@ class TrackOpenController extends Controller
 
         CampaignOpen::create([
             'campaign_id'   => $campaign->id,
-            'contact_id'    => $contact->id
+            'contact_id'    => $contact->id,
         ]);
     }
 }

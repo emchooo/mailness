@@ -33,7 +33,6 @@ class Campaign extends Model
      * @var int
      */
     protected $perPage = 10;
-    
 
     public function links():HasMany
     {
