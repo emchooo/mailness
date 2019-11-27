@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\SendCampaignRequest;
 use App\Http\Requests\SendTestMailRequest;
 use App\Http\Requests\CampaignStoreRequest;
+use Illuminate\Support\Facades\DB;
 
 class CampaignController extends Controller
 {
@@ -30,7 +31,9 @@ class CampaignController extends Controller
                         ->latest('id')
                         ->paginate()
                         ->onEachSide(3)
-                        ->appends($request->all());
+                        //@todo Add the Parameters to Appended
+                        //while creating the pagination Url's
+                        ->appends($request->only([]));
 
         return view('campaigns.index', compact('campaigns'));
     }
@@ -42,7 +45,8 @@ class CampaignController extends Controller
      */
     public function create()
     {
-        $templates = Template::pluck('name', 'id');
+        $templates = DB::table((new Template)->getTable())
+                        ->pluck('name', 'id');
 
         return view('campaigns.create', compact('templates'));
     }

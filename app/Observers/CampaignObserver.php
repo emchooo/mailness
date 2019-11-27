@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Campaign;
+use Illuminate\Support\Str;
 
 class CampaignObserver
 {
@@ -17,5 +18,6 @@ class CampaignObserver
         $request = request();
 
         $campaign->status = $request->status ? $request->status : 'draft';
+        $campaign->uuid = Str::uuid();
     }
 }
