@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use DOMDocument;
-use DOMElement;
-use App\Lists;
 use App\Campaign;
-use App\Template;
-use App\Jobs\SendCampaign;
-use Illuminate\Support\Str;
-use App\Mail\CampaignMail;
-use Illuminate\Http\Request;
-use Aws\Exception\AwsException;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\CampaignStoreRequest;
 use App\Http\Requests\SendCampaignRequest;
 use App\Http\Requests\SendTestMailRequest;
-use App\Http\Requests\CampaignStoreRequest;
+use App\Jobs\SendCampaign;
+use App\Lists;
+use App\Mail\CampaignMail;
+use App\Template;
+use Aws\Exception\AwsException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class CampaignController extends Controller
 {
@@ -170,8 +167,6 @@ class CampaignController extends Controller
         if ($campaign->status != 'draft') {
             return back()->with(['error' => 'Campaign must be in draft mode.']);
         }
-
-
 
         foreach ($request->lists as $key => $value) {
             $list = Lists::find($key);

@@ -2,13 +2,12 @@
 
 namespace App\Jobs;
 
-use DOMDocument;
 use App\Campaign;
 use App\Contact;
 use App\Mail\CampaignMail;
 use App\SendingLog;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
+use DOMDocument;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -51,34 +50,29 @@ class SendEmail implements ShouldQueue
             ->update(['sent_at' => Carbon::now()]);
     }
 
-    /**
-     * 
-     */
     protected function mailContent()
     {
-        if($this->campaign->track_clicks) {
+        if ($this->campaign->track_clicks) {
             return $this->addContactIdToTrackingLinks();
         }
+
         return $this->campaign->content;
     }
 
-    /**
-     * 
-     */
     protected function addContactIdToTrackingLinks()
     {
         $dom = new DOMDocument();
 
         $dom->loadHTML($this->campaign->content);
 
-        foreach($dom->getElementsByTagName('body')[0]->getElementsByTagName('a') as $link) {
-
+        foreach ($dom->getElementsByTagName('body')[0]->getElementsByTagName('a') as $link) {
             $oldLink = $link->getAttribute('href');
 
-            $newLink = $oldLink . '/' . $this->contact->uuid;
+            $newLink = $oldLink.'/'.$this->contact->uuid;
 
-            $link->setAttribute('href',$newLink);
+            $link->setAttribute('href', $newLink);
         }
+
         return $dom->saveHtml();
     }
 }

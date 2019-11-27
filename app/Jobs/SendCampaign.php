@@ -2,16 +2,16 @@
 
 namespace App\Jobs;
 
-use DOMDocument;
 use App\Campaign;
 use App\Lists;
-use Illuminate\Support\Str;
+use DOMDocument;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class SendCampaign implements ShouldQueue
 {
@@ -39,7 +39,7 @@ class SendCampaign implements ShouldQueue
      */
     public function handle()
     {
-        if($this->campaign->track_clicks) {
+        if ($this->campaign->track_clicks) {
             $this->addTrackingLinks();
         }
         // @todo don't insert bounced contacts
@@ -50,8 +50,6 @@ class SendCampaign implements ShouldQueue
     }
 
     /**
-     * 
-     * 
      * @return void
      */
     protected function addTrackingLinks()
@@ -60,18 +58,17 @@ class SendCampaign implements ShouldQueue
 
         $dom->loadHTML($this->campaign->content);
 
-        foreach($dom->getElementsByTagName('body')[0]->getElementsByTagName('a') as $link) {
-
+        foreach ($dom->getElementsByTagName('body')[0]->getElementsByTagName('a') as $link) {
             $oldLink = $link->getAttribute('href');
 
-            $campaignLink = $this->campaign->links()->create([ 
+            $campaignLink = $this->campaign->links()->create([
                 'uuid'  => Str::uuid(),
-                'link'  => $oldLink
+                'link'  => $oldLink,
             ]);
 
-            $newLink = route('open.link', [ $campaignLink->uuid ]);
+            $newLink = route('open.link', [$campaignLink->uuid]);
 
-            $link->setAttribute('href',$newLink);
+            $link->setAttribute('href', $newLink);
         }
         $this->campaign->content = $dom->saveHtml();
         $this->campaign->save();

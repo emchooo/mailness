@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Field;
-use App\Lists;
-use App\Import;
 use App\Contact;
-use App\Jobs\ImportFile;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use App\Services\ImportContacts;
-use Box\Spout\Common\Entity\Row;
-use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\ImportSaveRequest;
+use App\Field;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ContactUpdateRequest;
+use App\Http\Requests\ImportSaveRequest;
+use App\Import;
+use App\Jobs\ImportFile;
+use App\Lists;
+use App\Services\ImportContacts;
+use Box\Spout\Common\Entity\Row;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ContactController extends Controller
 {
@@ -130,13 +129,12 @@ class ContactController extends Controller
 
     public function export(Lists $lists)
     {
-
-        $contacts = Contact::with('fields')->where('list_id', $lists->id)->take(1000000)->orderBy('id','DESC')->get();
+        $contacts = Contact::with('fields')->where('list_id', $lists->id)->take(1000000)->orderBy('id', 'DESC')->get();
 
         $writer = WriterEntityFactory::createCSVWriter();
 
         $fileName = 'contacts.csv';
-        $writer->openToBrowser($fileName); 
+        $writer->openToBrowser($fileName);
 
         // csv file headers
         $headers = array_keys($contacts->toArray()[0]);
@@ -149,16 +147,16 @@ class ContactController extends Controller
         $writer->addRow($singleRow);
 
         foreach ($contacts as $row) {
-                $data = [];
-                $row_array = $row->toArray();
-                // foreach ($lists->fields as $field) {
-                //     $custom_field_value = $row->getFieldValue($field->id);
-                //     $custom_field_value ? $data[] = $custom_field_value : $data[] = '';
-                // }
-                $final = array_merge($row_array, $data);
-                $singleRow2 = WriterEntityFactory::createRowFromArray($final);
-                $writer->addRow($singleRow2);
-            }
+            $data = [];
+            $row_array = $row->toArray();
+            // foreach ($lists->fields as $field) {
+            //     $custom_field_value = $row->getFieldValue($field->id);
+            //     $custom_field_value ? $data[] = $custom_field_value : $data[] = '';
+            // }
+            $final = array_merge($row_array, $data);
+            $singleRow2 = WriterEntityFactory::createRowFromArray($final);
+            $writer->addRow($singleRow2);
+        }
 
         $writer->close();
     }
