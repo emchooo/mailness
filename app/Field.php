@@ -19,6 +19,4 @@ class Field extends Model
      * @var int
      */
     protected $perPage = 10;
-    
-
 }

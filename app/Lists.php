@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Lists extends Model
@@ -35,12 +36,12 @@ class Lists extends Model
         });
     }
 
-    public function contacts()
+    public function contacts(): HasMany
     {
         return $this->hasMany(Contact::class, 'list_id')->active();
     }
 
-    public function fields()
+    public function fields(): HasMany
     {
         return $this->hasMany(Field::class, 'list_id');
     }

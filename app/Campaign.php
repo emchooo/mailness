@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Support\Str;
 use App\Observers\CampaignObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Campaign extends Model
 {
@@ -18,10 +18,6 @@ class Campaign extends Model
         parent::boot();
 
         static::observe(CampaignObserver::class);
-
-        static::creating(function(Model $model){
-            $model->uuid = Str::uuid();
-        });
     }
 
     /**
@@ -30,6 +26,7 @@ class Campaign extends Model
      * @var array
      */
     protected $fillable = ['status', 'subject', 'sending_name', 'sending_email', 'preview_text', 'content', 'track_opens', 'track_clicks'];
+
     /**
      * The number of models to return for pagination.
      *
@@ -37,17 +34,17 @@ class Campaign extends Model
      */
     protected $perPage = 10;
 
-    public function links()
+    public function links():HasMany
     {
         return $this->hasMany(CampaignLink::class);
     }
 
-    public function opensTracking()
+    public function opensTracking():HasMany
     {
         return $this->hasMany(CampaignOpen::class);
     }
 
-    public function linksTracking()
+    public function linksTracking():HasMany
     {
         return $this->hasMany(CampaignClickLink::class);
     }

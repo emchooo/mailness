@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Lists;
-use App\Field;
 use App\Contact;
+use App\Field;
 use App\Http\Requests\ListStoreRequest;
 use App\Http\Requests\ListUpdateRequest;
 use App\Http\Requests\StoreSubscriptionRequest;
+use App\Lists;
 use Illuminate\Http\Request;
 
 class ListsController extends Controller
@@ -22,12 +22,12 @@ class ListsController extends Controller
         $lists = Lists::query()
                     ->latest('id')
                     ->withCount(['contacts as contactCount'])
-                    ->paginate(null,['*'],'listPage')
+                    ->paginate(null, ['*'], 'listPage')
                     ->onEachSide(3)
-                    // @todo Add the Required Parameters to add in 
+                    // @todo Add the Required Parameters to add in
                     //pagination
                     ->appends($request->only([]));
-                    
+
         return view('lists.index', compact('lists'));
     }
 
@@ -133,7 +133,7 @@ class ListsController extends Controller
         $contact = Contact::create([
             'email' => $request->email,
             'list_id'   => $list->id,
-            'subscribed'    => $list->double_opt_in ? 0 : 1
+            'subscribed'    => $list->double_opt_in ? 0 : 1,
         ]);
 
         if ($request->fields) {
