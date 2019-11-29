@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\CampaignClickLink;
 use App\CampaignLink;
 use App\Contact;
-use Illuminate\Http\Request;
 
 class TrackClickController extends Controller
 {
@@ -19,10 +18,9 @@ class TrackClickController extends Controller
         CampaignClickLink::create([
             'campaign_id'   => $link->campaign_id,
             'link_id'   => $link->id,
-            'contact_id'    => $contact->id
+            'contact_id'    => $contact->id,
         ]);
 
         return redirect($link->link);
-
     }
 }

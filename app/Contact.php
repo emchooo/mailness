@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Contact extends Model
@@ -25,22 +28,22 @@ class Contact extends Model
     {
         parent::boot();
 
-        static::creating(function(Model $model){
+        static::creating(function (Model $model) {
             $model->uuid = Str::uuid();
         });
     }
 
-    public function list()
+    public function list():BelongsTo
     {
         return $this->belongsTo(Lists::class);
     }
 
-    public function fields()
+    public function fields():BelongsToMany
     {
         return $this->belongsToMany(Field::class)->withPivot('value');
     }
 
-    public function sent()
+    public function sent():HasMany
     {
         return $this->hasMany(SendingLog::class);
     }
