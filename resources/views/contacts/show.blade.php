@@ -15,6 +15,11 @@
 @endforeach
 </ul>
 
+<form action="{{ route('contacts.unsubscribe', [ $contact->list->id, $contact->id ] ) }}" method="POST" >
+@csrf
+  <input type="submit" value="Unsubscribe" class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center" >
+</form>
+
 <p>Campaings recived:</p>
 <ul class="mb-5" >
   @foreach( $contact->sent as $sent )

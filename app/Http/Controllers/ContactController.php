@@ -115,6 +115,17 @@ class ContactController extends Controller
     }
 
     /**
+     * 
+     */
+    public function unsubscribe(Lists $lists, Contact $contact)
+    {
+        $contact->subscribed = 0;
+        $contact->save();
+
+        return back();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Contact  $contact

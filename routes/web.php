@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::get('lists/{lists}/contacts/{contact}/edit', 'ContactController@edit')->name('contacts.edit');
     Route::put('lists/{lists}/contacts/{contact}/update', 'ContactController@update')->name('contacts.update');
     Route::delete('contact/{contact}/delete', 'ContactController@destroy')->name('contacts.delete');
+    Route::post('lists/{lists}/contacts/{contact}/unsubscribe', 'ContactController@unsubscribe')->name('contacts.unsubscribe');
 
     Route::get('lists/{lists}/forms', 'FormController@index')->name('forms.index');
     Route::get('lists/{lists}/forms/hosted', 'FormController@hosted')->name('forms.hosted');
