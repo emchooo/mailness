@@ -17,7 +17,6 @@
 - Attach img for tracking open
 - If bounced update record
 - If compaint update record
-- When sending send only to valid records, escape unsubscribed, bounced and complaint mails
 - Sending rate
 
 # Templates
@@ -50,4 +49,3 @@
 - Statistics
 
 # Bugs
-- After registration it redirects to /home which doesn't exist
