@@ -1,7 +1,6 @@
 # Lists
 - Double opt-in  - send confirmation email
 - Import large lists ( split file and process )
-- On contact add option to unsubscribe
 - Refactor import and export
 - External unsubscrive link
 - Number of unsubscribed

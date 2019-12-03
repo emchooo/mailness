@@ -22,9 +22,10 @@
 
 <p>Campaings recived:</p>
 <ul class="mb-5" >
-  @foreach( $contact->sent as $sent )
-    <li><a href="{{ route('campaigns.show', $sent->campaign->id) }}">{{ $sent->campaign->subject }}</a></li>
-  @endforeach
+
+    @foreach( $contact->sent as $sent )
+    <li><a href="{{ route('campaigns.report', [ $sent->campaign['id'] ]) }}">{{ $sent->campaign['subject'] }}</a></li>
+    @endforeach
 </ul>
 
 		
