@@ -133,6 +133,8 @@ class CampaignController extends Controller
         $campaign->sending_name = $request->sending_name;
         $campaign->sending_email = $request->sending_email;
         $campaign->content = $request->content;
+        $campaign->track_clicks = $request->track_clicks ? 1 : 0;
+        $campaign->track_opens = $request->track_opens ? 1 : 0;
         $campaign->save();
 
         return redirect()->route('campaigns.show', $campaign->id);
