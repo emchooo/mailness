@@ -4,7 +4,7 @@
 
 <h3>Settings</h3>
 
-<a href="{{ route('settings.sending') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center" >Sending</a>
+<a href="{{ route('settings.sending') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center mt-3 inline-block" >Sending</a>
 
 <div class="mt-5" >
     <h4>Account settings</h4>

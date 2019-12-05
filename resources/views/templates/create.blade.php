@@ -12,7 +12,7 @@
 <form action="{{ route('templates.store') }}" method="POST">
     @csrf
 
-<input type="text" name="name" class="border bg-gray-300 mb-3" placeholder="Name" value="{{ old('name') }}" >
+<input type="text" name="name" class="border bg-gray-300 mb-3 p-2" placeholder="Name" value="{{ old('name') }}" >
     @if($errors->has('name'))
 			<div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
 				<p>{{ $errors->first('name') }}</p>
