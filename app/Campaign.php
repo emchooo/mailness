@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Campaign extends Model
 {
+    const DRAFT = 'draft';
+    const SENDING = 'sending';
+    const SENT = 'sent';
+
     /**
      * The "booting" method of the model.
      *
