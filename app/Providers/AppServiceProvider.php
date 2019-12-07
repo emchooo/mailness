@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Service;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Dusk\DuskServiceProvider;
@@ -29,19 +30,25 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        if (Schema::hasTable('services')) {
-            $service = Service::first();
-            if ($service) {
-                config([
-                    'services'  => [
-                        'ses'   => [
-                            'key'   => $service->key,
-                            'secret'    => $service->secret,
-                            'region'    => $service->region,
+
+        if(! App::runningInConsole()){
+
+            if (Schema::hasTable('services')) {
+                $service = Service::first();
+                if ($service) {
+                    config([
+                        'services'  => [
+                            'ses'   => [
+                                'key'   => $service->key,
+                                'secret'    => $service->secret,
+                                'region'    => $service->region,
+                            ],
                         ],
-                    ],
-                ]);
+                    ]);
+                }
             }
+
         }
+        
     }
 }
