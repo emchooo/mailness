@@ -22,9 +22,15 @@
     </ul>
     </div>
 
-    <ul class="pt-2" >
+    <ul class="flex pt-2" >
     <li>
         <a href="{{ route('settings.index') }}">Settings</a>
+      </li>
+      <li>
+        <form action="{{ route('logout') }}" method="POST">
+          @csrf
+          <button class="pl-3" type="submit" >Logout</button>
+        </form>
       </li>
     </ul>
   </div>

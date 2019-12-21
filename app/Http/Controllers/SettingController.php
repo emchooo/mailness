@@ -34,16 +34,10 @@ class SettingController extends Controller
         return view('settings.sending');
     }
 
-    public function updateAWS(Request $request)
+    public function aws()
     {
-        $service = Service::first();
-
-        $service->key = $request->aws_id;
-        if (strlen($request->aws_key) > 25) {
-            $service->secret = $request->aws_key;
-        }
-        $service->save();
-
-        return back();
+        return view('settings.aws');
     }
+
+
 }

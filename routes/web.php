@@ -17,9 +17,10 @@ Route::get('w/{campaign_uuid}/{contact_uuid?}', 'TrackOpenController@index')->na
 
 Route::middleware('auth')->group(function () {
     Route::get('settings', 'SettingController@index')->name('settings.index');
-    Route::get('settings/sending', 'SettingController@sending')->name('settings.sending');
     Route::post('settings/update', 'SettingController@update')->name('settings.update');
-    Route::post('settings/aws', 'SettingController@updateAws')->name('settings.update.aws');
+
+    Route::get('settings/sending', 'SettingController@sending')->name('settings.sending');
+    Route::get('settings/aws', 'SettingController@aws')->name('settings.create.aws');
 
     Route::get('lists', 'ListsController@index')->name('lists.index');
     Route::get('lists/create', 'ListsController@create')->name('lists.create');
@@ -81,5 +82,3 @@ Route::middleware('auth')->group(function () {
 
     Route::get('dashboard', 'DashboardController@show')->name('dashboard.show');
 });
-
-Route::get('/home', 'HomeController@index')->name('home');
