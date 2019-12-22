@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
 use Symfony\Component\Console\Question\Question;
 
 class MailnessInstallCommand extends Command
@@ -20,6 +19,7 @@ class MailnessInstallCommand extends Command
      * @var string
      */
     protected $description = 'Install Mailness Application';
+
     /**
      * Execute the console command.
      *
@@ -33,7 +33,7 @@ class MailnessInstallCommand extends Command
 
         if (strlen(config('app.key')) === 0) :
             $this->call('key:generate');
-            $this->line('Secret key properly generated');
+        $this->line('Secret key properly generated');
         endif;
 
         $credentials = $this->requestDatabaseCredentials();
@@ -41,7 +41,6 @@ class MailnessInstallCommand extends Command
         $this->updateEnvironmentFile($credentials);
 
         if ($this->confirm('Do you want to migrate the database?', false)) {
-
             $this->migrateDatabaseWithFreshCredentials($credentials);
 
             $this->line('~ Database successfully migrated.');
@@ -51,6 +50,7 @@ class MailnessInstallCommand extends Command
 
         $this->goodbye();
     }
+
     /**
      * Update the .env file from an array of $key => $value pairs.
      *
@@ -68,6 +68,7 @@ class MailnessInstallCommand extends Command
             ));
         }
     }
+
     /**
      * Display the welcome message.
      */
@@ -75,6 +76,7 @@ class MailnessInstallCommand extends Command
     {
         $this->info('>> Welcome to the Mailness installation process! <<');
     }
+
     /**
      * Display the completion message.
      */
@@ -97,7 +99,7 @@ class MailnessInstallCommand extends Command
             'DB_PASSWORD' => $this->askHiddenWithDefault('Database password (leave blank for no password)'),
         ];
     }
-    
+
     /**
      * Create the initial .env file.
      */
@@ -108,6 +110,7 @@ class MailnessInstallCommand extends Command
             $this->line('.env file successfully created');
         }
     }
+
     /**
      * Migrate the db with the new credentials.
      *
@@ -126,6 +129,7 @@ class MailnessInstallCommand extends Command
         }
         $this->call('migrate:fresh');
     }
+
     /**
      * Prompt the user for optional input but hide the answer from the console.
      *
@@ -137,6 +141,7 @@ class MailnessInstallCommand extends Command
     {
         $question = new Question($question, 'null');
         $question->setHidden(true)->setHiddenFallback($fallback);
+
         return $this->output->askQuestion($question);
     }
 }
