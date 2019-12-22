@@ -31,8 +31,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        if(! App::runningInConsole()){
-
+        if (! App::runningInConsole()) {
             if (Schema::hasTable('services')) {
                 $service = Service::first();
                 if ($service) {
@@ -47,8 +46,6 @@ class AppServiceProvider extends ServiceProvider
                     ]);
                 }
             }
-
         }
-        
     }
 }
