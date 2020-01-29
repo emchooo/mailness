@@ -39,5 +39,24 @@ class SettingController extends Controller
         return view('settings.aws');
     }
 
+    public function smtp()
+    {
+        return view('settings.smtp');
+    }
+
+    public function saveSmtp(Request $request)
+    {
+        
+        $service = new Service();
+        $service->service = 'smtp';
+        $service->credentials = json_encode([ 
+            'host' => $request->host, 
+            'port' => $request->port, 
+            'username' => $request->username,
+            'password' => $request->passsword,
+            'encription' => $request->encription
+            ]);
+        $service->save();
+    }
 
 }

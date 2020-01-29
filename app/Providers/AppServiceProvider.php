@@ -30,25 +30,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-
-        if(! App::runningInConsole()){
-
-            if (Schema::hasTable('services')) {
-                $service = Service::first();
-                if ($service) {
-                    config([
-                        'services'  => [
-                            'ses'   => [
-                                'key'   => $service->key,
-                                'secret'    => $service->secret,
-                                'region'    => $service->region,
-                            ],
-                        ],
-                    ]);
-                }
-            }
-
-        }
         
     }
 }

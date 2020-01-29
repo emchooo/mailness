@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('settings/sending', 'SettingController@sending')->name('settings.sending');
     Route::get('settings/aws', 'SettingController@aws')->name('settings.create.aws');
+    Route::get('settings/smtp', 'SettingController@smtp')->name('settings.smtp');
+    Route::post('settings/smtp', 'SettingController@saveSmtp')->name('settings.save.smtp');
 
     Route::get('lists', 'ListsController@index')->name('lists.index');
     Route::get('lists/create', 'ListsController@create')->name('lists.create');
