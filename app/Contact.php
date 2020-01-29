@@ -33,17 +33,17 @@ class Contact extends Model
         });
     }
 
-    public function list():BelongsTo
+    public function list(): BelongsTo
     {
         return $this->belongsTo(Lists::class);
     }
 
-    public function fields():BelongsToMany
+    public function fields(): BelongsToMany
     {
         return $this->belongsToMany(Field::class)->withPivot('value');
     }
 
-    public function sent():HasMany
+    public function sent(): HasMany
     {
         return $this->hasMany(SendingLog::class);
     }

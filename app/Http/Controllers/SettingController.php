@@ -45,17 +45,15 @@ class SettingController extends Controller
 
     public function saveSmtp(Request $request)
     {
-        
         $service = new Service();
         $service->service = 'smtp';
-        $service->credentials = json_encode([ 
-            'host' => $request->host, 
-            'port' => $request->port, 
+        $service->credentials = json_encode([
+            'host' => $request->host,
+            'port' => $request->port,
             'username' => $request->username,
             'password' => $request->passsword,
-            'encription' => $request->encription
-            ]);
+            'encription' => $request->encription,
+        ]);
         $service->save();
     }
-
 }
