@@ -38,17 +38,17 @@ class Campaign extends Model
      */
     protected $perPage = 10;
 
-    public function links():HasMany
+    public function links(): HasMany
     {
         return $this->hasMany(CampaignLink::class);
     }
 
-    public function opensTracking():HasMany
+    public function opensTracking(): HasMany
     {
         return $this->hasMany(CampaignOpen::class);
     }
 
-    public function linksTracking():HasMany
+    public function linksTracking(): HasMany
     {
         return $this->hasMany(CampaignClickLink::class);
     }

@@ -26,8 +26,7 @@ class MailServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(! App::runningInConsole()){
-
+        if (! App::runningInConsole()) {
             if (Schema::hasTable('services')) {
                 $service = Service::first();
                 if ($service) {
@@ -40,13 +39,12 @@ class MailServiceProvider extends ServiceProvider
                             'password' => $service->credentials['password'],
                             'from' => [
                                 'address' => 'emir@gmail.com',
-                                'name' => 'Emir'
-                            ]
-                        ]
+                                'name' => 'Emir',
+                            ],
+                        ],
                     ]);
                 }
             }
-
         }
     }
 }
