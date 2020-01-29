@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SettingsUpdateRequest;
 use App\Service;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller

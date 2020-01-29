@@ -114,9 +114,6 @@ class ContactController extends Controller
         return view('contacts.show', ['list' => $lists, 'contact' => $contact]);
     }
 
-    /**
-     * 
-     */
     public function unsubscribe(Lists $lists, Contact $contact)
     {
         $contact->subscribed = 0;
