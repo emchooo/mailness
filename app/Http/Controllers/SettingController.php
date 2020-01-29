@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SettingsUpdateRequest;
+use App\Http\Requests\SmtpSettings;
 use App\Service;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 class SettingController extends Controller
 {
@@ -30,7 +33,8 @@ class SettingController extends Controller
 
     public function sending()
     {
-        return view('settings.sending');
+        $service = Service::first();
+        return view('settings.sending', compact('service'));
     }
 
     public function aws()
@@ -43,19 +47,21 @@ class SettingController extends Controller
         return view('settings.smtp');
     }
 
-    public function saveSmtp(Request $request)
+    public function saveSmtp(SmtpSettings $request)
     {
         
         $service = new Service();
         $service->service = 'smtp';
-        $service->credentials = json_encode([ 
+        $service->credentials = [ 
             'host' => $request->host, 
             'port' => $request->port, 
             'username' => $request->username,
-            'password' => $request->passsword,
+            'password' => $request->password,
             'encription' => $request->encription
-            ]);
+            ];
         $service->save();
+
+        return redirect()->route('settings.index');
     }
 
 }
