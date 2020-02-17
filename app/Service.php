@@ -15,4 +15,9 @@ class Service extends Model
     {
         return substr_replace($value, '***************', 0, 35);
     }
+
+    public function getConfig()
+    {
+    	return $this->credentials;
+    }
 }

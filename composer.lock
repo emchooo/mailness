@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e693ce60a64a390e588c4db5a342b33",
+    "content-hash": "4b9d32b229e1e819b2faa7710bb32fa1",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -431,6 +431,59 @@
                 "validator"
             ],
             "time": "2019-08-13T17:33:27+00:00"
+        },
+        {
+            "name": "emchooo/laravel-flymail",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/emchooo/laravel-flymail.git",
+                "reference": "8fbcef15197837f9f5c4b25577fa7447fb1a6702"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/emchooo/laravel-flymail/zipball/8fbcef15197837f9f5c4b25577fa7447fb1a6702",
+                "reference": "8fbcef15197837f9f5c4b25577fa7447fb1a6702",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^6.0",
+                "php": "^7.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Emchooo\\Flymail\\FlymailServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Emchooo\\Flymail\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emir Softić",
+                    "email": "emir.softic@gmail.com",
+                    "homepage": "https://div.ba",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Send mails in laravel with custom config you can set on the fly",
+            "homepage": "https://github.com/emchooo/laravel-flymail",
+            "keywords": [
+                "laravel",
+                "mail",
+                "mailer",
+                "mailness"
+            ],
+            "time": "2020-02-14T23:20:52+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -3557,6 +3610,7 @@
                 "selenium",
                 "webdriver"
             ],
+            "abandoned": "php-webdriver/webdriver",
             "time": "2019-06-13T08:02:18+00:00"
         },
         {
@@ -3958,6 +4012,7 @@
                 "bcmath",
                 "math"
             ],
+            "abandoned": "brick/math",
             "time": "2017-02-16T16:54:46+00:00"
         },
         {
@@ -5382,7 +5437,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "emchooo/laravel-flymail": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

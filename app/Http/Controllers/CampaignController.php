@@ -14,6 +14,7 @@ use Aws\Exception\AwsException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Service;
 
 class CampaignController extends Controller
 {
@@ -156,10 +157,12 @@ class CampaignController extends Controller
     public function sendTestMail(SendTestMailRequest $request, Campaign $campaign)
     {
         try {
-            Mail::to($request->email)->send(new CampaignMail($campaign));
+            $config = Service::first()->getConfig();
+
+            Mail::config($config)->to($request->email)->send(new CampaignMail($campaign));
 
             return back()->with(['success' => 'Test mail sent!']);
-        } catch (AwsException $e) {
+        } catch (Exception $e) {
             return back()->with(['success' =>  $e->getAwsErrorMessage()]);
         }
     }
