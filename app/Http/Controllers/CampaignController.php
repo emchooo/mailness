@@ -9,12 +9,11 @@ use App\Http\Requests\SendTestMailRequest;
 use App\Jobs\SendCampaign;
 use App\Lists;
 use App\Mail\CampaignMail;
+use App\Service;
 use App\Template;
-use Aws\Exception\AwsException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use App\Service;
 
 class CampaignController extends Controller
 {

@@ -17,6 +17,6 @@ class Service extends Model
 
     public function getConfig()
     {
-    	return $this->credentials;
+        return $this->credentials;
     }
 }
