@@ -6,8 +6,6 @@ use App\Http\Requests\SettingsUpdateRequest;
 use App\Http\Requests\SmtpSettings;
 use App\Service;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-
 
 class SettingController extends Controller
 {
@@ -34,6 +32,7 @@ class SettingController extends Controller
     public function sending()
     {
         $service = Service::first();
+
         return view('settings.sending', compact('service'));
     }
 
@@ -51,13 +50,13 @@ class SettingController extends Controller
     {
         $service = new Service();
         $service->service = 'smtp';
-        $service->credentials = [ 
-            'host' => $request->host, 
-            'port' => $request->port, 
+        $service->credentials = [
+            'host' => $request->host,
+            'port' => $request->port,
             'username' => $request->username,
             'password' => $request->password,
-            'encription' => $request->encription
-            ];
+            'encription' => $request->encription,
+        ];
         $service->save();
 
         return redirect()->route('settings.index');
