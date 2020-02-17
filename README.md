@@ -4,7 +4,7 @@
 <a href="https://travis-ci.org/emchooo/mailness"><img src="https://travis-ci.org/emchooo/mailness.svg?branch=master" alt="Build Status"></a>
 </p>
 
-Mailness is free open-source self-hosted email marketing tool for sending newsletter via AmazonSES.
+Mailness is free open-source self-hosted email marketing tool for sending newsletter.
 Mailness is self-hosted alternative for paid email marketing services - MailChimp, Sendy.co, Campaign Monitor ...
 
 PHP | Laravel 6 | TailwindCSS | VueJS

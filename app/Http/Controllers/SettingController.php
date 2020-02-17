@@ -49,7 +49,6 @@ class SettingController extends Controller
 
     public function saveSmtp(SmtpSettings $request)
     {
-        
         $service = new Service();
         $service->service = 'smtp';
         $service->credentials = [ 
@@ -63,5 +62,4 @@ class SettingController extends Controller
 
         return redirect()->route('settings.index');
     }
-
 }

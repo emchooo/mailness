@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Service;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Dusk\DuskServiceProvider;

@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
-
     protected $casts = [
-        'credentials' => 'array'
+        'credentials' => 'array',
     ];
 
     public function getSecretAttribute($value)

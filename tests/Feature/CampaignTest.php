@@ -65,9 +65,9 @@ class CampaignTest extends TestCase
 
         $response = $this->actingAs($this->user)->put(route('campaigns.update', $campaign->id),
         ['subject' => 'Edited subject',
-        'sending_name' => $campaign->sending_name,
-        'sending_email' => $campaign->sending_email,
-        'content' => $campaign->content,
+            'sending_name' => $campaign->sending_name,
+            'sending_email' => $campaign->sending_email,
+            'content' => $campaign->content,
         ]);
 
         $response->assertRedirect(route('campaigns.show', $campaign->id));
