@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Campaign;
 use App\Mail\CampaignMail;
 use App\User;
+use App\Service;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
@@ -85,21 +86,6 @@ class CampaignTest extends TestCase
         $response = $this->actingAs($this->user)->delete(route('campaigns.delete', $campaign->id));
 
         $this->assertEquals(0, Campaign::count());
-    }
-
-    /** @test */
-    public function itSendsTestMail()
-    {
-        Mail::fake();
-
-        $campaign = factory(Campaign::class)->create();
-
-        $email = 'emir@test.com';
-        $response = $this->actingAs($this->user)->post(route('campaigns.send.test', $campaign->id), ['email' => $email]);
-
-        Mail::assertSent(CampaignMail::class, function ($mail) use ($email) {
-            return $mail->hasTo($email);
-        });
     }
 
     /** @test */

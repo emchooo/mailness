@@ -10,13 +10,23 @@ class Service extends Model
         'credentials' => 'array',
     ];
 
-    public function getSecretAttribute($value)
-    {
-        return substr_replace($value, '***************', 0, 35);
-    }
-
     public function getConfig()
     {
     	return $this->credentials;
+    }
+
+    public function getCredentialsAttribute($value) 
+    {
+        $credentials = json_decode($value, true);
+        $credentials['username'] = decrypt($credentials['username']);
+        $credentials['password'] = decrypt($credentials['password']);
+        return $credentials;
+    }
+
+    public function setCredentialsAttribute($value)
+    {
+        $value['username'] = encrypt($value['username']);
+        $value['password'] = encrypt($value['password']);
+        $this->attributes['credentials'] = json_encode($value);
     }
 }
