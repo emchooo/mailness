@@ -27,7 +27,7 @@ class SmtpSettings extends FormRequest
             'host' => 'required',
             'port' => 'required|integer',
             'username' => 'required',
-            'password' => 'required'
+            'password' => 'required',
         ];
     }
 }

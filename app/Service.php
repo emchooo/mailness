@@ -17,6 +17,7 @@ class Service extends Model
 
     public function getCredentialsAttribute($value) 
     {
+<<<<<<< HEAD
         $credentials = json_decode($value, true);
         $credentials['username'] = decrypt($credentials['username']);
         $credentials['password'] = decrypt($credentials['password']);
@@ -28,5 +29,8 @@ class Service extends Model
         $value['username'] = encrypt($value['username']);
         $value['password'] = encrypt($value['password']);
         $this->attributes['credentials'] = json_encode($value);
+=======
+        return $this->credentials;
+>>>>>>> 26fdfa98e34bcd774e123442bf315d887874db1b
     }
 }
