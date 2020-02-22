@@ -3,11 +3,8 @@
 namespace Tests\Feature;
 
 use App\Campaign;
-use App\Mail\CampaignMail;
 use App\User;
-use App\Service;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class CampaignTest extends TestCase
