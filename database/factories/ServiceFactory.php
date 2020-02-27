@@ -9,8 +9,8 @@ $factory->define(Service::class, function (Faker $faker) {
     return [
         'service' => 'smtp',
         'credentials' => [
-        	'username'	=> 'test',
-        	'password'	=> 'test',
-        ]
+            'username'	=> 'test',
+            'password'	=> 'test',
+        ],
     ];
 });

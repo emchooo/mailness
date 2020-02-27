@@ -52,8 +52,8 @@ class SettingController extends Controller
         $service->service = 'smtp';
         $service->credentials = [
             'driver' => 'smtp',
-            'host' => $request->host, 
-            'port' => $request->port, 
+            'host' => $request->host,
+            'port' => $request->port,
             'username' => $request->username,
             'password' => $request->password,
             'encription' => $request->encription,
