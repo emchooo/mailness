@@ -161,8 +161,8 @@ class CampaignController extends Controller
             Mail::config($config)->to($request->email)->send(new CampaignMail($campaign));
 
             return back()->with(['success' => 'Test mail sent!']);
-        } catch (Exception $e) {
-            return back()->with(['success' =>  $e->getAwsErrorMessage()]);
+        } catch (\Exception $e) {
+            return back()->with(['success' =>  $e->getMessage()]);
         }
     }
 
