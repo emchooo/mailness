@@ -58,10 +58,10 @@ class SettingController extends Controller
             'password' => $request->password,
             'encription' => $request->encription,
             'from'  => [
-                    'name'  => $request->name,
-                    'address'   => $request->address
-                ]
-            ];
+                'name'  => $request->name,
+                'address'   => $request->address,
+            ],
+        ];
         $service->save();
 
         return redirect()->route('settings.index');
@@ -70,6 +70,7 @@ class SettingController extends Controller
     public function editSmtp()
     {
         $service = Service::first();
+
         return view('settings.edit_smtp', compact('service'));
     }
 
@@ -79,16 +80,16 @@ class SettingController extends Controller
         $service->service = 'smtp';
         $service->credentials = [
             'driver' => 'smtp',
-            'host' => $request->host, 
-            'port' => $request->port, 
+            'host' => $request->host,
+            'port' => $request->port,
             'username' => $request->username,
             'password' => $request->password,
             'encription' => $request->encription,
             'from'  => [
-                    'name'  => $request->name,
-                    'address'   => $request->address
-                ]
-            ];
+                'name'  => $request->name,
+                'address'   => $request->address,
+            ],
+        ];
         $service->save();
 
         return redirect()->route('settings.index');
