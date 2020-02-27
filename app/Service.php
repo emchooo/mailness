@@ -12,14 +12,15 @@ class Service extends Model
 
     public function getConfig()
     {
-    	return $this->credentials;
+        return $this->credentials;
     }
 
-    public function getCredentialsAttribute($value) 
+    public function getCredentialsAttribute($value)
     {
         $credentials = json_decode($value, true);
         $credentials['username'] = decrypt($credentials['username']);
         $credentials['password'] = decrypt($credentials['password']);
+
         return $credentials;
     }
 
@@ -28,6 +29,7 @@ class Service extends Model
         $value['username'] = encrypt($value['username']);
         $value['password'] = encrypt($value['password']);
         $this->attributes['credentials'] = json_encode($value);
+
         return $this->credentials;
     }
 }
