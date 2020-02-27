@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::get('settings/aws', 'SettingController@aws')->name('settings.create.aws');
     Route::get('settings/smtp', 'SettingController@smtp')->name('settings.smtp');
     Route::post('settings/smtp', 'SettingController@saveSmtp')->name('settings.save.smtp');
+    Route::get('settings/smtp/edit', 'SettingController@editSmtp')->name('settings.edit.smtp');
+    Route::post('settings/smtp/update', 'SettingController@updateSmtp')->name('settings.update.smtp');
 
     Route::get('lists', 'ListsController@index')->name('lists.index');
     Route::get('lists/create', 'ListsController@create')->name('lists.create');

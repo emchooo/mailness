@@ -58,8 +58,35 @@ class SettingController extends Controller
             'password' => $request->password,
             'encription' => $request->encription,
             'from'  => [
-                    'name'  => 'Emir',
-                    'address'   => 'address'
+                    'name'  => $request->name,
+                    'address'   => $request->address
+                ]
+            ];
+        $service->save();
+
+        return redirect()->route('settings.index');
+    }
+
+    public function editSmtp()
+    {
+        $service = Service::first();
+        return view('settings.edit_smtp', compact('service'));
+    }
+
+    public function updateSmtp(SmtpSettings $request)
+    {
+        $service = Service::first();
+        $service->service = 'smtp';
+        $service->credentials = [
+            'driver' => 'smtp',
+            'host' => $request->host, 
+            'port' => $request->port, 
+            'username' => $request->username,
+            'password' => $request->password,
+            'encription' => $request->encription,
+            'from'  => [
+                    'name'  => $request->name,
+                    'address'   => $request->address
                 ]
             ];
         $service->save();

@@ -8,8 +8,7 @@
 
     <p>Provider: {{ $service->service }}</p>
     <p>Host: {{ $service->credentials['host'] }}</p>
-    <p><a href="">Delete</a></p>
-    <p><a href="">Edit</a></p>
+    <p class="mt-3" ><a href="{{ route('settings.edit.smtp') }}" class="bg-gray-200 px-2 py-1 rounded border" >Edit</a></p>
 
 
 @else

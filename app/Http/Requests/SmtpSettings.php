@@ -28,6 +28,8 @@ class SmtpSettings extends FormRequest
             'port' => 'required|integer',
             'username' => 'required',
             'password' => 'required',
+            'name' => 'required',
+            'address' => 'required|email'
         ];
     }
 }
