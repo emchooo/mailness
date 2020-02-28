@@ -23,15 +23,18 @@ class SendEmail implements ShouldQueue
 
     protected $contact;
 
+    protected $config;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Contact $contact, Campaign $campaign)
+    public function __construct(Contact $contact, Campaign $campaign, $config)
     {
         $this->campaign = $campaign;
         $this->contact = $contact;
+        $this->config = $config;
     }
 
     /**
@@ -43,7 +46,7 @@ class SendEmail implements ShouldQueue
     {
         $mail_content = $this->mailContent();
 
-        Mail::to($this->contact->email)->send(new CampaignMail($mail_content));
+        Mail::config($this->config)->to($this->contact->email)->send(new CampaignMail($mail_content));
         // @todo if sent save to SendingLog
         SendingLog::where('contact_id', $this->contact->id)
             ->where('campaign_id', $this->campaign->id)

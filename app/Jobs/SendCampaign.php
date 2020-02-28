@@ -12,6 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Service;
 
 class SendCampaign implements ShouldQueue
 {
@@ -44,8 +45,9 @@ class SendCampaign implements ShouldQueue
         }
         // @todo don't insert bounced contacts
         DB::insert('insert into sending_logs (campaign_id , contact_id ) SELECT ? , id FROM contacts where list_id = ?', [$this->campaign->id, $this->list->id]);
+        $config = Service::first()->getConfig();
         foreach ($this->list->contacts as $contact) {
-            SendEmail::dispatch($contact, $this->campaign);
+            SendEmail::dispatch($contact, $this->campaign, $config);
         }
     }
 
