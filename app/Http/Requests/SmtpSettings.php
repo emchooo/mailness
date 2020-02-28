@@ -29,7 +29,7 @@ class SmtpSettings extends FormRequest
             'username' => 'required',
             'password' => 'required',
             'name' => 'required',
-            'address' => 'required|email'
+            'address' => 'required|email',
         ];
     }
 }
