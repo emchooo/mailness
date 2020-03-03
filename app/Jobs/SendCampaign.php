@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Campaign;
 use App\Lists;
+use App\Service;
 use DOMDocument;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -12,7 +13,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use App\Service;
 
 class SendCampaign implements ShouldQueue
 {
