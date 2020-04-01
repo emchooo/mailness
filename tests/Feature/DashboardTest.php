@@ -2,12 +2,9 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\User;
-use App\Lists;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class DashboardTest extends TestCase
 {
@@ -34,5 +31,4 @@ class DashboardTest extends TestCase
 
         $response->assertStatus(200);
     }
-
 }

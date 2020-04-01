@@ -11,6 +11,7 @@ class CustomMailManager extends MailManager
     public function config(array $config)
     {
         $this->config = $config;
+
         return $this;
     }
 
@@ -22,7 +23,7 @@ class CustomMailManager extends MailManager
      */
     protected function getConfig(string $name)
     {
-        if($this->config) {
+        if ($this->config) {
             return $this->config;
         }
 
