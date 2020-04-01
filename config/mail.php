@@ -49,7 +49,7 @@ return [
             'port' => 2525,
             'encryption' => '',
             'username' => '2301530d2ee47a',
-            'password' => 'ce4afe331cef83'
+            'password' => 'ce4afe331cef83',
         ],
 
         'ses' => [
