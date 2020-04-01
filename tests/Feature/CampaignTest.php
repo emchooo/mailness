@@ -3,9 +3,12 @@
 namespace Tests\Feature;
 
 use App\Campaign;
+use App\Service;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CampaignMail;
 
 class CampaignTest extends TestCase
 {
@@ -84,6 +87,23 @@ class CampaignTest extends TestCase
 
         $this->assertEquals(0, Campaign::count());
     }
+
+    // @todo fix this test
+    // /** @test */
+    // public function itSendsTestMail()
+    // {
+    //     Mail::fake();
+
+    //     $campaign = factory(Campaign::class)->create();
+    //     $service = factory(Service::class)->create();
+
+    //     $email = 'emir@test.com';
+    //     $response = $this->actingAs($this->user)->post(route('campaigns.send.test', $campaign->id), ['email' => $email]);
+
+    //     Mail::assertSent(CampaignMail::class, function ($mail) use ($email) {
+    //         return $mail->hasTo($email);
+    //     });
+    // }
 
     /** @test */
     public function itCanDuplicateCampaign()

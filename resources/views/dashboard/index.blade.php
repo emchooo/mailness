@@ -13,11 +13,11 @@
 <div class="flex shadow-lg rounded-lg mt-10 p-5 " >
     <div class="w-1/4 text-center" >
         Contacts
-        <span class="block" >100</span>
+        <span class="block" >{{ $contacts }}</span>
     </div>
     <div class="w-1/4 text-center" >
         Total sent 
-        <span class="block" >100</span>
+        <span class="block" >{{ $sent }}</span>
     </div>
     <div class="w-1/4 text-center" >
         Total compaint

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\CustomMailManager;
 use Illuminate\Support\ServiceProvider;
 
 class MailServiceProvider extends ServiceProvider
@@ -13,7 +14,9 @@ class MailServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->extend('mail.manager', function ($app) {
+            return new CustomMailManager(app());
+        });
     }
 
     /**

@@ -16,6 +16,7 @@
 - If bounced update record
 - If compaint update record
 - Sending rate
+- Before sending campaign or test mail add warning if creds are not set
 
 # Templates
 - Implement open template ( preview )
