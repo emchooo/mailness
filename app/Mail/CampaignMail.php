@@ -29,6 +29,6 @@ class CampaignMail extends Mailable
      */
     public function build()
     {
-        return $this->html($this->content);
+        return $this->html($this->content->content);
     }
 }

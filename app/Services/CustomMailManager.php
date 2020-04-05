@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Mail\MailManager;
 
 class CustomMailManager extends MailManager
@@ -11,6 +13,8 @@ class CustomMailManager extends MailManager
     public function config(array $config)
     {
         $this->config = $config;
+
+        // $this->setGlobalAddress($this, $config, 'from' );
 
         return $this;
     }
@@ -33,5 +37,26 @@ class CustomMailManager extends MailManager
         return $this->app['config']['mail.driver']
             ? $this->app['config']['mail']
             : $this->app['config']["mail.mailers.{$name}"];
+    }
+
+    /**
+     * Set a global address on the mailer by type.
+     *
+     * @param  \Illuminate\Mail\Mailer  $mailer
+     * @param  array  $config
+     * @param  string  $type
+     * @return void
+     */
+    protected function setGlobalAddress($mailer, array $config, string $type)
+    {
+        $address = Arr::get($config, $type, $this->app['config']['mail.'.$type]);
+
+        if($this->config) {
+            $address = Arr::get($config, $type, $this->config[$type]);
+        }
+        
+        if (is_array($address) && isset($address['address'])) {
+            $mailer->{'always'.Str::studly($type)}($address['address'], $address['name']);
+        }
     }
 }

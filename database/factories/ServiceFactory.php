@@ -7,17 +7,17 @@ use Faker\Generator as Faker;
 
 $factory->define(Service::class, function (Faker $faker) {
     return [
-        'service' => 'smtp',
+        'service' => 'log',
         'credentials' => [
             'from' => [
-                'name' => 'Emir',
-                'address' => 'test@gmail.com',
+                'name' => 'Emir Factory',
+                'address' => 'test@factory.com',
             ],
-            'username'	=> '',
-            'password'	=> '',
+            'username'	=> 'test',
+            'password'	=> 'test',
             'host' => 'smtp.test.com',
             'port' => 2525,
-            'transport' => 'smtp',
+            'transport' => 'log',
             'encription' => null,
         ],
     ];
