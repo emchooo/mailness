@@ -7,24 +7,16 @@ use App\Mail\CampaignMail;
 use App\Service;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
-use Swift_Events_EventListener;
-use Swift_Message;
 
 class CampaignTest extends TestCase
 {
     use DatabaseMigrations;
 
-    protected $emails = [];
-
     protected function setUp(): void
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
-
-        Mail::getSwiftMailer()->registerPlugin(new TestingMailEventListener($this));
-
     }
 
     /** @test */
@@ -95,27 +87,6 @@ class CampaignTest extends TestCase
         $this->assertEquals(0, Campaign::count());
     }
 
-    // @todo fix this test
-    /** @test */
-    public function itSendsTestMail()
-    {
-
-        // Mail::fake();
-
-        $campaign = factory(Campaign::class)->create();
-        $service = factory(Service::class)->create();
-
-        $email = 'emir@test.com';
-        $response = $this->actingAs($this->user)->post(route('campaigns.send.test', $campaign->id), ['email' => $email]);
-
-        $this->assertNotEmpty($this->emails);
-
-
-        // Mail::assertSent(CampaignMail::class, function ($mail) use ($email) {
-        //     return $mail->hasTo($email);
-        // });
-    }
-
     /** @test */
     public function itCanDuplicateCampaign()
     {
@@ -128,27 +99,4 @@ class CampaignTest extends TestCase
         $this->assertEquals(2, Campaign::count());
         $this->assertEquals('draft', $record->status);
     }
-
-    public function addEmail(Swift_Message $email)
-    {
-        $this->emails[] = $email;
-    }
-}
-
-class TestingMailEventListener implements Swift_Events_EventListener
-{
-    protected $test;
-
-    public function __construct($test)
-    {
-        $this->test = $test;
-    }
-
-    public function beforeSendPerformed($event)
-    {
-        $message = $event->getMessage();
-
-        $this->test->addEmail($message);
-    }
-
 }
