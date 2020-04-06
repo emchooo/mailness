@@ -2,16 +2,14 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use Swift_Events_EventListener;
-use Swift_Message;
-use App\User;
-use Illuminate\Support\Facades\Mail;
 use App\Campaign;
 use App\Service;
+use App\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Mail;
+use Swift_Events_EventListener;
+use Swift_Message;
+use Tests\TestCase;
 
 class SendingMailsTest extends TestCase
 {
@@ -25,13 +23,11 @@ class SendingMailsTest extends TestCase
         $this->user = factory(User::class)->create();
 
         Mail::getSwiftMailer()->registerPlugin(new TestingMailEventListener($this));
-
     }
 
     /** @test */
     public function itSendsTestMail()
     {
-
         $campaign = factory(Campaign::class)->create();
         $service = factory(Service::class)->create();
 
@@ -62,5 +58,4 @@ class TestingMailEventListener implements Swift_Events_EventListener
 
         $this->test->addEmail($message);
     }
-
 }
