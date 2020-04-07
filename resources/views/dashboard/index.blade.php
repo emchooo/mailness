@@ -30,14 +30,19 @@
 </div>
 
 <div class="flex mt-10" >
-    <div class="w-1/2" >
+    <div class="w-1/2 shadow-lg rounded-lg p-5  " >
         <h2>Campaigns</h2>
-        <ul>
-            <li>Campaign 1</li>
-            <li>Campaign 2</li>
+        @if($campaigns)
+        <ul >
+            @foreach($campaigns as $campaign)
+                <li class="pt-2" ><a href="">{{ $campaign->subject }}</a></li>
+            @endforeach
         </ul>
+        @else
+            Crete new campaign
+        @endif
     </div>
-    <div class="w-1/2" >
+    <div class="w-1/2 shadow-lg rounded-lg p-5 " >
         <h2>Lists</h2>
         <ul>
             <li>List 1</li>
@@ -46,8 +51,8 @@
     </div>
 </div>
 
-<div>
-    <h2>Metrics</h2>
+<div class="mt-5" >
+    <h2 class="pb-3" >Metrics</h2>
 
     <span>ADD graph</span>
 
