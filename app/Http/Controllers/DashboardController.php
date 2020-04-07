@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Campaign;
 use App\Contact;
 use App\SendingLog;
-use App\Campaign;
 
 class DashboardController extends Controller
 {
