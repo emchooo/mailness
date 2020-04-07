@@ -2,10 +2,9 @@
 
 namespace App\Services;
 
+use Illuminate\Mail\MailManager;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Illuminate\Mail\MailManager;
-use Illuminate\Support\Facades\Log;
 
 class CustomMailManager extends MailManager
 {
@@ -15,7 +14,7 @@ class CustomMailManager extends MailManager
     {
         $this->config = $config;
 
-        $this->setGlobalAddress($this, $config, 'from' );
+        $this->setGlobalAddress($this, $config, 'from');
 
         return $this;
     }
@@ -52,10 +51,10 @@ class CustomMailManager extends MailManager
     {
         $address = Arr::get($config, $type, $this->app['config']['mail.'.$type]);
 
-        if($this->config && isset($this->config[$type])) {
+        if ($this->config && isset($this->config[$type])) {
             $address = Arr::get($config, $type, $this->config[$type]);
         }
-        
+
         if (is_array($address) && isset($address['address'])) {
             $mailer->{'always'.Str::studly($type)}($address['address'], $address['name']);
         }
