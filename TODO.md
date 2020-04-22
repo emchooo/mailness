@@ -1,21 +1,17 @@
 # Lists
-- Double opt-in  - send confirmation email
 - Import large lists ( split file and process )
 - Refactor import and export
 - External unsubscrive link
 - Number of unsubscribed
 - Number of bounced
-- Link From name and From email with list
-- Create list add Name and From Email
 - Check fields
-- Edit List add Name and Email
-- Refactor Download
-- Refactor Import
+- Update list fields add validation messages
 
 # Campaigns
 - When all mails are sent mark campaign as sent
 - Status as consts
 - On duplicate return original links
+- Double opt-in  - send confirmation email
 
 # Sending
 - Attach img for tracking open

@@ -50,7 +50,12 @@ class ListsController extends Controller
     public function store(ListStoreRequest $request)
     {
         $double_opt_in = $request->double_opt_in ? $request->double_opt_in : 0;
-        $list = Lists::create(['name' => $request->name, 'double_opt_in' => $double_opt_in]);
+        $list = Lists::create([
+            'name' => $request->name, 
+            'double_opt_in' => $double_opt_in,
+            'from_name' => $request->from_name,
+            'from_email' => $request->from_email,
+            ]);
 
         return redirect()->route('lists.show', $list->id);
     }
@@ -92,6 +97,8 @@ class ListsController extends Controller
 
         $lists->double_opt_in = $double_opt_in;
         $lists->name = $request->name;
+        $lists->from_name = $request->from_name;
+        $lists->from_email = $request->from_email;
         $lists->save();
 
         return redirect(route('lists.show', $lists->id));

@@ -16,6 +16,8 @@ class CreateListsTable extends Migration
         Schema::create('lists', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->uuid('uuid');
+            $table->string('from_name')->nullable();
+            $table->string('from_email')->nullable();
             $table->string('name');
             $table->boolean('double_opt_in')->default(false);
             $table->timestamps();

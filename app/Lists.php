@@ -13,7 +13,7 @@ class Lists extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'uuid', 'double_opt_in'];
+    protected $fillable = ['name', 'uuid', 'double_opt_in', 'from_name', 'from_email'];
 
     /**
      * The attributes that aren't mass assignable.

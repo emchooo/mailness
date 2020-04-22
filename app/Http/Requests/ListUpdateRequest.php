@@ -25,6 +25,7 @@ class ListUpdateRequest extends FormRequest
     {
         return [
             'name'  => 'required',
+            'from_email' => 'email'
         ];
     }
 }
