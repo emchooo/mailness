@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Campaign;
 use App\Contact;
-use App\SendingLog;
 use App\Lists;
+use App\SendingLog;
 
 class DashboardController extends Controller
 {
