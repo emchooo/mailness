@@ -20,34 +20,39 @@
         <span class="block" >{{ $sent }}</span>
     </div>
     <div class="w-1/4 text-center" >
-        Total compaint
-        <span class="block" >0</span>
+        Total complaint
+        <span class="block" >{{ $complaint }}</span>
     </div>
     <div class="w-1/4 text-center" >
         Total bounced
-        <span class="block" >0</span>
+        <span class="block" >{{ $bounced }}</span>
     </div>
 </div>
 
 <div class="flex mt-10" >
     <div class="w-1/2 shadow-lg rounded-lg p-5  " >
         <h2>Campaigns</h2>
-        @if($campaigns)
+        @if($campaigns->count() > 0)
         <ul >
             @foreach($campaigns as $campaign)
-                <li class="pt-2" ><a href="">{{ $campaign->subject }}</a></li>
+                <li class="pt-2" ><a href="{{ route('campaigns.show', $campaign->id) }}">{{ $campaign->subject }}</a></li>
             @endforeach
         </ul>
         @else
-            Crete new campaign
+            <a href="{{ route('campaigns.create') }}">Crete new campaign</a>
         @endif
     </div>
     <div class="w-1/2 shadow-lg rounded-lg p-5 " >
         <h2>Lists</h2>
-        <ul>
-            <li>List 1</li>
-            <li>List 2</li>
-        </ul>
+        @if($lists->count() > 0)
+            <ul>
+                @foreach($lists as $list)
+                    <li><a href="{{ route('lists.show', $list->id) }}">{{ $list->name }}</a></li>
+                @endforeach
+            </ul>
+        @else
+
+        @endif
     </div>
 </div>
 

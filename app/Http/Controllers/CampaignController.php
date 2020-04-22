@@ -158,7 +158,7 @@ class CampaignController extends Controller
         try {
             $config = Service::first()->getConfig();
 
-            Mail::config($config)->to($request->email)->send(new CampaignMail($campaign));
+            Mail::config($config)->to($request->email)->send(new CampaignMail($campaign->content));
 
             return back()->with(['success' => 'Test mail sent!']);
         } catch (\Exception $e) {

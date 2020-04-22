@@ -5,6 +5,12 @@
 - External unsubscrive link
 - Number of unsubscribed
 - Number of bounced
+- Link From name and From email with list
+- Create list add Name and From Email
+- Check fields
+- Edit List add Name and Email
+- Refactor Download
+- Refactor Import
 
 # Campaigns
 - When all mails are sent mark campaign as sent
@@ -17,6 +23,7 @@
 - If compaint update record
 - Sending rate
 - Before sending campaign or test mail add warning if creds are not set
+- Can't send if content is empty
 
 # Templates
 - Implement open template ( preview )

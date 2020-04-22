@@ -24,7 +24,7 @@
 <ul class="mb-5" >
 
     @foreach( $contact->sent as $sent )
-    <li><a href="{{ route('campaigns.report', [ $sent->campaign['id'] ]) }}">{{ $sent->campaign['subject'] }}</a></li>
+    <li><a href="{{ route('campaigns.report', [ $sent->campaign_id ]) }}">1. {{ $sent->campaign->subject }}</a></li>
     @endforeach
 </ul>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contact;
 use App\SendingLog;
 use App\Campaign;
+use App\Lists;
 
 class DashboardController extends Controller
 {
@@ -12,8 +13,11 @@ class DashboardController extends Controller
     {
         $contacts = Contact::count();
         $sent = SendingLog::count();
-        $campaigns = Campaign::take(3)->get();
+        $campaigns = Campaign::take(3)->orderBy('id', 'desc')->get();
+        $lists = Lists::take(3)->orderBy('id', 'desc')->get();
+        $complaint = 0;
+        $bounced = 0;
 
-        return view('dashboard.index', compact('contacts', 'sent', 'campaigns'));
+        return view('dashboard.index', compact('contacts', 'sent', 'campaigns', 'lists', 'complaint', 'bounced'));
     }
 }
