@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Contact;
 
 class UnsubscribeController extends Controller
@@ -16,8 +15,7 @@ class UnsubscribeController extends Controller
         $contact->save();
 
         // @todo if unsubsribed from campaign
-        
-        return view('lists.unsubscribe');
 
+        return view('lists.unsubscribe');
     }
 }
