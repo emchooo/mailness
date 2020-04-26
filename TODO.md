@@ -1,11 +1,7 @@
 # Lists
 - Import large lists ( split file and process )
 - Refactor import and export
-- External unsubscrive link
-- Number of unsubscribed
-- Number of bounced
-- Check fields
-- Update list fields add validation messages
+- Make template for subsribe and unsubscribe pages
 
 # Campaigns
 - When all mails are sent mark campaign as sent

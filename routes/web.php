@@ -1,9 +1,5 @@
 <?php
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::redirect('/', '/dashboard');
 
 Auth::routes();
@@ -11,6 +7,7 @@ Auth::routes();
 Route::get('lists/{listUuid}/subscribe', 'ListsController@subscribe')->name('lists.subscribe');
 Route::post('lists/{listUuid}/subscribe', 'ListsController@subscribeStore')->name('lists.subscribe.store');
 Route::get('lists/{listUuid}/subscribe/success', 'ListsController@subscribeSuccess')->name('lists.subscribe.success');
+Route::get('unsubscribe/{contact_uuid}/{campaign_uuid?}', 'UnsubscribeController@unsubscribe')->name('unsubscribe.contact');
 
 Route::get('t/{link_uuid}/{contact_uuid?}', 'TrackClickController@index')->name('open.link');
 Route::get('w/{campaign_uuid}/{contact_uuid?}', 'TrackOpenController@index')->name('open.mail');

@@ -15,6 +15,8 @@
       </div>
 
       <div class="py-3 px-6" >{{ $list->contactCount }} subscribers</div>
+      <div>{{ $list->bounces()->count() }} bounced </div>
+      <div>{{ $list->complaints()->count() }} complaints </div>
     </div>
   @endforeach
 

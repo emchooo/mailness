@@ -64,4 +64,14 @@ class Contact extends Model
     {
         return $query->where('subscribed', 0);
     }
+
+    public function scopeBounces($query)
+    {
+        return $query->whereNotNull('bounced_at');
+    }
+
+    public function scopeComplaints($query)
+    {
+        return $query->whereNotNull('complaint_at');
+    }
 }

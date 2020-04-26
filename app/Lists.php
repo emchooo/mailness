@@ -46,6 +46,16 @@ class Lists extends Model
         return $this->hasMany(Field::class, 'list_id');
     }
 
+    public function bounces()
+    {
+        return $this->contacts()->bounces();
+    }
+
+    public function complaints()
+    {
+        return $this->contacts()->complaints();
+    }
+
     /**
      * The number of models to return for pagination.
      *
