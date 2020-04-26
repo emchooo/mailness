@@ -7,7 +7,7 @@
 Mailness is free open-source self-hosted email marketing tool for sending newsletter.
 Mailness is self-hosted alternative for paid email marketing services - MailChimp, Sendy.co, Campaign Monitor ...
 
-PHP | Laravel 6 | TailwindCSS | VueJS
+PHP | Laravel 7 | TailwindCSS | VueJS
 
 # Status
 This project is currently in **pre-alpha** phase and is actively under development.
