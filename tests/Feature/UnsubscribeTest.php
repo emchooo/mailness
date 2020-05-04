@@ -24,6 +24,6 @@ class UnsubscribeTest extends TestCase
 
         $this->get(route('unsubscribe.contact', $contact2->uuid));
 
-        $this->assertEquals(1, Contact::active()->count());
+        $this->assertEquals(1, Contact::subscribed()->count());
     }
 }
