@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Contact;
-use Illuminate\Support\Str;
+use Illuminate\Database\Seeder;
 
 class ContactSeeder extends Seeder
 {
@@ -13,11 +12,9 @@ class ContactSeeder extends Seeder
      */
     public function run()
     {
-        
-        
         foreach (range(1, 10000) as $i) {
             $contact = new Contact();
-            
+
             $contact->email = "test1300{$i}@example.com";
             $contact->list_id = 1;
             $contact->save();
@@ -25,5 +22,4 @@ class ContactSeeder extends Seeder
             // $contact->refresh();
         }
     }
-
 }
