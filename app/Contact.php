@@ -55,12 +55,12 @@ class Contact extends Model
         }
     }
 
-    public function scopeActive($query)
+    public function scopeSubscribed($query)
     {
         return $query->where('subscribed', 1);
     }
 
-    public function scopeInactive($query)
+    public function scopeUnsubscribed($query)
     {
         return $query->where('subscribed', 0);
     }

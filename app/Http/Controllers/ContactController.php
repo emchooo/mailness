@@ -11,7 +11,6 @@ use App\Import;
 use App\Jobs\ImportFile;
 use App\Lists;
 use App\Services\ImportContacts;
-use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -132,40 +131,6 @@ class ContactController extends Controller
         $contact->delete();
 
         return redirect()->route('lists.index');
-    }
-
-    public function export(Lists $lists)
-    {
-        $contacts = Contact::with('fields')->where('list_id', $lists->id)->take(1000000)->orderBy('id', 'DESC')->get();
-
-        $writer = WriterEntityFactory::createCSVWriter();
-
-        $fileName = 'contacts.csv';
-        $writer->openToBrowser($fileName);
-
-        // csv file headers
-        $headers = array_keys($contacts->toArray()[0]);
-        // add custom fields to headres
-        foreach ($lists->fields as $field) {
-            $headers[] = strtolower($field->name);
-        }
-
-        $singleRow = WriterEntityFactory::createRowFromArray($headers);
-        $writer->addRow($singleRow);
-
-        foreach ($contacts as $row) {
-            $data = [];
-            $row_array = $row->toArray();
-            // foreach ($lists->fields as $field) {
-            //     $custom_field_value = $row->getFieldValue($field->id);
-            //     $custom_field_value ? $data[] = $custom_field_value : $data[] = '';
-            // }
-            $final = array_merge($row_array, $data);
-            $singleRow2 = WriterEntityFactory::createRowFromArray($final);
-            $writer->addRow($singleRow2);
-        }
-
-        $writer->close();
     }
 
     public function import(Lists $lists)
