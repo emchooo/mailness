@@ -49,7 +49,7 @@ class ListsController extends Controller
      */
     public function store(ListStoreRequest $request)
     {
-        if(! $request->exists('double_opt_in')){
+        if (! $request->exists('double_opt_in')) {
             $request->request->add(['double_opt_in' => 0]);
         }
 
@@ -66,7 +66,7 @@ class ListsController extends Controller
      */
     public function show(Request $request, Lists $lists)
     {
-        $contacts = Contact::where('list_id','=',$lists->id)
+        $contacts = Contact::where('list_id', '=', $lists->id)
                             ->where('subscribed', ! $request->subscribed)
                             ->orderBy('id', 'desc')
                             ->paginate(10);
@@ -94,7 +94,7 @@ class ListsController extends Controller
      */
     public function update(ListUpdateRequest $request, Lists $lists)
     {
-        if(! $request->exists('double_opt_in')){
+        if (! $request->exists('double_opt_in')) {
             $request->request->add(['double_opt_in' => 0]);
         }
 

@@ -128,12 +128,12 @@ class CampaignController extends Controller
             return back();
         }
 
-        $updationArray = array_merge($request->only(['subject', 'sending_name', 'sending_email','content']),
+        $updationArray = array_merge($request->only(['subject', 'sending_name', 'sending_email', 'content']),
                     [
-                    'track_clicks' => $request->track_clicks ? 1 : 0,
-                    'track_opens' => $request->track_opens ? 1 : 0,
-                ]);
-                
+                        'track_clicks' => $request->track_clicks ? 1 : 0,
+                        'track_opens' => $request->track_opens ? 1 : 0,
+                    ]);
+
         $campaign->update($updationArray);
 
         return redirect()->route('campaigns.show', $campaign->id);

@@ -6,8 +6,7 @@ use Illuminate\View\Component;
 
 class CheckErrorExistsComponent extends Component
 {
-    /** @var string $controlName */
-
+    /** @var string */
     public $controlName;
 
     /**
