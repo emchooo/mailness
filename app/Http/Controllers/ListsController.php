@@ -49,13 +49,11 @@ class ListsController extends Controller
      */
     public function store(ListStoreRequest $request)
     {
-        $double_opt_in = $request->double_opt_in ? $request->double_opt_in : 0;
-        $list = Lists::create([
-            'name' => $request->name,
-            'double_opt_in' => $double_opt_in,
-            'from_name' => $request->from_name,
-            'from_email' => $request->from_email,
-        ]);
+        if(! $request->exists('double_opt_in')){
+            $request->request->add(['double_opt_in' => 0]);
+        }
+
+        $list = Lists::create($request->except(['__token']));
 
         return redirect()->route('lists.show', $list->id);
     }
@@ -68,7 +66,10 @@ class ListsController extends Controller
      */
     public function show(Request $request, Lists $lists)
     {
-        $contacts = Contact::where('list_id', $lists->id)->where('subscribed', ! $request->subscribed)->orderBy('id', 'desc')->paginate(10);
+        $contacts = Contact::where('list_id','=',$lists->id)
+                            ->where('subscribed', ! $request->subscribed)
+                            ->orderBy('id', 'desc')
+                            ->paginate(10);
 
         return view('lists.show', ['list' => $lists, 'contacts' => $contacts, 'subscribed' => $request->subscribed]);
     }
@@ -93,13 +94,11 @@ class ListsController extends Controller
      */
     public function update(ListUpdateRequest $request, Lists $lists)
     {
-        $double_opt_in = $request->double_opt_in ? $request->double_opt_in : 0;
+        if(! $request->exists('double_opt_in')){
+            $request->request->add(['double_opt_in' => 0]);
+        }
 
-        $lists->double_opt_in = $double_opt_in;
-        $lists->name = $request->name;
-        $lists->from_name = $request->from_name;
-        $lists->from_email = $request->from_email;
-        $lists->save();
+        $lists->update($request->except(['__token']));
 
         return redirect(route('lists.show', $lists->id));
     }

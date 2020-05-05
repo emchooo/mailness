@@ -11,6 +11,61 @@ class Campaign extends Model
     const DRAFT = 'draft';
     const SENDING = 'sending';
     const SENT = 'sent';
+    const FINISHED = 'finished';
+
+    /**
+     * Checks if Current Campaign status is as Specified
+     *
+     * @param string $status
+     * @return bool
+     **/
+    public function isInStatus(string $status):bool
+    {
+        if($this->status === $status){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks if Current Campaign status is Draft
+     *
+     * @return bool
+     **/
+    public function isDraft()
+    {
+        return $this->isInStatus($this::DRAFT);
+    }
+
+    /**
+     * Checks if Current Campaign status is Not Draft
+     *
+     * @return bool
+     **/
+    public function isNotDraft()
+    {
+        return ! $this->isDraft();
+    }
+
+    /**
+     * Checks if Current Campaign status is Finished
+     *
+     * @return bool
+     **/
+    public function isFinished()
+    {
+        return $this->isInStatus($this::FINISHED);
+    }
+
+    /**
+     * Checks if Current Campaign status is Not FINISHED
+     *
+     * @return bool
+     **/
+    public function isNotFinished()
+    {
+        return ! $this->isFinished();
+    }
 
     /**
      * The "booting" method of the model.

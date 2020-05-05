@@ -24,12 +24,12 @@ class SmtpSettings extends FormRequest
     public function rules()
     {
         return [
-            'host' => 'required',
-            'port' => 'required|integer',
-            'username' => 'required',
-            'password' => 'required',
-            'name' => 'required',
-            'address' => 'required|email',
+            'host' => ['required'],
+            'port' => ['required','integer'],
+            'username' => ['required'],
+            'password' => ['required'],
+            'name' => ['required'],
+            'address' => ['required','email'],
         ];
     }
 }
