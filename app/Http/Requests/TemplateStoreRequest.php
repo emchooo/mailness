@@ -24,8 +24,8 @@ class TemplateStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  => 'required',
-            'content'   => 'required',
+            'name'  => ['required'],
+            'content'   => ['required'],
         ];
     }
 }

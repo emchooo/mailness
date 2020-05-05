@@ -24,8 +24,8 @@ class SettingsUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email',
+            'name' => ['required'],
+            'email' => ['required', 'email'],
         ];
     }
 }

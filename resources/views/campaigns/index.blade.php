@@ -10,10 +10,11 @@
 @foreach($campaigns as $campaign)
     <div class="bg-gray-100 p-4 shadow flex justify-between mb-2 " >
         <div>
-        <a href="{{ route('campaigns.show', $campaign->id) }}">{{ $campaign->subject }} </a> <span class="text-xs text-gray-500 pl-4" >{{ $campaign->status }}</span>
+            <a href="{{ route('campaigns.show', $campaign->id) }}">{{ $campaign->subject }} </a> 
+            <span class="text-xs text-gray-500 pl-4" >{{ $campaign->status }}</span>
         </div>
         <div>
-            @if($campaign->status == 'draft')
+            @if($campaign->isDraft())
                 <a href="{{ route('campaigns.edit', $campaign->id) }}" class="bg-gray-200 px-2 py-1 rounded border" >Edit</a>
             @endif
             <form action="{{ route('campaigns.duplicate', $campaign->id) }}" method="POST" >
