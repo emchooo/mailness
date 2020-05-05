@@ -6,7 +6,7 @@ use Illuminate\View\Component;
 
 class ErrorAlertComponent extends Component
 {
-    /** @var string $errorMessage */
+    /** @var string */
     public $errorMessage;
 
     /**

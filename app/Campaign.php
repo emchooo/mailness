@@ -14,21 +14,22 @@ class Campaign extends Model
     const FINISHED = 'finished';
 
     /**
-     * Checks if Current Campaign status is as Specified
+     * Checks if Current Campaign status is as Specified.
      *
      * @param string $status
      * @return bool
      **/
-    public function isInStatus(string $status):bool
+    public function isInStatus(string $status): bool
     {
-        if($this->status === $status){
+        if ($this->status === $status) {
             return true;
         }
+
         return false;
     }
 
     /**
-     * Checks if Current Campaign status is Draft
+     * Checks if Current Campaign status is Draft.
      *
      * @return bool
      **/
@@ -38,7 +39,7 @@ class Campaign extends Model
     }
 
     /**
-     * Checks if Current Campaign status is Not Draft
+     * Checks if Current Campaign status is Not Draft.
      *
      * @return bool
      **/
@@ -48,7 +49,7 @@ class Campaign extends Model
     }
 
     /**
-     * Checks if Current Campaign status is Finished
+     * Checks if Current Campaign status is Finished.
      *
      * @return bool
      **/
@@ -58,7 +59,7 @@ class Campaign extends Model
     }
 
     /**
-     * Checks if Current Campaign status is Not FINISHED
+     * Checks if Current Campaign status is Not FINISHED.
      *
      * @return bool
      **/

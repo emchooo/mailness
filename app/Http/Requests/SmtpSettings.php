@@ -25,11 +25,11 @@ class SmtpSettings extends FormRequest
     {
         return [
             'host' => ['required'],
-            'port' => ['required','integer'],
+            'port' => ['required', 'integer'],
             'username' => ['required'],
             'password' => ['required'],
             'name' => ['required'],
-            'address' => ['required','email'],
+            'address' => ['required', 'email'],
         ];
     }
 }
