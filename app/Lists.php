@@ -43,7 +43,7 @@ class Lists extends Model
 
     public function unsubscribedContacts(): HasMany
     {
-        return $this->hasMany(Contact::class, 'list_id')->unsubscribed(); 
+        return $this->hasMany(Contact::class, 'list_id')->unsubscribed();
     }
 
     public function fields(): HasMany

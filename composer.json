@@ -15,7 +15,8 @@
         "fruitcake/laravel-cors": "^1.0",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0"
+        "laravel/ui": "^2.0",
+        "laravelcollective/html": "^6.1"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.4",

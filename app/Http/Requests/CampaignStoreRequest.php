@@ -24,9 +24,10 @@ class CampaignStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'subject'   => 'required',
-            'sending_name'  => 'required',
-            'sending_email' => 'required|email',
+            'subject'   => ['required'],
+            'sending_name'  => ['required'],
+            'sending_email' => ['required', 'email'],
+            'content' => ['required'],
         ];
     }
 
@@ -55,6 +56,7 @@ class CampaignStoreRequest extends FormRequest
             'subject' => 'Subject',
             'sending_name' => 'Sending Name',
             'sending_email' => 'Sending Email',
+            'content' => 'Content',
         ];
     }
 }

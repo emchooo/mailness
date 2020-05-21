@@ -24,8 +24,8 @@ class ListStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  => 'required',
-            'from_email' => 'email',
+            'name'  => ['required'],
+            'from_email' => ['email'],
         ];
     }
 

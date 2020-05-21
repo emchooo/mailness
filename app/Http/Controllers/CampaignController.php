@@ -90,9 +90,10 @@ class CampaignController extends Controller
      */
     public function show(Campaign $campaign)
     {
-        $lists = Lists::pluck('name', 'id');
+        $lists = DB::table((new Lists)->getTable())
+                        ->pluck('name', 'id');
 
-        if ($campaign->status == 'finished') {
+        if ($campaign->isFinished()) {
             return redirect()->to(route('campaigns.report', $campaign->id));
         }
 
@@ -107,8 +108,7 @@ class CampaignController extends Controller
      */
     public function edit(Campaign $campaign)
     {
-        // @todo refactor this
-        if ($campaign->status != 'draft') {
+        if ($campaign->isNotDraft()) {
             return back();
         }
 
@@ -124,18 +124,17 @@ class CampaignController extends Controller
      */
     public function update(CampaignStoreRequest $request, Campaign $campaign)
     {
-        // @todo refactor this
-        if ($campaign->status != 'draft') {
+        if ($campaign->isNotDraft()) {
             return back();
         }
-        // @todo add validation
-        $campaign->subject = $request->subject;
-        $campaign->sending_name = $request->sending_name;
-        $campaign->sending_email = $request->sending_email;
-        $campaign->content = $request->content;
-        $campaign->track_clicks = $request->track_clicks ? 1 : 0;
-        $campaign->track_opens = $request->track_opens ? 1 : 0;
-        $campaign->save();
+
+        $updationArray = array_merge($request->only(['subject', 'sending_name', 'sending_email', 'content']),
+                    [
+                        'track_clicks' => $request->track_clicks ? 1 : 0,
+                        'track_opens' => $request->track_opens ? 1 : 0,
+                    ]);
+
+        $campaign->update($updationArray);
 
         return redirect()->route('campaigns.show', $campaign->id);
     }
@@ -168,7 +167,7 @@ class CampaignController extends Controller
 
     public function send(SendCampaignRequest $request, Campaign $campaign)
     {
-        if ($campaign->status != 'draft') {
+        if ($campaign->isNotDraft()) {
             return back()->with(['error' => 'Campaign must be in draft mode.']);
         }
 

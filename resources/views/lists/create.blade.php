@@ -13,24 +13,26 @@
 		@csrf
 
 		<label for="name">Name</label>
+
 		<input value="{{ old('name') }}" type="text" name="name" class="m-2 p-2 bg-gray-200 hover:bg-gray-100 hover:border-gray-900 focus:outline-none focus:bg-white focus:shadow-outline focus:border-gray-303" placeholder="List name">
 
-		@if($errors->has('name'))
-			<div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
-				<p>{{ $errors->first('name') }}</p>
-			</div>
-		@endif
+		<x-errorExists
+		controlName="name">
+		</x-errorExists>
 
 		<label for="">From name</label>
 		<input value="{{ old('from_name') }}" type="text" name="from_name" class="m-2 p-2 bg-gray-200 hover:bg-gray-100 hover:border-gray-900 focus:outline-none focus:bg-white focus:shadow-outline focus:border-gray-303" placeholder="from name">
 
+		<x-errorExists
+		controlName="from_name">
+		</x-errorExists>
+
 		<label for="email">From email</label>
 		<input value="{{ old('from_email') }}" type="text" name="from_email" class="m-2 p-2 bg-gray-200 hover:bg-gray-100 hover:border-gray-900 focus:outline-none focus:bg-white focus:shadow-outline focus:border-gray-303" placeholder="from email">
-		@if($errors->has('from_email'))
-			<div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
-				<p>{{ $errors->first('from_email') }}</p>
-			</div>
-		@endif
+
+		<x-errorExists
+		controlName="from_email">
+		</x-errorExists>
 
 		<div class="block ml-2 my-2">
 			<input type="checkbox" name="double_opt_in" value="1">

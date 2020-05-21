@@ -11,47 +11,31 @@
 
 <input type="text" name="subject" value="{{ old('subject') }}" placeholder="Subject" class="bg-gray-300 p-2 mb-2 block">  
 
-  @if($errors->has('subject'))
-    <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
-      <p>{{ $errors->first('subject') }}</p>
-    </div>
-  @endif
+<x-errorExists
+controlName="subject">
+</x-errorExists>
 
 <input type="text" name="sending_name" value="{{ old('sending_name') }}" placeholder="Sending name" class="bg-gray-300 mb-2 p-2 block">
 
-@if($errors->has('sending_name'))
-    <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
-      <p>{{ $errors->first('sending_name') }}</p>
-    </div>
-  @endif
-
+<x-errorExists controlName="sending_name"> </x-errorExists>
 
 <input type="text" name="sending_email" value="{{ old('sending_email') }}" placeholder="Sending email" class="bg-gray-300 mb-2 p-2 block" >
-@if($errors->has('sending_email'))
-    <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
-      <p>{{ $errors->first('sending_email') }}</p>
-    </div>
-  @endif
+
+<x-errorExists controlName="sending_email"> </x-errorExists>
 
   <div class="block">
     <input type="checkbox" name="track_clicks" value="1" >
-    <label for="">Track clicks</label>
+    <label for="track_clicks">Track clicks</label>
   </div>
-  @if($errors->has('track_clicks'))
-    <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
-      <p>{{ $errors->first('track_clicks') }}</p>
-    </div>
-  @endif
+
+  <x-errorExists controlName="track_clicks"> </x-errorExists>
 
   <div class="block">
     <input type="checkbox" name="track_opens" value="1" >
-    <label for="">Track opens</label>
+    <label for="track_opens">Track opens</label>
   </div>
-  @if($errors->has('track_opens'))
-    <div class="bg-red-100 border-l-4 border-orange-500 text-orange-700 p-2 mx-2" role="alert">
-      <p>{{ $errors->first('track_opens') }}</p>
-    </div>
-  @endif
+
+  <x-errorExists controlName="track_opens"> </x-errorExists>
 
   <div>
     Select template:

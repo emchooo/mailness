@@ -9,6 +9,8 @@
 
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+  @stack('pageSpecificCss')
+
 </head>
 <body class="font-openSans">
 
@@ -17,7 +19,6 @@
     <div class="container mx-auto pt-5 px-3">
       @yield('content')
     </div>
-    
-
+    @stack('pageSpecificJS')
 </body>
 </html>
