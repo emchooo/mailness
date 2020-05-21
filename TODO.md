@@ -1,7 +1,6 @@
 # Lists
 - Make template for subsribe and unsubscribe pages
 - Double opt-in  - send confirmation email
-- When creating new List add First and Last name Fields
 
 # Campaigns
 - When all mails are sent mark campaign as sent

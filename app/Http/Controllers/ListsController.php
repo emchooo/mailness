@@ -55,6 +55,16 @@ class ListsController extends Controller
 
         $list = Lists::create($request->except(['__token']));
 
+        $list->fields()->create([
+                'name' => 'First name',
+                'slug' => 'first_name'
+            ]);
+            
+        $list->fields()->create([
+            'name' => 'Last name',
+            'slug' => 'last_name'
+        ]);
+
         return redirect()->route('lists.show', $list->id);
     }
 
