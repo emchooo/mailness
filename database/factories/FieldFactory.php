@@ -8,8 +8,9 @@ use Illuminate\Support\Str;
 
 $factory->define(Field::class, function (Faker $faker) {
     $name = $faker->name;
+
     return [
         'name'	=> $name,
-        'slug' => Str::slug($name)
+        'slug' => Str::slug($name),
     ];
 });
