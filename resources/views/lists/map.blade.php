@@ -33,11 +33,11 @@
 
     @foreach($listFields as $field)
       <div class="block mt-2">
-        <label for="">{{ $field }}</label>
-        <select name="{{ $field }}" id="">
+        <label for="">{{ $field->name }}</label>
+        <select name="{{ $field->slug }}" id="">
           <option value=""></option>
           @foreach($fileFields as $f)
-            <option value="{{ $f }}" @if(stripos($field, $f) !== false) selected="selected" @endif >{{ $f }}</option>
+            <option value="{{ $f }}" @if(stripos($field->slug, $f) !== false) selected="selected" @endif >{{ $f }}</option>
           @endforeach
         </select>
       </div>

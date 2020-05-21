@@ -1,6 +1,4 @@
 # Lists
-- Import large lists ( split file and process )
-- Refactor import and export
 - Make template for subsribe and unsubscribe pages
 - Double opt-in  - send confirmation email
 - When creating new List add First and Last name Fields

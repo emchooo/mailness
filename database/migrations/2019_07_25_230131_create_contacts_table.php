@@ -24,6 +24,8 @@ class CreateContactsTable extends Migration
             $table->datetime('bounced_at')->nullable();
             $table->datetime('complaint_at')->nullable();
             $table->timestamps();
+
+            $table->index(['list_id']);
         });
     }
 

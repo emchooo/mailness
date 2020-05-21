@@ -6,6 +6,7 @@ use App\Field;
 use App\Http\Requests\FieldStoreRequest;
 use App\Lists;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class FieldController extends Controller
 {
@@ -44,6 +45,7 @@ class FieldController extends Controller
         // @todo add validation
         $field = new Field();
         $field->name = $request->name;
+        $field->slug = Str::slug($request->name);
         $field->list_id = $list_id;
         $field->save();
 

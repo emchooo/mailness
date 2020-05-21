@@ -6,13 +6,8 @@ use App\Contact;
 use App\Field;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ContactUpdateRequest;
-use App\Http\Requests\ImportSaveRequest;
-use App\Import;
-use App\Jobs\ImportFile;
 use App\Lists;
-use App\Services\ImportContacts;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ContactController extends Controller
@@ -131,52 +126,5 @@ class ContactController extends Controller
         $contact->delete();
 
         return redirect()->route('lists.index');
-    }
-
-    public function import(Lists $lists)
-    {
-        return view('lists.import', ['list' => $lists]);
-    }
-
-    public function importSave(Lists $lists, ImportSaveRequest $request)
-    {
-        $path = Storage::drive('public')->putFileAs('imports', $request->file('file'), Str::uuid().'.csv');
-
-        $import = new Import();
-        $import->path = $path;
-        $import->list_id = $lists->id;
-        $import->contacts_subscribed = $request->contacts_subscribed;
-        $import->skip_duplicate = $request->skip_duplicate;
-        $import->save();
-
-        return redirect()->route('contacts.import.map', ['lists' => $lists, 'id' => $import->id]);
-    }
-
-    public function map(Lists $lists, $import_id)
-    {
-        $import = new ImportContacts($import_id);
-
-        $fileFields = $import->getFileFields();
-
-        $listFields = $import->getListFields($lists);
-
-        return view('lists.map', ['fileFields' => $fileFields, 'listFields' => $listFields, 'list' => $lists, 'import_id' => $import_id]);
-    }
-
-    public function importProcess(Request $request, Lists $lists, $import_id)
-    {
-        $importer = new ImportContacts($import_id);
-
-        if (! $request->email) {
-            return back()->withErrors(['email_field' => 'Email field is empty']);
-        }
-
-        if (! $importer->isEmailFieldsValidEmailAddress($request)) {
-            return back()->withErrors(['email_field' => 'Email field is not valid']);
-        }
-
-        ImportFile::dispatch($request->except(['_token']), $lists, $import_id);
-
-        return redirect()->route('lists.show', $lists->id);
     }
 }

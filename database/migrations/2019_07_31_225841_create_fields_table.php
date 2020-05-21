@@ -17,6 +17,7 @@ class CreateFieldsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('list_id');
             $table->string('name');
+            $table->string('slug');
             $table->timestamps();
         });
     }

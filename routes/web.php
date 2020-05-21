@@ -39,10 +39,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('lists/{lists}/fields/{field}/delete', 'FieldController@destroy')->name('fields.delete');
 
     Route::post('lists/{lists}/contacts/export/{type?}', 'ExportController@export')->name('contacts.export');
-    Route::get('lists/{lists}/import', 'ContactController@import')->name('contacts.import');
-    Route::post('lists/{lists}/import', 'ContactController@importSave')->name('contacts.import.save');
-    Route::get('lists/{lists}/import/{id}/map', 'ContactController@map')->name('contacts.import.map');
-    Route::post('lists/{lists}/import/{id}/process', 'ContactController@importProcess')->name('contacts.import.process');
+    Route::get('lists/{lists}/import', 'ImportController@create')->name('contacts.import');
+    Route::post('lists/{lists}/import', 'ImportController@store')->name('contacts.import.save');
+    Route::get('lists/{lists}/import/{id}/map', 'ImportController@map')->name('contacts.import.map');
+    Route::post('lists/{lists}/import/{id}/process', 'ImportController@importProcess')->name('contacts.import.process');
 
     Route::get('lists/{lists}/parse', 'ContactController@importParse');
 
