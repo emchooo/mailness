@@ -7,8 +7,6 @@ use App\Field;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ContactUpdateRequest;
 use App\Lists;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class ContactController extends Controller
 {

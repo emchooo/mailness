@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Lists;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ImportSaveRequest;
 use App\Import;
-use App\Jobs\ImportFile;
-use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
-use App\Contact;
-use App\Field;
 use App\Jobs\ImportContacts;
+use App\Lists;
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ImportController extends Controller
 {
@@ -29,7 +26,7 @@ class ImportController extends Controller
             'path' => $path,
             'list_id' => $lists->id,
             'contacts_subscribed' => $request->contacts_subscribed,
-            'skip_duplicate' => $request->skip_duplicate
+            'skip_duplicate' => $request->skip_duplicate,
         ]);
 
         return redirect()->route('contacts.import.map', ['lists' => $lists, 'id' => $import->id]);
@@ -43,13 +40,11 @@ class ImportController extends Controller
 
         return $header->current()->toArray();
     }
-    
 
     public function map(Lists $lists, $import_id)
     {
-
         $import = Import::findOrFail($import_id);
-        
+
         $file_path = storage_path('app/public/'.$import->path);
 
         $reader = ReaderEntityFactory::createReaderFromFile($file_path);
@@ -69,7 +64,7 @@ class ImportController extends Controller
         $mapped_fields = array_flip(array_filter($request->except('_token')));
 
         $import = Import::findOrFail($import_id);
-        
+
         $file_path = storage_path('app/public/'.$import->path);
 
         $reader = ReaderEntityFactory::createReaderFromFile($file_path);
@@ -86,24 +81,24 @@ class ImportController extends Controller
         $delimeter = 250;
 
         $contacts = [];
-        foreach($sheet->getRowIterator() as $sheet_row) {
+        foreach ($sheet->getRowIterator() as $sheet_row) {
             $count++;
 
             $row = $sheet_row->toArray();
 
-            if($row == $header) {
+            if ($row == $header) {
                 continue;
             }
-            
+
             $contact = array_combine($header, $row);
 
             $new_contacts = [];
-            foreach($mapped_fields as $key => $value) {
+            foreach ($mapped_fields as $key => $value) {
                 $new_contacts[$value] = $contact[$key];
                 array_push($contacts, $new_contacts);
             }
-            
-            if($count > $delimeter ) {
+
+            if ($count > $delimeter) {
                 ImportContacts::dispatch($contacts, $lists->id, $import->id);
                 $contacts = [];
                 $count = 1;
@@ -111,7 +106,6 @@ class ImportController extends Controller
         }
 
         ImportContacts::dispatch($contacts, $lists->id, $import->id);
-        
 
         $reader->close();
 
