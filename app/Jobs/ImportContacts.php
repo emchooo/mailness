@@ -2,14 +2,14 @@
 
 namespace App\Jobs;
 
+use App\Contact;
+use App\Field;
+use App\Import;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Import;
-use App\Contact;
-use App\Field;
 
 class ImportContacts implements ShouldQueue
 {
@@ -26,7 +26,7 @@ class ImportContacts implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(array $contacts, $list_id, $import_id )
+    public function __construct(array $contacts, $list_id, $import_id)
     {
         $this->contacts = $contacts;
         $this->list_id = $list_id;
@@ -41,27 +41,27 @@ class ImportContacts implements ShouldQueue
     public function handle()
     {
         $import = Import::findOrFail($this->import_id);
-        foreach($this->contacts as $contact) {
-            $this->import_contact($contact, $this->list_id , $import);
+        foreach ($this->contacts as $contact) {
+            $this->import_contact($contact, $this->list_id, $import);
         }
     }
 
     public function import_contact(array $contact_array, $list_id, $import)
     {
-        $contact = Contact::where('email', $contact_array['email'])->where('list_id', $list_id)->first(); 
-        if($contact and $import->skip_duplicate) {
+        $contact = Contact::where('email', $contact_array['email'])->where('list_id', $list_id)->first();
+        if ($contact and $import->skip_duplicate) {
             return;
         }
-        if($contact) {
+        if ($contact) {
             $this->update_contact($contact_array, $contact, $import);
+
             return;
         } else {
             $this->new_contact($contact_array, $list_id, $import);
         }
-        
     }
 
-    public function update_contact($contact_array, $contact, $import )
+    public function update_contact($contact_array, $contact, $import)
     {
         $contact->subscribed = $import->contacts_subscribed;
         $contact->save();
@@ -94,7 +94,6 @@ class ImportContacts implements ShouldQueue
                     $contact->fields()->attach($field, ['value' => $value]);
                 }
             }
-
         }
     }
 }
