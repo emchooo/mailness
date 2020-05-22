@@ -162,7 +162,7 @@ class ListsController extends Controller
             }
         }
 
-        if($list->double_opt_in) {
+        if ($list->double_opt_in) {
             SendConfirmSubscriptionEmail::dispatch($contact);
         }
 
@@ -183,6 +183,5 @@ class ListsController extends Controller
         $contact->setAsConfirmed();
         
         return view('lists.confirmed', [ 'contact' => $contact ]);
-
     }
 }

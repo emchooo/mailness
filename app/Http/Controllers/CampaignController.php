@@ -69,7 +69,8 @@ class CampaignController extends Controller
             $content = $template->content;
         }
 
-        $creationArray = array_merge($request->only(['subject', 'sending_name', 'sending_email']),
+        $creationArray = array_merge(
+            $request->only(['subject', 'sending_name', 'sending_email']),
             [
                 'content' => $content,
                 'track_clicks'  => $request->track_clicks ? 0 : 1,
@@ -128,11 +129,13 @@ class CampaignController extends Controller
             return back();
         }
 
-        $updationArray = array_merge($request->only(['subject', 'sending_name', 'sending_email', 'content']),
-                    [
+        $updationArray = array_merge(
+            $request->only(['subject', 'sending_name', 'sending_email', 'content']),
+            [
                         'track_clicks' => $request->track_clicks ? 1 : 0,
                         'track_opens' => $request->track_opens ? 1 : 0,
-                    ]);
+                    ]
+        );
 
         $campaign->update($updationArray);
 

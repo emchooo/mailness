@@ -39,7 +39,6 @@ class ContactController extends Controller
      */
     public function store(ContactStoreRequest $request, Lists $lists)
     {
-
         $contactCreationArray = array_merge(
             $request->only(['email']),
             [
@@ -59,7 +58,7 @@ class ContactController extends Controller
             }
         }
 
-        if($request->confirmation_mail) {
+        if ($request->confirmation_mail) {
             $contact->setAsUnsubscribed();
             SendConfirmSubscriptionEmail::dispatch($contact);
         }
