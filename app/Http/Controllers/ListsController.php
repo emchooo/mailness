@@ -9,6 +9,7 @@ use App\Http\Requests\ListUpdateRequest;
 use App\Http\Requests\StoreSubscriptionRequest;
 use App\Lists;
 use Illuminate\Http\Request;
+use App\Jobs\SendConfirmSubscriptionEmail;
 
 class ListsController extends Controller
 {
@@ -161,8 +162,8 @@ class ListsController extends Controller
             }
         }
 
-        if ($list->double_opt_in) {
-            // send confirmation email
+        if($list->double_opt_in) {
+            SendConfirmSubscriptionEmail::dispatch($contact);
         }
 
         return redirect()->to(route('lists.subscribe.success', $list->uuid));
@@ -171,5 +172,17 @@ class ListsController extends Controller
     public function subscribeSuccess(Lists $list)
     {
         return view('lists.subscribeSuccess', compact('list'));
+    }
+
+    public function subscribeConfirm($list_uuid, $contact_uuid)
+    {
+        $list = Lists::where('uuid', $list_uuid)->firstOrFail();
+
+        $contact = Contact::where('list_id', $list->id)->where('uuid', $contact_uuid)->firstOrFail();
+
+        $contact->setAsConfirmed();
+        
+        return view('lists.confirmed', [ 'contact' => $contact ]);
+
     }
 }

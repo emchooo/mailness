@@ -7,6 +7,7 @@ use App\Field;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ContactUpdateRequest;
 use App\Lists;
+use App\Jobs\SendConfirmSubscriptionEmail;
 
 class ContactController extends Controller
 {
@@ -38,6 +39,7 @@ class ContactController extends Controller
      */
     public function store(ContactStoreRequest $request, Lists $lists)
     {
+
         $contactCreationArray = array_merge(
             $request->only(['email']),
             [
@@ -47,6 +49,7 @@ class ContactController extends Controller
 
         $contact = Contact::create($contactCreationArray);
 
+
         if ($request->fields) {
             foreach ($request->fields as $key => $value) {
                 if ($value) {
@@ -54,6 +57,11 @@ class ContactController extends Controller
                     $contact->fields()->attach($field, ['value' => $value]);
                 }
             }
+        }
+
+        if($request->confirmation_mail) {
+            $contact->setAsUnsubscribed();
+            SendConfirmSubscriptionEmail::dispatch($contact);
         }
 
         return redirect()->route('lists.show', $lists->id);

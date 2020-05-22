@@ -74,4 +74,17 @@ class Contact extends Model
     {
         return $query->whereNotNull('complaint_at');
     }
+
+    public function setAsConfirmed()
+    {
+        $this->subscribed = 1;
+        $this->confirmed_at = now();
+        $this->save();
+    }
+
+    public function setAsUnsubscribed()
+    {
+        $this->subscribed = 0;
+        $this->save();
+    }
 }

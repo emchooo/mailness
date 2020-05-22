@@ -1,11 +1,10 @@
 # Lists
-- Make template for subsribe and unsubscribe pages
-- Double opt-in  - send confirmation email
 
 # Campaigns
 - When all mails are sent mark campaign as sent
 - Status as consts
 - On duplicate return original links
+- If unsubsribed from campaign save in log
 
 # Sending
 - Attach img for tracking open

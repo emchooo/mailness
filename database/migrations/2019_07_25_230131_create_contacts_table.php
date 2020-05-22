@@ -21,6 +21,7 @@ class CreateContactsTable extends Migration
             $table->datetime('approved_at')->nullable();
             $table->boolean('subscribed')->default(1);
             $table->datetime('unsubscribed_at')->nullable();
+            $table->datetime('confirmed_at')->nullable();
             $table->datetime('bounced_at')->nullable();
             $table->datetime('complaint_at')->nullable();
             $table->timestamps();
