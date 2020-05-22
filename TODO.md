@@ -1,4 +1,5 @@
 # Lists
+- Confirmation mail can be customised
 
 # Campaigns
 - When all mails are sent mark campaign as sent
