@@ -2,14 +2,14 @@
 
 namespace App\Jobs;
 
+use App\Mail\ConfirmSubscription;
+use App\Service;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Service;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ConfirmSubscription;
 
 class SendConfirmSubscriptionEmail implements ShouldQueue
 {
