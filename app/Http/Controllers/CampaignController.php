@@ -132,9 +132,9 @@ class CampaignController extends Controller
         $updationArray = array_merge(
             $request->only(['subject', 'sending_name', 'sending_email', 'content']),
             [
-                        'track_clicks' => $request->track_clicks ? 1 : 0,
-                        'track_opens' => $request->track_opens ? 1 : 0,
-                    ]
+                'track_clicks' => $request->track_clicks ? 1 : 0,
+                'track_opens' => $request->track_opens ? 1 : 0,
+            ]
         );
 
         $campaign->update($updationArray);
