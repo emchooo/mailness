@@ -47,10 +47,10 @@ class ListTest extends TestCase
         $response = $this->actingAs($this->user)->post(route('lists.store'), [
             'name' => $name,
             'from_email' => $email,
-            ]);
+        ]);
 
         $list = Lists::first();
-        
+
         $this->assertEquals($list->name, $name);
         $response->assertRedirect(route('lists.show', $list->id));
     }
