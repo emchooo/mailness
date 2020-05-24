@@ -38,12 +38,10 @@ class TextBox extends Component
         string $controlName,
         ?string $labelText = null,
         ?string $placeholder = null
-        )
-    {
+        ) {
         $this->controlName = $controlName;
-        $this->labelText = is_null($labelText) ? Str::of($controlName)->title()->replace('_',' ') : $labelText;
+        $this->labelText = is_null($labelText) ? Str::of($controlName)->title()->replace('_', ' ') : $labelText;
         $this->placeholder = $placeholder;
-        
     }
 
     /**

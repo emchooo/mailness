@@ -25,7 +25,7 @@ class ListStoreRequest extends FormRequest
     {
         return [
             'name'  => ['required'],
-            'from_email' => ['required','email',],
+            'from_email' => ['required', 'email'],
         ];
     }
 
