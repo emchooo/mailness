@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Campaign;
 use App\Contact;
+use App\Jobs\Middleware\RateLimited;
 use App\Mail\CampaignMail;
 use App\SendingLog;
 use Carbon\Carbon;
@@ -14,7 +15,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
-use App\Jobs\Middleware\RateLimited;
 
 class SendEmail implements ShouldQueue
 {
@@ -54,7 +54,6 @@ class SendEmail implements ShouldQueue
             ->update(['sent_at' => Carbon::now()]);
     }
 
-
     /**
      * Get the middleware the job should pass through.
      *
@@ -64,7 +63,6 @@ class SendEmail implements ShouldQueue
     {
         return [new RateLimited];
     }
-
 
     /**
      * Determine the time at which the job should timeout.
