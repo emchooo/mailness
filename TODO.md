@@ -11,7 +11,6 @@
 - Attach img for tracking open
 - If bounced update record
 - If compaint update record
-- Sending rate
 - Before sending campaign or test mail add warning if creds are not set
 - Can't send if content is empty
 

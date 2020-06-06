@@ -6,6 +6,7 @@
   <h1 class="text-gray-700 text-2xl py-4" >Create new campaign</h1>
 </div>
 
+
 <form action="{{ route('campaigns.store') }}" method="POST" >
 @csrf 
 

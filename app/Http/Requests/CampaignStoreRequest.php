@@ -27,7 +27,6 @@ class CampaignStoreRequest extends FormRequest
             'subject'   => ['required'],
             'sending_name'  => ['required'],
             'sending_email' => ['required', 'email'],
-            'content' => ['required'],
         ];
     }
 
