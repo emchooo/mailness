@@ -6,8 +6,8 @@ use App\Contact;
 use App\Field;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ContactUpdateRequest;
-use App\Lists;
 use App\Jobs\SendConfirmSubscriptionEmail;
+use App\Lists;
 
 class ContactController extends Controller
 {
@@ -47,7 +47,6 @@ class ContactController extends Controller
         );
 
         $contact = Contact::create($contactCreationArray);
-
 
         if ($request->fields) {
             foreach ($request->fields as $key => $value) {

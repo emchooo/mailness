@@ -7,9 +7,9 @@ use App\Field;
 use App\Http\Requests\ListStoreRequest;
 use App\Http\Requests\ListUpdateRequest;
 use App\Http\Requests\StoreSubscriptionRequest;
+use App\Jobs\SendConfirmSubscriptionEmail;
 use App\Lists;
 use Illuminate\Http\Request;
-use App\Jobs\SendConfirmSubscriptionEmail;
 
 class ListsController extends Controller
 {
@@ -181,7 +181,7 @@ class ListsController extends Controller
         $contact = Contact::where('list_id', $list->id)->where('uuid', $contact_uuid)->firstOrFail();
 
         $contact->setAsConfirmed();
-        
-        return view('lists.confirmed', [ 'contact' => $contact ]);
+
+        return view('lists.confirmed', ['contact' => $contact]);
     }
 }

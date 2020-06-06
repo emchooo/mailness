@@ -11,30 +11,11 @@
 
 <h1 class="text-xl mb-3" >Edit list</h1>
 
-	<form method="POST" action="{{ route('lists.update', $list->id) }}" >
-    <input type="hidden" name="_method" value="PUT">
+	{!! Form::model($list, ['route' => ['lists.update', $list] ,'class' => 'flex flex-col w-1/2' ]) !!}
+	
+	@method('PUT')
 
-		@csrf
-
-		<div class="block mb-5 ">
-			<label for="name">Name</label>
-			<input type="text" name="name" value="{{ $list->name }}" class="bg-gray-300 p-2 block" >
-		</div>	
-
-		<div class="block mb-5 ">
-			<label for="from_name">From name</label>
-			<input type="text" name="from_name" value="{{ $list->from_name }}" class="bg-gray-300 p-2 block" >
-		</div>	
-
-		<div class="block mb-5 ">
-			<label for="from_email">From email</label>
-			<input type="text" name="from_email" value="{{ $list->from_email }}" class="bg-gray-300 p-2 block" >
-		</div>	
-
-		<div class="block mb-5">
-			<label for="name">Double Opt-in</label>
-			<input type="checkbox" name="double_opt_in" value="1" @if($list->double_opt_in) checked @endif >
-		</div>
+	@include('lists._form')
 
 		<div class="block">
 			<input type="submit" value="Save" class="bg-blue-500 py-2 px-4 rounded" >
