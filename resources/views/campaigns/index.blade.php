@@ -12,6 +12,11 @@
         <div>
             <a href="{{ route('campaigns.show', $campaign->id) }}">{{ $campaign->subject }} </a> 
             <span class="text-xs text-gray-500 pl-4" >{{ $campaign->status }}</span>
+            <span class="text-xs" >
+                @if($campaign->status == 'sending')
+                    {{ $campaign->totalSent->count() }} / {{ $campaign->total_sent }}
+                @endif
+            </span>
         </div>
         <div>
             @if($campaign->isDraft())

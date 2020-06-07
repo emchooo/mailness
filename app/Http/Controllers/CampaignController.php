@@ -174,9 +174,14 @@ class CampaignController extends Controller
             return back()->with(['error' => 'Campaign must be in draft mode.']);
         }
 
+        if(!Service::count()) {
+            return back()->with(['error' => 'You need to setup sending options in settings first.']);
+        }
+
         foreach ($request->lists as $key => $value) {
             $list = Lists::find($key);
             SendCampaign::dispatch($campaign, $list);
+            $campaign->setTotalSentTo($list->contacts->count());
         }
 
         $campaign->status = 'sending';

@@ -108,4 +108,21 @@ class Campaign extends Model
     {
         return $this->hasMany(CampaignClickLink::class);
     }
+
+    public function setTotalSentTo($number_sent)
+    {
+        $this->total_sent = $this->total_sent + $number_sent;
+        $this->save();
+    }
+
+    public function totalSent()
+    {
+        return $this->hasMany(SendingLog::class)->whereNotNull('sent_at');
+    }
+
+    public function setAsSent()
+    {
+        $this->status = 'sent';
+        $this->save();
+    }
 }

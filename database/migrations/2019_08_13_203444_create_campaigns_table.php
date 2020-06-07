@@ -24,6 +24,7 @@ class CreateCampaignsTable extends Migration
             $table->longText('content');
             $table->boolean('track_opens')->default(false);
             $table->boolean('track_clicks')->default(false);
+            $table->integer('sent_to_number')->default(0);
             $table->timestamps();
         });
     }
