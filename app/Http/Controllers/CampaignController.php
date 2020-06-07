@@ -174,7 +174,7 @@ class CampaignController extends Controller
             return back()->with(['error' => 'Campaign must be in draft mode.']);
         }
 
-        if(!Service::count()) {
+        if (! Service::count()) {
             return back()->with(['error' => 'You need to setup sending options in settings first.']);
         }
 
