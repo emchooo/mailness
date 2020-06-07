@@ -2,12 +2,12 @@
 
 namespace App\Jobs;
 
+use App\Campaign;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Campaign;
 
 class SetCampaignAsSent implements ShouldQueue
 {
@@ -34,8 +34,9 @@ class SetCampaignAsSent implements ShouldQueue
      */
     public function handle()
     {
-        if( ! $this->campaignIsSent()) {
+        if (! $this->campaignIsSent()) {
             $this->release(60);
+
             return;
         }
         $this->campaign->setAsSent();
@@ -43,9 +44,10 @@ class SetCampaignAsSent implements ShouldQueue
 
     protected function campaignIsSent()
     {
-        if($this->campaign->totalSent->count() == $this->campaign->total_sent) {
+        if ($this->campaign->totalSent->count() == $this->campaign->total_sent) {
             return true;
         }
+
         return false;
     }
 }

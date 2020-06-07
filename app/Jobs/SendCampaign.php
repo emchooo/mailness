@@ -13,7 +13,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use App\Jobs\SetCampaignAsSent;
 
 class SendCampaign implements ShouldQueue
 {
