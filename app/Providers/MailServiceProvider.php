@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\CustomMailManager;
+use App\Models\Services\CustomMailManager;
 use Illuminate\Support\ServiceProvider;
 
 class MailServiceProvider extends ServiceProvider

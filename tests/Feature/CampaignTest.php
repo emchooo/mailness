@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Campaign;
-use App\User;
+use App\Models\Campaign;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 

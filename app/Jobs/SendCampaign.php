@@ -2,9 +2,9 @@
 
 namespace App\Jobs;
 
-use App\Campaign;
-use App\Lists;
-use App\Service;
+use App\Models\Campaign;
+use App\Models\Lists;
+use App\Models\Service;
 use DOMDocument;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

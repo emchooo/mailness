@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Lists;
+use App\Models\Lists;
 
 class FormController extends Controller
 {

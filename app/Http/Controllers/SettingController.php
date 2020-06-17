@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SettingsUpdateRequest;
 use App\Http\Requests\SmtpSettings;
-use App\Service;
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
