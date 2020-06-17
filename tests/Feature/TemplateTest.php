@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Template;
-use App\User;
+use App\Models\Template;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 

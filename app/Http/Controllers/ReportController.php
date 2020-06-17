@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Campaign;
+use App\Models\Campaign;
 
 class ReportController extends Controller
 {

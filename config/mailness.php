@@ -1,7 +1,7 @@
 <?php
 
 return [
-    /**
+    /*
      * Sending rate throttling
      * Default setting is 10 mails per second.
      */

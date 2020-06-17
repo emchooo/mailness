@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Campaign;
+use App\Models\Campaign;
 use Illuminate\Support\Str;
 
 class CampaignObserver
@@ -10,7 +10,7 @@ class CampaignObserver
     /**
      * Handle the campaign "created" event.
      *
-     * @param  \App\Campaign  $campaign
+     * @param  \App\Models\Campaign  $campaign
      * @return void
      */
     public function creating(Campaign $campaign)

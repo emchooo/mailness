@@ -2,11 +2,11 @@
 
 namespace App\Jobs;
 
-use App\Campaign;
-use App\Contact;
+use App\Models\Campaign;
+use App\Models\Contact;
 use App\Jobs\Middleware\RateLimited;
 use App\Mail\CampaignMail;
-use App\SendingLog;
+use App\Models\SendingLog;
 use Carbon\Carbon;
 use DOMDocument;
 use Illuminate\Bus\Queueable;

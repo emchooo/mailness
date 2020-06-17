@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Lists;
+use App\Models\Lists;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Illuminate\Support\Str;
 
