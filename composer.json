@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
+        "aws/aws-php-sns-message-validator": "^1.6",
         "aws/aws-sdk-php": "^3.112",
         "box/spout": "^3.1",
         "fideloper/proxy": "^4.2",

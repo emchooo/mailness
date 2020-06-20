@@ -16,7 +16,7 @@ class CreateCampaignClickLinksTable extends Migration
         Schema::create('campaign_click_links', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('campaign_id');
-            $table->integer('link_id');
+            $table->text('link');
             $table->integer('contact_id');
             $table->timestamps();
         });

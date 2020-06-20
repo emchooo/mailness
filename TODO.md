@@ -6,7 +6,6 @@
 - Status as consts
 - On duplicate return original links
 - If unsubsribed from campaign save in log
-- On duplicate reset total_sent
 
 # Sending
 - Attach img for tracking open

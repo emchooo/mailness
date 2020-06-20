@@ -16,12 +16,15 @@ Route::get('lists/{list_uuid}/{contact_uuid}/confirm', 'ListsController@subscrib
 Route::get('t/{link_uuid}/{contact_uuid?}', 'TrackClickController@index')->name('open.link');
 Route::get('w/{campaign_uuid}/{contact_uuid?}', 'TrackOpenController@index')->name('open.mail');
 
+Route::post('notifications/ses', 'Notifications\SESNotificationsController@index');
+
 Route::middleware('auth')->group(function () {
     Route::get('settings', 'SettingController@index')->name('settings.index');
     Route::post('settings/update', 'SettingController@update')->name('settings.update');
 
     Route::get('settings/sending', 'SettingController@sending')->name('settings.sending');
     Route::get('settings/aws', 'SettingController@aws')->name('settings.create.aws');
+    Route::post('settings/aws', 'SettingController@saveAws')->name('settings.save.aws');
     Route::get('settings/smtp', 'SettingController@smtp')->name('settings.smtp');
     Route::post('settings/smtp', 'SettingController@saveSmtp')->name('settings.save.smtp');
     Route::get('settings/smtp/edit', 'SettingController@editSmtp')->name('settings.edit.smtp');
@@ -83,6 +86,9 @@ Route::middleware('auth')->group(function () {
     Route::post('campaigns/{campaign}/duplicate', 'CampaignController@duplicate')->name('campaigns.duplicate');
 
     Route::get('campaigns/{campaign}/report', 'ReportController@show')->name('campaigns.report');
+    Route::get('campaigns/{campaign}/report/opens', 'ReportController@opens')->name('campaigns.report.opens');
+    Route::get('campaigns/{campaign}/report/clicks', 'ReportController@clicks')->name('campaigns.report.clicks');
+    Route::get('campaigns/{campaign}/report/unsubscribed', 'ReportController@unsubscribed')->name('campaigns.report.unsubscribed');
     Route::get('reports', 'ReportController@index')->name('reports.index');
 
     Route::get('dashboard', 'DashboardController@show')->name('dashboard.show');

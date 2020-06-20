@@ -99,25 +99,45 @@ class Campaign extends Model
         return $this->hasMany(CampaignLink::class);
     }
 
-    public function opensTracking(): HasMany
+    public function opens(): HasMany
     {
         return $this->hasMany(CampaignOpen::class);
     }
 
-    public function linksTracking(): HasMany
+    public function uniqueOpens(): HasMany
+    {
+        return $this->hasMany(CampaignOpen::class)->distinct('contact_id');
+    }
+
+    public function clicks(): HasMany
     {
         return $this->hasMany(CampaignClickLink::class);
     }
 
     public function setTotalSentTo($number_sent)
     {
-        $this->total_sent = $this->total_sent + $number_sent;
+        $this->sent_to_number = $this->sent_to_number + $number_sent;
         $this->save();
     }
 
     public function totalSent()
     {
         return $this->hasMany(SendingLog::class)->whereNotNull('sent_at');
+    }
+
+    public function totalBounced()
+    {
+        return $this->hasMany(SendingLog::class)->whereNotNull('bounced_at');
+    }
+
+    public function totalComplaint()
+    {
+        return $this->hasMany(SendingLog::class)->whereNotNull('complaint_at');
+    }
+
+    public function totalUnsubscribed()
+    {
+        return $this->hasMany(SendingLog::class)->whereNotNull('unsubscribed_at');
     }
 
     public function setAsSent()

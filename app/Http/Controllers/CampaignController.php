@@ -194,6 +194,7 @@ class CampaignController extends Controller
     {
         $new_campaign = $campaign->replicate();
         $new_campaign->status = 'draft';
+        $new_campaign->sent_to_number = 0;
         $new_campaign->save();
 
         return redirect()->route('campaigns.edit', $new_campaign->id);

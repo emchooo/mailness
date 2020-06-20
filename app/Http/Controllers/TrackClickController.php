@@ -8,8 +8,9 @@ use App\Contact;
 
 class TrackClickController extends Controller
 {
-    public function index($link_uuid, $contact_uuid)
+    public function index($link_uuid, $contact_uuid = null)
     {
+        return;
         // @todo add as Job
         $link = CampaignLink::where('uuid', $link_uuid)->first();
 

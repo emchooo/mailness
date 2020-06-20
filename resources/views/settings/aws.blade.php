@@ -4,7 +4,8 @@
 
 <h3>Setup AWS:</h3>
 
-<form action="">
+<form action="{{ route('settings.save.aws') }}" method="POST">
+    @csrf
     <label for="Key">Key</label>
     <input type="text" name="key" class="block border" >
     

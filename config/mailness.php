@@ -7,6 +7,6 @@ return [
      */
     'sending_rate_limit' => [
         'number_of_mails' => 1,
-        'number_of_mails_every' => 30, // seconds
+        'number_of_mails_every' => 1, // seconds
     ],
 ];

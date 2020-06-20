@@ -6,6 +6,7 @@ use App\Http\Requests\SettingsUpdateRequest;
 use App\Http\Requests\SmtpSettings;
 use App\Service;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
@@ -39,6 +40,26 @@ class SettingController extends Controller
     public function aws()
     {
         return view('settings.aws');
+    }
+
+    public function saveAws(Request $request)
+    {
+        $service = new Service();
+        $service->service = 'aws';
+        $service->credentials = [
+            'transport' => 'aws',
+            'key' => $request->key,
+            'secret' => $request->secret,
+            'region' => $request->region,
+            'version' => 'latest',
+            'from'  => [
+                'name'  => $request->name,
+                'address'   => $request->address,
+            ],
+        ];
+        $service->save();
+
+        return redirect()->route('settings.index');
     }
 
     public function smtp()

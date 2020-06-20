@@ -12,14 +12,17 @@ class CampaignMail extends Mailable
 
     protected $content;
 
+    public $send_id;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($content)
+    public function __construct($campaign, $send_id)
     {
-        $this->content = $content;
+        $this->content = $campaign->content;
+        $this->send_id = $send_id;
     }
 
     /**

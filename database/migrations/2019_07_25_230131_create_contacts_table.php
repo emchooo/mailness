@@ -18,12 +18,10 @@ class CreateContactsTable extends Migration
             $table->uuid('uuid');
             $table->string('email');
             $table->integer('list_id');
-            $table->datetime('approved_at')->nullable();
             $table->boolean('subscribed')->default(1);
             $table->datetime('unsubscribed_at')->nullable();
             $table->datetime('confirmed_at')->nullable();
-            $table->datetime('bounced_at')->nullable();
-            $table->datetime('complaint_at')->nullable();
+            $table->string('unsubscribe_type')->nullable();
             $table->timestamps();
 
             $table->index(['list_id']);

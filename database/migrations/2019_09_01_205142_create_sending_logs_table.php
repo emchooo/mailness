@@ -16,11 +16,14 @@ class CreateSendingLogsTable extends Migration
     {
         Schema::create('sending_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('message_id', 255)->nullable();
             $table->integer('contact_id');
             $table->integer('campaign_id');
             $table->datetime('sent_at')->nullable();
             $table->datetime('opened_at')->nullable();
             $table->datetime('bounced_at')->nullable();
+            $table->datetime('complaint_at')->nullable();
+            $table->datetime('unsubscribed_at')->nullable();
             $table->datetime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->datetime('updated_at')->nullable();
         });

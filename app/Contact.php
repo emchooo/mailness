@@ -67,12 +67,12 @@ class Contact extends Model
 
     public function scopeBounces($query)
     {
-        return $query->whereNotNull('bounced_at');
+        return $query->where('unsubscribe_type', 'bounced');
     }
 
     public function scopeComplaints($query)
     {
-        return $query->whereNotNull('complaint_at');
+        return $query->where('unsubscribe_type', 'complaint');
     }
 
     public function setAsConfirmed()
@@ -85,6 +85,22 @@ class Contact extends Model
     public function setAsUnsubscribed()
     {
         $this->subscribed = 0;
+        $this->save();
+    }
+
+    public function setAsBounced()
+    {
+        $this->subscribed = 0;
+        $this->unsubscribed_at = now();
+        $this->unsubscribe_type = 'bounce';
+        $this->save();
+    }
+
+    public function setAsComplaint()
+    {
+        $this->subscribed = 0;
+        $this->unsubscribed_at = now();
+        $this->unsubscribe_type = 'complaint';
         $this->save();
     }
 }
