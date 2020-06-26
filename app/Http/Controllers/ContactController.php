@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Contact;
-use App\Field;
+use App\Models\Contact;
+use App\Models\Field;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ContactUpdateRequest;
 use App\Jobs\SendConfirmSubscriptionEmail;
-use App\Lists;
+use App\Models\Lists;
 
 class ContactController extends Controller
 {
@@ -68,7 +68,7 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Contact  $contact
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
     public function show(Lists $lists, Contact $contact)
@@ -79,7 +79,7 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Contact  $contact
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
     public function edit(Lists $lists, Contact $contact)
@@ -91,7 +91,7 @@ class ContactController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Contact  $contact
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
     public function update(ContactUpdateRequest $request, Lists $lists, Contact $contact)
@@ -122,7 +122,7 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Contact  $contact
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
     public function destroy(Contact $contact)

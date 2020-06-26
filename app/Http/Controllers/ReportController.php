@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Campaign;
-use App\CampaignClickLink;
+use App\Models\Campaign;
+use App\Models\CampaignClickLink;
 
 class ReportController extends Controller
 {

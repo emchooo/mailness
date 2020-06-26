@@ -4,7 +4,7 @@ namespace App\Jobs;
 
 use App\Jobs\Middleware\RateLimited;
 use App\Mail\CampaignMail;
-use App\SendingLog;
+use App\Models\SendingLog;
 use DOMDocument;
 use Exception;
 use Illuminate\Bus\Queueable;

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Campaign;
-use App\CampaignUnsubscribe;
-use App\Contact;
+use App\Models\Campaign;
+use App\Models\CampaignUnsubscribe;
+use App\Models\Contact;
 
 class UnsubscribeController extends Controller
 {

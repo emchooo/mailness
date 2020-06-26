@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Campaign;
-use App\CampaignOpen;
-use App\Contact;
+use App\Models\Campaign;
+use App\Models\CampaignOpen;
+use App\Models\Contact;
 
 class TrackOpenController extends Controller
 {

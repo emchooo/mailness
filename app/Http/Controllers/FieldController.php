@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Field;
+use App\Models\Field;
 use App\Http\Requests\FieldStoreRequest;
-use App\Lists;
+use App\Models\Lists;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
