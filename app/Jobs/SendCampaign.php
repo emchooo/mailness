@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Campaign;
 use App\Lists;
+use App\SendingLog;
 use App\Service;
 use DOMDocument;
 use Illuminate\Bus\Queueable;
@@ -11,10 +12,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use App\Jobs\SetCampaignAsSent;
-use App\SendingLog;
 
 class SendCampaign implements ShouldQueue
 {
@@ -47,7 +45,7 @@ class SendCampaign implements ShouldQueue
         }
 
         $config = Service::first()->getConfig();
-        
+
         foreach ($this->list->contacts as $contact) {
             $send = SendingLog::create([
                 'contact_id' => $contact->id,

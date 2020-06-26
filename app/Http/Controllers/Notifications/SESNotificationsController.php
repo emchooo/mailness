@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers\Notifications;
 
-use App\Contact;
+use App\CampaignClickLink;
+use App\Http\Controllers\Controller;
 use App\SendingLog;
 use Aws\Sns\Message;
-use App\CampaignClickLink;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Log;
-use Aws\Sns\Exception\InvalidSnsMessageException;
-
 
 class SESNotificationsController extends Controller
 {
@@ -21,6 +17,7 @@ class SESNotificationsController extends Controller
 
         if ($message['Type'] === 'SubscriptionConfirmation') {
             $this->confirmSubscription($message);
+
             return;
         }
 
@@ -28,7 +25,7 @@ class SESNotificationsController extends Controller
 
         $messageId = $payload['mail']['messageId'];
         $send = SendingLog::where('message_id', $messageId)->first();
-        
+
         $this->handleEvent($payload, $send);
     }
 
@@ -41,23 +38,23 @@ class SESNotificationsController extends Controller
     {
         $eventType = $payload['eventType'] ?? null;
 
-        if(!$eventType) {
+        if (! $eventType) {
             return;
         }
-        if(!$send) {
+        if (! $send) {
             return;
         }
         // @todo is this campaign set to track open and clicks ?
-        if($eventType == 'Click' ) {
+        if ($eventType == 'Click') {
             $this->handleClick($payload, $send);
         }
-        if($eventType == 'Open' ) {
+        if ($eventType == 'Open') {
             $this->handleOpen($send);
         }
-        if($eventType == 'Bounce' and $payload['bounce']['bounceType'] == 'Permanent') {
+        if ($eventType == 'Bounce' and $payload['bounce']['bounceType'] == 'Permanent') {
             $this->handleBounce($send);
         }
-        if($eventType == 'Complaint') {
+        if ($eventType == 'Complaint') {
             $this->handleComplaint($send);
         }
     }
@@ -68,7 +65,7 @@ class SESNotificationsController extends Controller
         CampaignClickLink::create([
             'campaign_id' => $send->campaign_id,
             'link' => $link,
-            'contact_id' => $send->contact_id
+            'contact_id' => $send->contact_id,
         ]);
     }
 
@@ -77,7 +74,7 @@ class SESNotificationsController extends Controller
         $send->opened();
         $send->campaign->opens()->create([
             'contact_id' => $send->contact_id,
-            'campaign_id' => $send->campaign_id
+            'campaign_id' => $send->campaign_id,
         ]);
     }
 

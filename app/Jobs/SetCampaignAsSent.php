@@ -44,8 +44,7 @@ class SetCampaignAsSent implements ShouldQueue
 
     protected function campaignIsSent()
     {
-        if($this->campaign->sent->count() + $this->campaign->failed->count() == $this->campaign->sent_to_number) {
-
+        if ($this->campaign->sent->count() + $this->campaign->failed->count() == $this->campaign->sent_to_number) {
             return true;
         }
 

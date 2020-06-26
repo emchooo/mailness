@@ -2,22 +2,17 @@
 
 namespace App\Jobs;
 
-use Exception;
-use App\Campaign;
-use App\Contact;
 use App\Jobs\Middleware\RateLimited;
 use App\Mail\CampaignMail;
 use App\SendingLog;
-use Carbon\Carbon;
 use DOMDocument;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log;
-
 
 class SendEmail implements ShouldQueue
 {
@@ -53,8 +48,6 @@ class SendEmail implements ShouldQueue
         } catch (Exception $exception) {
             $this->send->failed($exception->getMessage());
         }
-
-        
     }
 
     /**
