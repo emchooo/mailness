@@ -9,7 +9,7 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $reports = Campaign::Where('status', 'sent')->orderBy('id','desc')->get();
+        $reports = Campaign::Where('status', 'sent')->orderBy('id', 'desc')->get();
 
         return view('reports.index', compact('reports'));
     }
@@ -17,6 +17,7 @@ class ReportController extends Controller
     public function show(Campaign $campaign)
     {
         $unique_clicks = CampaignClickLink::where('campaign_id', $campaign->id)->distinct('contact_id')->count();
+
         return view('reports.show', compact('campaign', 'unique_clicks'));
     }
 

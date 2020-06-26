@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Contact;
 use App\Campaign;
 use App\CampaignUnsubscribe;
+use App\Contact;
 
 class UnsubscribeController extends Controller
 {
@@ -18,10 +18,10 @@ class UnsubscribeController extends Controller
         $contact->save();
 
         $campaign = Campaign::where('uuid', $campaign_uuid)->first();
-        if($campaign) {
+        if ($campaign) {
             CampaignUnsubscribe::create([
                 'campaign_id' => $campaign->id,
-                'contact_id' => $contact->id
+                'contact_id' => $contact->id,
             ]);
         }
 

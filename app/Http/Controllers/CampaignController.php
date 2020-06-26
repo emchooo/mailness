@@ -7,6 +7,7 @@ use App\Http\Requests\CampaignStoreRequest;
 use App\Http\Requests\SendCampaignRequest;
 use App\Http\Requests\SendTestMailRequest;
 use App\Jobs\SendCampaign;
+use App\Jobs\SendEmail;
 use App\Lists;
 use App\Mail\CampaignMail;
 use App\Service;
@@ -14,8 +15,6 @@ use App\Template;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use App\Jobs\SendEmail;
-
 
 class CampaignController extends Controller
 {
@@ -208,7 +207,7 @@ class CampaignController extends Controller
 
         $failed_mails = $campaign->failed;
 
-        foreach($failed_mails as $send){
+        foreach ($failed_mails as $send) {
             $send->clearFailed();
             SendEmail::dispatch($send, $config);
         }
