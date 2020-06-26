@@ -11,7 +11,6 @@ class Campaign extends Model
     const DRAFT = 'draft';
     const SENDING = 'sending';
     const SENT = 'sent';
-    const FINISHED = 'finished';
 
     /**
      * Checks if Current Campaign status is as Specified.
@@ -49,13 +48,13 @@ class Campaign extends Model
     }
 
     /**
-     * Checks if Current Campaign status is Finished.
+     * Checks if Current Campaign status is SENT.
      *
      * @return bool
      **/
-    public function isFinished()
+    public function isSent()
     {
-        return $this->isInStatus($this::FINISHED);
+        return $this->isInStatus($this::SENT);
     }
 
     /**
@@ -63,9 +62,9 @@ class Campaign extends Model
      *
      * @return bool
      **/
-    public function isNotFinished()
+    public function isNotSent()
     {
-        return ! $this->isFinished();
+        return ! $this->isSent();
     }
 
     /**
@@ -120,22 +119,27 @@ class Campaign extends Model
         $this->save();
     }
 
-    public function totalSent()
+    public function sent()
     {
         return $this->hasMany(SendingLog::class)->whereNotNull('sent_at');
     }
 
-    public function totalBounced()
+    public function failed()
+    {
+        return $this->hasMany(SendingLog::class)->whereNotNull('failed_at');
+    }
+
+    public function bounced()
     {
         return $this->hasMany(SendingLog::class)->whereNotNull('bounced_at');
     }
 
-    public function totalComplaint()
+    public function complaint()
     {
         return $this->hasMany(SendingLog::class)->whereNotNull('complaint_at');
     }
 
-    public function totalUnsubscribed()
+    public function unsubscribed()
     {
         return $this->hasMany(SendingLog::class)->whereNotNull('unsubscribed_at');
     }

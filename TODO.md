@@ -2,35 +2,27 @@
 - Confirmation mail can be customised
 
 # Campaigns
-- When all mails are sent mark campaign as sent
-- Status as consts
 - On duplicate return original links
-- If unsubsribed from campaign save in log
+- Refactor "track clicks" and "track opens". We need this only if sending from SMTP
+- Inlude {{unsubscribe_url}} in campaign
+- On send campaign page in earch List show number of contacts
 
 # Sending
 - Attach img for tracking open
-- If bounced update record
-- If compaint update record
 - Before sending campaign or test mail add warning if creds are not set
 - Can't send if content is empty
 
 # Templates
 - Implement open template ( preview )
 
-# Reports
-- Open report with data
-- Test
+# Frontend
+- Style all pages
 
-# Settings
-- Add sending method ( AmazonSES, SMTP )
+# General
+- If zero user registered /login redirect to /register
+- On settings page add option to enable/disable registration
 
-# Auth
-- Style all auth pages
-
-# To-Do list
-- list_submenu highlight current link
-- Responsive
-- Translation ???
+# Database
 - Fix migrations add foreign keys and indexes
 
 # Connect to SES and SNS
@@ -38,9 +30,5 @@
 - Email address is not verified
 - The security token included in the request is invalid.
 
-# Dashboard
-- AWS setup info
-- Last campaings
-- Statistics
-
 # Bugs
+- On dashboard it total complaint and bounced are wrong

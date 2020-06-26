@@ -13,6 +13,8 @@
 
 <h2>List of unsubscribed</h2>
 
-{{ $campaign->totalUnsubscribed }}
+@foreach($campaign->totalUnsubscribed as $unsubscribed)
+    {{ $unsubscribed->contact->email }}
+@endforeach
 
 @endsection

@@ -27,8 +27,9 @@ class LogSentMessage
      */
     public function handle($event)
     {
-        $sesMessageId = $event->message->getHeaders()->get('X-SES-Message-ID')->getValue();
-        $send_id = $event->data['send_id'];
-        SendingLog::where('id',$send_id)->update([ 'message_id' => $sesMessageId ]);
+        // @todo only if SES
+        // $sesMessageId = $event->message->getHeaders()->get('X-SES-Message-ID')->getValue();
+        // $send_id = $event->data['send_id'];
+        // SendingLog::where('id',$send_id)->update([ 'message_id' => $sesMessageId ]);
     }
 }

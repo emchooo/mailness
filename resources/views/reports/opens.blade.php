@@ -13,7 +13,7 @@
 
 <h2>List of Clicks</h2>
 
-@foreach($campaign->clicks as $open)
+@foreach($campaign->opens as $open)
     <p>{{ $open->contact->email }} - {{ $open->created_at }}</p>
 @endforeach
 

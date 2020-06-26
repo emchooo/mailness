@@ -14,6 +14,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Jobs\SetCampaignAsSent;
+use App\SendingLog;
 
 class SendCampaign implements ShouldQueue
 {
@@ -48,7 +49,11 @@ class SendCampaign implements ShouldQueue
         $config = Service::first()->getConfig();
         
         foreach ($this->list->contacts as $contact) {
-            SendEmail::dispatch($contact, $this->campaign, $config);
+            $send = SendingLog::create([
+                'contact_id' => $contact->id,
+                'campaign_id' => $this->campaign->id,
+            ]);
+            SendEmail::dispatch($send, $config);
         }
 
         SetCampaignAsSent::dispatch($this->campaign);

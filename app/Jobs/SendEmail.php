@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use Exception;
 use App\Campaign;
 use App\Contact;
 use App\Jobs\Middleware\RateLimited;
@@ -15,14 +16,14 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+
 
 class SendEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $campaign;
-
-    protected $contact;
+    protected $send;
 
     protected $config;
 
@@ -31,10 +32,9 @@ class SendEmail implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Contact $contact, Campaign $campaign, $config)
+    public function __construct(SendingLog $send, $config)
     {
-        $this->campaign = $campaign;
-        $this->contact = $contact;
+        $this->send = $send;
         $this->config = $config;
     }
 
@@ -47,13 +47,12 @@ class SendEmail implements ShouldQueue
     {
         $mail_content = $this->mailContent();
 
-        $send = SendingLog::create([
-            'contact_id' => $this->contact->id,
-            'campaign_id' => $this->campaign->id,
-            'sent_at' => Carbon::now()
-        ]);
-
-        Mail::config($this->config)->to($this->contact->email)->send(new CampaignMail($this->campaign, $send->id));
+        try {
+            Mail::config($this->config)->to($this->send->contact->email)->send(new CampaignMail($this->send->campaign, $this->send->id));
+            $this->send->sent();
+        } catch (Exception $exception) {
+            $this->send->failed($exception->getMessage());
+        }
 
         
     }
@@ -80,23 +79,23 @@ class SendEmail implements ShouldQueue
 
     protected function mailContent()
     {
-        if ($this->campaign->track_clicks) {
+        if ($this->send->campaign->track_clicks) {
             return $this->addContactIdToTrackingLinks();
         }
 
-        return $this->campaign->content;
+        return $this->send->campaign->content;
     }
 
     protected function addContactIdToTrackingLinks()
     {
         $dom = new DOMDocument();
 
-        $dom->loadHTML($this->campaign->content);
+        $dom->loadHTML($this->send->campaign->content);
 
         foreach ($dom->getElementsByTagName('body')[0]->getElementsByTagName('a') as $link) {
             $oldLink = $link->getAttribute('href');
 
-            $newLink = $oldLink.'/'.$this->contact->uuid;
+            $newLink = $oldLink.'/'.$this->send->contact->uuid;
 
             $link->setAttribute('href', $newLink);
         }

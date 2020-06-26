@@ -9,9 +9,13 @@
     <li class="inline px-5 " ><a href="{{ route('campaigns.report.opens', $campaign->id) }}">Link for list of opens</a></li>
     <li class="inline px-5" ><a href="{{ route('campaigns.report.clicks', $campaign->id) }}">Link for list of clicks</a></li>
     <li class="inline px-5" ><a href="{{ route('campaigns.report.unsubscribed', $campaign->id) }}">Link for list of unsubscribed users</a></li>
+    <li class="inline px-5" ><a href="{{ route('campaigns.report.failed', $campaign->id) }}">Failed</a></li>
 </ul>
 
-<p class="text-xl" >Mails sent: {{ $campaign->sent_to_number }}</p>
+<p class="text-xl" >Mails sent: {{ $campaign->sent->count() }}</p>
+@if($campaign->failed->count())
+<p class="text-xl" >Mails failed: {{ $campaign->failed->count() }}</p>
+@endif
 
 <div class="block py-5">
     <p>Opens: {{ $campaign->opens->count() }}</p>
@@ -26,18 +30,18 @@
 </div>
 
 <div class="block py-5">
-    <p>Bounced: {{ $campaign->totalBounced->count() }} </p>
-    <p>Bounce rate: {{ round( $campaign->totalBounced->count() / $campaign->sent_to_number, 2 ) * 100 }}%</p>
+    <p>Bounced: {{ $campaign->bounced->count() }} </p>
+    <p>Bounce rate: {{ round( $campaign->bounced->count() / $campaign->sent_to_number, 2 ) * 100 }}%</p>
 </div>
 
 <div class="block py-5">
-    <p>Complaint: {{ $campaign->totalComplaint->count() }}</p>
-    <p>Complaint rate: {{ round( $campaign->totalComplaint->count() / $campaign->sent_to_number, 2 ) * 100 }}%</p>
+    <p>Complaint: {{ $campaign->complaint->count() }}</p>
+    <p>Complaint rate: {{ round( $campaign->complaint->count() / $campaign->sent_to_number, 2 ) * 100 }}%</p>
 </div>
 
 <div class="block py-5">
-    <p>unsubscribed: {{ $campaign->totalUnsubscribed->count() }}</p>
-    <p>Unsubscribe rate: {{ round( $campaign->totalUnsubscribed->count() / $campaign->sent_to_number, 2 ) * 100 }}%</p>
+    <p>unsubscribed: {{ $campaign->unsubscribed->count() }}</p>
+    <p>Unsubscribe rate: {{ round( $campaign->unsubscribed->count() / $campaign->sent_to_number, 2 ) * 100 }}%</p>
 </div>
 
 

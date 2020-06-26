@@ -84,11 +84,13 @@ Route::middleware('auth')->group(function () {
     Route::put('campaigns/{campaign}/update', 'CampaignController@update')->name('campaigns.update');
     Route::delete('campaigns/{campaign}/delete', 'CampaignController@destroy')->name('campaigns.delete');
     Route::post('campaigns/{campaign}/duplicate', 'CampaignController@duplicate')->name('campaigns.duplicate');
+    Route::post('campaigns/{campaign}/retry_failed', 'CampaignController@retry')->name('campaigns.retry_failed');
 
     Route::get('campaigns/{campaign}/report', 'ReportController@show')->name('campaigns.report');
     Route::get('campaigns/{campaign}/report/opens', 'ReportController@opens')->name('campaigns.report.opens');
     Route::get('campaigns/{campaign}/report/clicks', 'ReportController@clicks')->name('campaigns.report.clicks');
     Route::get('campaigns/{campaign}/report/unsubscribed', 'ReportController@unsubscribed')->name('campaigns.report.unsubscribed');
+    Route::get('campaigns/{campaign}/report/failed', 'ReportController@failed')->name('campaigns.report.failed');
     Route::get('reports', 'ReportController@index')->name('reports.index');
 
     Route::get('dashboard', 'DashboardController@show')->name('dashboard.show');

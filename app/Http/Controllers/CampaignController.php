@@ -14,6 +14,8 @@ use App\Template;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendEmail;
+
 
 class CampaignController extends Controller
 {
@@ -94,7 +96,7 @@ class CampaignController extends Controller
         $lists = DB::table((new Lists)->getTable())
                         ->pluck('name', 'id');
 
-        if ($campaign->isFinished()) {
+        if ($campaign->isSent()) {
             return redirect()->to(route('campaigns.report', $campaign->id));
         }
 
@@ -198,5 +200,19 @@ class CampaignController extends Controller
         $new_campaign->save();
 
         return redirect()->route('campaigns.edit', $new_campaign->id);
+    }
+
+    public function retry(Campaign $campaign)
+    {
+        $config = Service::first()->getConfig();
+
+        $failed_mails = $campaign->failed;
+
+        foreach($failed_mails as $send){
+            $send->clearFailed();
+            SendEmail::dispatch($send, $config);
+        }
+
+        return back();
     }
 }

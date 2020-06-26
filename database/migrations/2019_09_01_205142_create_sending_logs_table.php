@@ -24,6 +24,8 @@ class CreateSendingLogsTable extends Migration
             $table->datetime('bounced_at')->nullable();
             $table->datetime('complaint_at')->nullable();
             $table->datetime('unsubscribed_at')->nullable();
+            $table->datetime('failed_at')->nullable();
+            $table->text('failed_reason')->nullable();
             $table->datetime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->datetime('updated_at')->nullable();
         });

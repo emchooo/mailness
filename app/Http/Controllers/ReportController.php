@@ -34,4 +34,9 @@ class ReportController extends Controller
     {
         return view('reports.unsubscribed', compact('campaign'));
     }
+
+    public function failed(Campaign $campaign)
+    {
+        return view('reports.failed', compact('campaign'));
+    }
 }
