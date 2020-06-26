@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Mail\ConfirmSubscription;
-use App\Service;
+use App\Models\Service;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

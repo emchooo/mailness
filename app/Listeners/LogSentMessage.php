@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\SendingLog;
+use App\Models\SendingLog;
 
 class LogSentMessage
 {
