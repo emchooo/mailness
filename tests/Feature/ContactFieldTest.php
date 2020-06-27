@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Contact;
-use App\Field;
-use App\Lists;
+use App\Models\Contact;
+use App\Models\Field;
+use App\Models\Lists;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 

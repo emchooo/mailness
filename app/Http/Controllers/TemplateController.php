@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TemplateStoreRequest;
-use App\Template;
+use App\Models\Template;
 
 class TemplateController extends Controller
 {
@@ -48,7 +48,7 @@ class TemplateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Template  $template
+     * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
     public function show(Template $template)
@@ -59,7 +59,7 @@ class TemplateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Template  $template
+     * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
     public function edit(Template $template)
@@ -71,7 +71,7 @@ class TemplateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Template  $template
+     * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
     public function update(TemplateStoreRequest $request, Template $template)
@@ -86,7 +86,7 @@ class TemplateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Template  $template
+     * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
     public function destroy(Template $template)

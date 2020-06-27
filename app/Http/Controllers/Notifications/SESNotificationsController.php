@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Notifications;
 
-use App\CampaignClickLink;
+use App\Models\CampaignClickLink;
 use App\Http\Controllers\Controller;
-use App\SendingLog;
+use App\Models\SendingLog;
 use Aws\Sns\Message;
 use Illuminate\Http\Request;
 

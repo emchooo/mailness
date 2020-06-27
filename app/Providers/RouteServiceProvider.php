@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Lists;
+use App\Models\Lists;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;

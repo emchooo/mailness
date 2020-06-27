@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Campaign;
+use App\Models\Campaign;
 use App\Http\Requests\CampaignStoreRequest;
 use App\Http\Requests\SendCampaignRequest;
 use App\Http\Requests\SendTestMailRequest;
 use App\Jobs\SendCampaign;
 use App\Jobs\SendEmail;
-use App\Lists;
+use App\Models\Lists;
 use App\Mail\CampaignMail;
-use App\Service;
-use App\Template;
+use App\Models\Service;
+use App\Models\Template;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -87,7 +87,7 @@ class CampaignController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Campaign  $campaign
+     * @param  \App\Models\Campaign  $campaign
      * @return \Illuminate\Http\Response
      */
     public function show(Campaign $campaign)
@@ -105,7 +105,7 @@ class CampaignController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Campaign  $campaign
+     * @param  \App\Models\Campaign  $campaign
      * @return \Illuminate\Http\Response
      */
     public function edit(Campaign $campaign)
@@ -121,7 +121,7 @@ class CampaignController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Campaign  $campaign
+     * @param  \App\Models\Campaign  $campaign
      * @return \Illuminate\Http\Response
      */
     public function update(CampaignStoreRequest $request, Campaign $campaign)
@@ -146,7 +146,7 @@ class CampaignController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Campaign  $campaign
+     * @param  \App\Models\Campaign  $campaign
      * @return \Illuminate\Http\Response
      */
     public function destroy(Campaign $campaign)
