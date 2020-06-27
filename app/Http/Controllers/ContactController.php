@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact;
-use App\Models\Field;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ContactUpdateRequest;
 use App\Jobs\SendConfirmSubscriptionEmail;
+use App\Models\Contact;
+use App\Models\Field;
 use App\Models\Lists;
 
 class ContactController extends Controller
