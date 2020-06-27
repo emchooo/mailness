@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Campaign;
 use App\Http\Requests\CampaignStoreRequest;
 use App\Http\Requests\SendCampaignRequest;
 use App\Http\Requests\SendTestMailRequest;
 use App\Jobs\SendCampaign;
 use App\Jobs\SendEmail;
-use App\Models\Lists;
 use App\Mail\CampaignMail;
+use App\Models\Campaign;
+use App\Models\Lists;
 use App\Models\Service;
 use App\Models\Template;
 use Illuminate\Http\Request;

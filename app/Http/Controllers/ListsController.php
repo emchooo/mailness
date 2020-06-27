@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact;
-use App\Models\Field;
 use App\Http\Requests\ListStoreRequest;
 use App\Http\Requests\ListUpdateRequest;
 use App\Http\Requests\StoreSubscriptionRequest;
 use App\Jobs\SendConfirmSubscriptionEmail;
+use App\Models\Contact;
+use App\Models\Field;
 use App\Models\Lists;
 use Illuminate\Http\Request;
 
