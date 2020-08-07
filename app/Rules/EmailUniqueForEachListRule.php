@@ -40,7 +40,7 @@ class EmailUniqueForEachListRule implements Rule
 
         return null === Contact::query()
                                 ->where('email', $value)
-                                ->when($this->list, function (Builder $query) use ($contact) {
+                                ->when($this->list, function (Builder $query) {
                                     return $query->where('list_id', '=', $this->list->id);
                                 })
                                 ->when($contact, function (Builder $query) use ($contact) {

@@ -2,10 +2,10 @@
 
 namespace App\Mail;
 
+use App\Models\SendingLog;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\SendingLog;
 
 class CampaignMail extends Mailable
 {
@@ -36,12 +36,11 @@ class CampaignMail extends Mailable
      */
     public function build()
     {
-        
         return $this->html($this->getMailContent());
     }
 
-    protected function getMailContent() {
+    protected function getMailContent()
+    {
         return $this->send->campaign->html_formated;
     }
-
 }
