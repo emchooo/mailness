@@ -40,10 +40,8 @@ class SendEmail implements ShouldQueue
      */
     public function handle()
     {
-        $mail_content = $this->mailContent();
-
         try {
-            Mail::config($this->config)->to($this->send->contact->email)->send(new CampaignMail($this->send->campaign, $this->send->id));
+            Mail::config($this->config->getConfig())->to($this->send->contact->email)->send(new CampaignMail($this->send, $this->config));
             $this->send->sent();
         } catch (Exception $exception) {
             $this->send->failed($exception->getMessage());
@@ -68,31 +66,5 @@ class SendEmail implements ShouldQueue
     public function retryUntil()
     {
         return now()->addDay();
-    }
-
-    protected function mailContent()
-    {
-        if ($this->send->campaign->track_clicks) {
-            return $this->addContactIdToTrackingLinks();
-        }
-
-        return $this->send->campaign->content;
-    }
-
-    protected function addContactIdToTrackingLinks()
-    {
-        $dom = new DOMDocument();
-
-        $dom->loadHTML($this->send->campaign->content);
-
-        foreach ($dom->getElementsByTagName('body')[0]->getElementsByTagName('a') as $link) {
-            $oldLink = $link->getAttribute('href');
-
-            $newLink = $oldLink.'/'.$this->send->contact->uuid;
-
-            $link->setAttribute('href', $newLink);
-        }
-
-        return $dom->saveHtml();
     }
 }

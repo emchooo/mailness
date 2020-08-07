@@ -55,7 +55,7 @@ class CampaignStoreRequest extends FormRequest
             'subject' => 'Subject',
             'sending_name' => 'Sending Name',
             'sending_email' => 'Sending Email',
-            'content' => 'Content',
+            'html' => 'HTML',
         ];
     }
 }

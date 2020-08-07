@@ -73,7 +73,7 @@ class CampaignController extends Controller
         $creationArray = array_merge(
             $request->only(['subject', 'sending_name', 'sending_email']),
             [
-                'content' => $content,
+                'html' => $content,
                 'track_clicks'  => $request->track_clicks ? 0 : 1,
                 'track_opens'   => $request->track_opens ? 0 : 1,
             ]
@@ -131,7 +131,7 @@ class CampaignController extends Controller
         }
 
         $updationArray = array_merge(
-            $request->only(['subject', 'sending_name', 'sending_email', 'content']),
+            $request->only(['subject', 'sending_name', 'sending_email', 'html']),
             [
                 'track_clicks' => $request->track_clicks ? 1 : 0,
                 'track_opens' => $request->track_opens ? 1 : 0,

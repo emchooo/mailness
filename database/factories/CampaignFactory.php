@@ -11,7 +11,7 @@ $factory->define(Campaign::class, function (Faker $faker) {
         'subject'   => $faker->name,
         'sending_name'  => $faker->name,
         'sending_email' => $faker->email,
-        'content'   => $faker->text,
+        'html'   => $faker->text,
     ];
 });
 

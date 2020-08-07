@@ -41,7 +41,7 @@ class CampaignTest extends TestCase
     /** @test */
     public function itCanSaveNewCampaign()
     {
-        $response = $this->actingAs($this->user)->post(route('campaigns.store'), ['subject' => 'My campaign', 'sending_name' => 'Emir', 'sending_email' => 'tom@sawyer.com', 'content' => 'Content']);
+        $response = $this->actingAs($this->user)->post(route('campaigns.store'), ['subject' => 'My campaign', 'sending_name' => 'Emir', 'sending_email' => 'tom@sawyer.com', 'html' => 'Content']);
 
         $this->assertEquals(1, Campaign::count());
     }
@@ -65,7 +65,7 @@ class CampaignTest extends TestCase
         ['subject' => 'Edited subject',
             'sending_name' => $campaign->sending_name,
             'sending_email' => $campaign->sending_email,
-            'content' => $campaign->content,
+            'html' => $campaign->html,
         ]);
 
         $response->assertRedirect(route('campaigns.show', $campaign->id));

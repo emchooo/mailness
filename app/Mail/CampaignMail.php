@@ -5,12 +5,15 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\SendingLog;
 
 class CampaignMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $content;
+    protected $send;
+
+    protected $config;
 
     public $send_id;
 
@@ -19,10 +22,11 @@ class CampaignMail extends Mailable
      *
      * @return void
      */
-    public function __construct($campaign, $send_id)
+    public function __construct(SendingLog $send, $config)
     {
-        $this->content = $campaign->content;
-        $this->send_id = $send_id;
+        $this->send = $send;
+        $this->config = $config;
+        $this->send_id = $send->id;
     }
 
     /**
@@ -32,6 +36,12 @@ class CampaignMail extends Mailable
      */
     public function build()
     {
-        return $this->html($this->content);
+        
+        return $this->html($this->getMailContent());
     }
+
+    protected function getMailContent() {
+        return $this->send->campaign->html_formated;
+    }
+
 }

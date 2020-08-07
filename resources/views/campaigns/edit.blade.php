@@ -49,7 +49,7 @@ controlName="sending_email">
     </div>
   @endif
 
-<textarea name="content" id="" cols="30" rows="10" class="bg-gray-300 mb-2 p-2 block" >{{ $campaign->content }}</textarea>
+<textarea name="html" id="" cols="30" rows="10" class="bg-gray-300 mb-2 p-2 block" >{{ $campaign->html }}</textarea>
 
 <input type="submit" value="Save" class="bg-blue-500 px-4 py-2 text-white" >
 
@@ -68,7 +68,7 @@ controlName="sending_email">
 @push('pageSpecificJS')
 <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace('content', {
+    CKEDITOR.replace('html', {
 		fullPage: true,
 	});
 </script>

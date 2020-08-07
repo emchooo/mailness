@@ -13,9 +13,6 @@ Route::get('lists/{listUuid}/subscribe/success', 'ListsController@subscribeSucce
 Route::get('unsubscribe/{contact_uuid}/{campaign_uuid?}', 'UnsubscribeController@unsubscribe')->name('unsubscribe.contact');
 Route::get('lists/{list_uuid}/{contact_uuid}/confirm', 'ListsController@subscribeConfirm')->name('subscribe.confirm');
 
-Route::get('t/{link_uuid}/{contact_uuid?}', 'TrackClickController@index')->name('open.link');
-Route::get('w/{campaign_uuid}/{contact_uuid?}', 'TrackOpenController@index')->name('open.mail');
-
 Route::post('notifications/ses', 'Notifications\SESNotificationsController@index');
 
 Route::middleware('auth')->group(function () {

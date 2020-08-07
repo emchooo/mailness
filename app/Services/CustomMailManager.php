@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Services;
+namespace App\Services;
 
 use Illuminate\Mail\MailManager;
 use Illuminate\Support\Arr;

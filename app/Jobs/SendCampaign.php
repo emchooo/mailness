@@ -40,11 +40,7 @@ class SendCampaign implements ShouldQueue
      */
     public function handle()
     {
-        if ($this->campaign->track_clicks) {
-            $this->addTrackingLinks();
-        }
-
-        $config = Service::first()->getConfig();
+        $config = Service::first(); //->getConfig();
 
         foreach ($this->list->contacts as $contact) {
             $send = SendingLog::create([
@@ -57,28 +53,4 @@ class SendCampaign implements ShouldQueue
         SetCampaignAsSent::dispatch($this->campaign);
     }
 
-    /**
-     * @return void
-     */
-    protected function addTrackingLinks()
-    {
-        $dom = new DOMDocument();
-
-        $dom->loadHTML($this->campaign->content);
-
-        foreach ($dom->getElementsByTagName('body')[0]->getElementsByTagName('a') as $link) {
-            $oldLink = $link->getAttribute('href');
-
-            $campaignLink = $this->campaign->links()->create([
-                'uuid'  => Str::uuid(),
-                'link'  => $oldLink,
-            ]);
-
-            $newLink = route('open.link', [$campaignLink->uuid]);
-
-            $link->setAttribute('href', $newLink);
-        }
-        $this->campaign->content = $dom->saveHtml();
-        $this->campaign->save();
-    }
 }
