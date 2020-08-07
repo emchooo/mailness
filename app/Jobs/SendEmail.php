@@ -5,7 +5,6 @@ namespace App\Jobs;
 use App\Jobs\Middleware\RateLimited;
 use App\Mail\CampaignMail;
 use App\Models\SendingLog;
-use DOMDocument;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

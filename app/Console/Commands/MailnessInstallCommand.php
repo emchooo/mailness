@@ -31,10 +31,10 @@ class MailnessInstallCommand extends Command
 
         $this->createEnvFile();
 
-        if (strlen(config('app.key')) === 0) :
+        if (strlen(config('app.key')) === 0) {
             $this->call('key:generate');
-        $this->line('Secret key properly generated');
-        endif;
+            $this->line('Secret key properly generated');
+        }
 
         $credentials = $this->requestDatabaseCredentials();
 
