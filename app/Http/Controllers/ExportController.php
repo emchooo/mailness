@@ -23,8 +23,8 @@ class ExportController extends Controller
 
         $allContacts = $this->getContacts($lists, $type);
 
-        $allContacts->select('id', 'email', 'list_id')->with('fields')->chunk(10000, function ($contacts) use ($writer,$header) {
-            $contacts->each(function ($contact) use ($writer,$header) {
+        $allContacts->select('id', 'email', 'list_id')->with('fields')->chunk(10000, function ($contacts) use ($writer, $header) {
+            $contacts->each(function ($contact) use ($writer, $header) {
                 $values = $this->getFields($contact->fields, $header);
                 $values['email'] = $contact->email;
                 $rowFromValues = WriterEntityFactory::createRowFromArray($values);
