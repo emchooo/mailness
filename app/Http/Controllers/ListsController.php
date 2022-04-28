@@ -132,7 +132,7 @@ class ListsController extends Controller
     /**
      * Subscribe form.
      *
-     * @param \App\Models\Lists $lists
+     * @param  \App\Models\Lists  $lists
      */
     public function subscribe(Lists $list)
     {
@@ -143,7 +143,7 @@ class ListsController extends Controller
      * Save subscribe.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param \App\Models\Lists $lists
+     * @param  \App\Models\Lists  $lists
      */
     public function subscribeStore(StoreSubscriptionRequest $request, Lists $list)
     {
