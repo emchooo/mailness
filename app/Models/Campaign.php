@@ -15,7 +15,7 @@ class Campaign extends Model
     /**
      * Checks if Current Campaign status is as Specified.
      *
-     * @param string $status
+     * @param  string  $status
      * @return bool
      **/
     public function isInStatus(string $status): bool
